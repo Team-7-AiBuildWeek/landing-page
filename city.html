@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>City — Narro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=10" />
+<link rel="stylesheet" href="pages.css?v=3" />
+</head>
+<body>
+
+  <header class="nav-wrap">
+    <nav class="nav container">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
+        <span>Narro</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="cities.html">Cities</a></li>
+        <li><a href="index.html#how">How it works</a></li>
+        <li><a href="index.html#voice">The voice</a></li>
+        <li><a href="index.html#stories">Reviews</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-login">Log in</a>
+        <a href="app.html" class="btn btn-dark">Open the app</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container" id="cityMain"></main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="logo" href="index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
+          <span>Narro</span>
+        </a>
+        <p class="footer-note"><em>Narro</em> — Latin for “I tell the story.” An AI guide for people who'd rather walk alone, and still hear all of it.</p>
+      </div>
+      <div class="footer-col">
+        <h4>App</h4>
+        <a href="app.html">Open the app</a><a href="cities.html">Cities</a><a href="index.html#how">How it works</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Press kit</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">Help centre</a><a href="#">Offline guide</a><a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="container footer-base">
+      <span>© 2026 Narro. All rights reserved.</span>
+      <span>Made for people who walk slowly.</span>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script>
+    (function () {
+      var main = document.getElementById('cityMain');
+      var slug = new URLSearchParams(window.location.search).get('city');
+      var city = window.NARRO_FIND_CITY(slug);
+
+      if (!city) {
+        document.title = 'City not found — Narro';
+        main.innerHTML =
+          '<div class="not-found">' +
+            '<h1 class="page-title">We haven\'t walked there <em>yet</em></h1>' +
+            '<p class="page-sub">That city isn\'t in the catalogue. New ones land every month.</p>' +
+            '<p style="margin-top:26px"><a class="btn btn-primary" href="cities.html">Browse all cities</a></p>' +
+          '</div>';
+        return;
+      }
+
+      document.title = city.name + ' — Narro';
+
+      function routeRow(r) {
+        return '' +
+          '<div class="route-row">' +
+            '<span class="route-icon">' +
+              '<svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>' +
+            '</span>' +
+            '<div class="route-copy">' +
+              '<h3>' + r.name + (r.free ? '<span class="route-free">Free</span>' : '') + '</h3>' +
+              '<p>' + r.blurb + '</p>' +
+            '</div>' +
+            '<div class="route-meta"><strong>' + r.stops + ' stops</strong>~' + Math.round(r.minutes / 60 * 10) / 10 + ' hrs</div>' +
+            '<a class="btn btn-primary" href="app.html?route=' + r.id + '">Start walking</a>' +
+          '</div>';
+      }
+
+      main.innerHTML =
+        '<section class="page-head" style="padding-bottom:0">' +
+          '<nav class="crumbs" aria-label="Breadcrumb">' +
+            '<a href="index.html">Home</a><span>/</span><a href="cities.html">Cities</a><span>/</span><strong>' + city.name + '</strong>' +
+          '</nav>' +
+        '</section>' +
+        '<div class="city-hero">' +
+          '<img src="' + city.image + '" alt="' + city.name + '" />' +
+          '<div class="city-hero-copy">' +
+            '<h1>' + city.name + '</h1>' +
+            '<p>' + city.tagline + ' · ' + city.hours + ' hours narrated · ' + city.country + '</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="route-list">' + city.routes.map(routeRow).join('') + '</div>';
+    })();
+  </script>
+
+</body>
+</html>

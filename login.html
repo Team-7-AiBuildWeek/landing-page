@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sign in — Voxa</title>
+<title>Sign in — Narro</title>
 <meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="stylesheet" href="auth.css" />
 </head>
@@ -19,7 +19,7 @@
   <aside class="auth-aside">
     <a class="logo" href="/">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
-      <span>Voxa</span>
+      <span>Narro</span>
     </a>
 
     <p class="auth-quote">Every street you<br /><em>haven't heard yet</em></p>
@@ -36,7 +36,7 @@
 
       <a class="auth-back" href="/">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 7 12l8.5 7.5 1.3-1.5L10 12l6.8-6z"/></svg>
-        Back to Voxa
+        Back to Narro
       </a>
 
       <h1 class="auth-title" id="authTitle">Welcome back</h1>
@@ -88,7 +88,7 @@
       </form>
 
       <p class="auth-foot" id="authFoot">
-        New to Voxa? <button type="button" data-switch="register">Create an account</button>
+        New to Narro? <button type="button" data-switch="register">Create an account</button>
       </p>
 
     </div>
@@ -117,7 +117,7 @@
       sub: "Sign in to pick up where your last walk ended.",
       submit: "Sign in",
       endpoint: "/api/login",
-      foot: 'New to Voxa? <button type="button" data-switch="register">Create an account</button>',
+      foot: 'New to Narro? <button type="button" data-switch="register">Create an account</button>',
     },
     register: {
       title: "Start listening",
@@ -184,7 +184,7 @@
     passwordHint.hidden = !isRegister;
     passwordInput.autocomplete = isRegister ? "new-password" : "current-password";
 
-    document.title = (isRegister ? "Create account" : "Sign in") + " — Voxa";
+    document.title = (isRegister ? "Create account" : "Sign in") + " — Narro";
     history.replaceState(null, "", isRegister ? "?mode=register" : location.pathname);
 
     clearErrors();

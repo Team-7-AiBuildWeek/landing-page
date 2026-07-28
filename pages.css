@@ -1,0 +1,174 @@
+/* Styles shared by the catalogue subpages (cities.html, city.html).
+   Loaded after styles.css, so tokens and the nav/footer come from there. */
+
+/* ============ PAGE HEAD ============ */
+.page-head {
+  padding: 72px 0 36px;
+  text-align: center;
+}
+.page-head .crumbs {
+  display: inline-flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.page-head .crumbs a:hover { color: var(--ink); }
+.page-head .crumbs span { opacity: 0.6; }
+.page-title {
+  margin: 0 0 12px;
+  font-family: var(--serif);
+  font-size: clamp(38px, 5.4vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+.page-title em { font-style: italic; }
+.page-sub {
+  margin: 0 auto;
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+/* ============ CITY SEARCH ============ */
+.city-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(440px, 100%);
+  margin: 28px auto 0;
+  padding: 6px 8px 6px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+}
+.city-search svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; stroke-width: 2; flex: none; }
+.city-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+}
+.city-search input::placeholder { color: var(--muted); }
+
+/* ============ CITIES GRID ============ */
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px;
+  padding: 40px 0 90px;
+}
+.cities-grid .dest-card { cursor: pointer; }
+.cities-grid .dest-card img { transition: transform 0.5s ease; }
+.cities-grid .dest-card:hover img { transform: scale(1.045); }
+.cities-empty {
+  grid-column: 1 / -1;
+  padding: 60px 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ============ CITY DETAIL ============ */
+.city-hero {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 26px;
+}
+.city-hero img {
+  width: 100%;
+  height: clamp(260px, 38vw, 420px);
+  object-fit: cover;
+}
+.city-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(30, 35, 64, 0.72) 100%);
+}
+.city-hero-copy {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 24px;
+  z-index: 2;
+  color: #fff;
+}
+.city-hero-copy h1 {
+  margin: 0 0 4px;
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.6vw, 54px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.city-hero-copy p { margin: 0; opacity: 0.85; font-size: 15px; }
+
+.route-list {
+  display: grid;
+  gap: 16px;
+  padding: 42px 0 90px;
+}
+.route-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.route-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px -26px rgba(30, 35, 64, 0.8);
+}
+.route-row .route-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(63, 95, 190, 0.12);
+}
+.route-row .route-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--accent); stroke-width: 1.8; }
+.route-row .route-copy { flex: 1; min-width: 0; }
+.route-row h3 { margin: 0 0 3px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.route-row p { margin: 0; color: var(--muted); font-size: 14px; }
+.route-row .route-meta {
+  flex: none;
+  text-align: right;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.route-row .route-meta strong { display: block; color: var(--ink); font-size: 14px; }
+.route-row .btn { flex: none; }
+.route-free {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(63, 95, 190, 0.14);
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.not-found {
+  padding: 110px 0 130px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .route-row { flex-wrap: wrap; }
+  .route-row .route-meta { text-align: left; }
+}

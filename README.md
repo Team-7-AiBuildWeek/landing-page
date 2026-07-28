@@ -1,4 +1,4 @@
-# Voxa
+# Narro
 
 Landing page plus a small auth server: registration, login, sessions, and a
 SQLite database of registered users.

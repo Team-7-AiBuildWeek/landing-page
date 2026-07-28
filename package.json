@@ -1,9 +1,9 @@
 {
-  "name": "voxa-auth",
+  "name": "narro-auth",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Auth server for the Voxa landing page — registration, login, sessions, SQLite user store.",
+  "description": "Auth server for the Narro landing page — registration, login, sessions, SQLite user store.",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",

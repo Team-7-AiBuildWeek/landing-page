@@ -28,7 +28,7 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 // dev server. Override with PORT=… if it clashes.
 const PORT = Number(process.env.PORT) || 4000;
 const PRODUCTION = process.env.NODE_ENV === "production";
-const COOKIE = "voxa_session";
+const COOKIE = "narro_session";
 
 const app = express();
 app.disable("x-powered-by");
@@ -254,7 +254,7 @@ purgeExpiredSessions();
 setInterval(purgeExpiredSessions, 60 * 60 * 1000).unref();
 
 const server = app.listen(PORT, () => {
-  console.log(`Voxa running at http://localhost:${PORT}`);
+  console.log(`Narro running at http://localhost:${PORT}`);
   console.log(`Database: ${dbPath}`);
   if (!PRODUCTION) console.log(`Sign in: http://localhost:${PORT}/login.html`);
 });
