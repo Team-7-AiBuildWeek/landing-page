@@ -315,7 +315,6 @@ a { color: inherit; text-decoration: none; }
   gap: 14px;
   flex-wrap: wrap;
 }
-.hero-sample { margin-top: 18px; }
 
 /* ============ SECTIONS ============ */
 .section { padding: 96px 0; }
