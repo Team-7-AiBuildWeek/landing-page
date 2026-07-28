@@ -6,19 +6,10 @@
 <title>Narro — The city tells its own story, out loud</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
-<link rel="stylesheet" href="assets/ambient.css" />
-<script src="assets/ambient.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles-f-arimo.css" />
 </head>
 <body>
-
-  <!-- ============ AMBIENT BACKGROUND ============ -->
-  <!-- Decorative only: aria-hidden, and pointer-events:none in CSS. -->
-  <div class="ambient" aria-hidden="true">
-    <div class="ambient-glow ambient-glow-far"></div>
-    <div class="ambient-glow ambient-glow-near"></div>
-  </div>
 
   <!-- ============ NAV ============ -->
   <header class="nav-wrap">
@@ -29,13 +20,14 @@
       </a>
 
       <ul class="nav-links">
+        <li><a href="#cities">Cities</a></li>
         <li><a href="#how">How it works</a></li>
         <li><a href="#voice">The voice</a></li>
         <li><a href="#stories">Reviews</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="login.html" class="nav-login">Log in</a>
+        <a href="#" class="nav-login">Log in</a>
         <a href="#get" class="btn btn-dark">Get the app</a>
       </div>
     </nav>
@@ -47,7 +39,7 @@
       <svg class="route-map"></svg>
 
       <figure class="float float-1">
-        <img src="images/roman-forum.jpeg" alt="" />
+        <img src="https://picsum.photos/seed/voxarome/420/540" alt="" />
         <span class="audio-tag">
           <span class="audio-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -55,7 +47,7 @@
         </span>
       </figure>
       <figure class="float float-2">
-        <img src="images/piazza-venezia.jpeg" alt="" />
+        <img src="https://picsum.photos/seed/voxalisbon/420/540" alt="" />
         <span class="audio-tag">
           <span class="audio-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -63,7 +55,7 @@
         </span>
       </figure>
       <figure class="float float-3">
-        <img src="images/trevi-fountain.jpeg" alt="" />
+        <img src="https://picsum.photos/seed/voxatokyo/420/540" alt="" />
         <span class="audio-tag">
           <span class="audio-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -71,7 +63,7 @@
         </span>
       </figure>
       <figure class="float float-4">
-        <img src="images/colosseum.jpeg" alt="" />
+        <img src="https://picsum.photos/seed/voxaporto/420/540" alt="" />
         <span class="audio-tag">
           <span class="audio-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -179,45 +171,106 @@
     </div>
   </section>
 
+  <!-- ============ CITIES ============ -->
+  <section class="section" id="cities">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Cities that talk back</h2>
+        <p class="section-sub">Every route written by local historians, then narrated live by your guide</p>
+        <a href="#" class="btn btn-primary">Browse all 140 cities</a>
+      </div>
+
+      <div class="dest-grid">
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/romecity/800/1000" alt="Rome" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 9 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Rome</h3>
+              <p>14 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/lisboncity/800/1000" alt="Lisbon" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 6 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Lisbon</h3>
+              <p>8 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/tokyocity/800/1000" alt="Tokyo" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 11 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Tokyo</h3>
+              <p>19 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/mexicocity/800/1000" alt="Mexico City" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 7 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Mexico City</h3>
+              <p>11 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ HOW IT WORKS ============ -->
   <section class="section" id="how">
     <div class="container how-grid">
-      <div class="how-media" id="how-panel" role="tabpanel" aria-labelledby="how-tab-0">
-        <img class="how-photo" src="https://picsum.photos/seed/voxapickcity/1000/1100" alt="Rooftops of a city at first light" />
+      <div class="how-media">
+        <img class="how-photo" src="https://picsum.photos/seed/walkingcity/1000/1100" alt="A traveller walking through a city with headphones" />
 
         <div class="chip chip-tl">
-          <span class="dot"></span> <span class="chip-text">12 routes nearby</span>
+          <span class="dot"></span> Narrating · 02:14
         </div>
 
         <div class="chip-card">
           <span class="chip-card-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg>
           </span>
           <div>
-            <strong class="chip-card-title">Rome</strong>
-            <span class="chip-card-meta">9 walks · from 45 min</span>
+            <strong>Baroque Loop</strong>
+            <span>12 stops · 2 hrs · hands-free</span>
           </div>
         </div>
       </div>
 
-      <div class="steps" role="tablist" aria-orientation="vertical" aria-label="How it works">
-        <div class="step is-active" role="tab" id="how-tab-0" aria-controls="how-panel" aria-selected="true" tabindex="0">
+      <div class="steps">
+        <article class="step is-active">
           <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
           <h3>Pick your city</h3>
           <p>Open the app anywhere and it already knows which streets are around you.</p>
-        </div>
+        </article>
 
-        <div class="step" role="tab" id="how-tab-1" aria-controls="how-panel" aria-selected="false" tabindex="-1">
+        <article class="step">
           <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
           <h3>Press play, start walking</h3>
           <p>Your guide reads the city aloud, triggering each story the moment you arrive.</p>
-        </div>
+        </article>
 
-        <div class="step" role="tab" id="how-tab-2" aria-controls="how-panel" aria-selected="false" tabindex="-1">
+        <article class="step">
           <span class="step-icon"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></span>
           <h3>Talk back to it</h3>
           <p>Interrupt with a question out loud and get an answer before the next corner.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -329,12 +382,12 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
           <span>Narro</span>
         </a>
-        <p class="footer-note"><em>Narro</em> — Latin for “I tell the story.” An AI guide for people who'd rather walk alone, and still hear all of it.</p>
+        <p class="footer-note">An AI guide for people who'd rather walk alone — and still hear the whole story.</p>
       </div>
 
       <div class="footer-col">
         <h4>App</h4>
-        <a href="#how">How it works</a><a href="#voice">The voice</a>
+        <a href="#cities">Cities</a><a href="#how">How it works</a><a href="#voice">The voice</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -352,108 +405,6 @@
   </footer>
 
   <script>
-    // "How it works" — selecting a step swaps the media beside it.
-    (function () {
-      var tabs = [].slice.call(document.querySelectorAll('.steps .step'));
-      var panel = document.getElementById('how-panel');
-      if (!tabs.length || !panel) return;
-
-      var PIN = '<svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>';
-      var CANS = '<svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg>';
-      var MIC = '<svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>';
-
-      var views = [
-        {
-          img: 'https://picsum.photos/seed/voxapickcity/1000/1100',
-          alt: 'Rooftops of a city at first light',
-          chip: '12 routes nearby',
-          title: 'Rome',
-          meta: '9 walks · from 45 min',
-          icon: PIN
-        },
-        {
-          img: 'https://picsum.photos/seed/walkingcity/1000/1100',
-          alt: 'A traveller walking through a city with headphones',
-          chip: 'Narrating · 02:14',
-          title: 'Baroque Loop',
-          meta: '12 stops · 2 hrs · hands-free',
-          icon: CANS
-        },
-        {
-          img: 'https://picsum.photos/seed/voxaaskaloud/1000/1100',
-          alt: 'A traveller pausing to look up at a building',
-          chip: 'Listening…',
-          title: '“Who built this?”',
-          meta: 'Answered in 2s, then resumed',
-          icon: MIC
-        }
-      ];
-
-      var photo = panel.querySelector('.how-photo');
-      var chipText = panel.querySelector('.chip-text');
-      var cardIcon = panel.querySelector('.chip-card-icon');
-      var cardTitle = panel.querySelector('.chip-card-title');
-      var cardMeta = panel.querySelector('.chip-card-meta');
-
-      // Warm the cache so switching doesn't flash an empty frame.
-      views.forEach(function (v) { new Image().src = v.img; });
-
-      var current = 0;
-
-      function select(i, focus) {
-        if (i === current) return;
-        var v = views[i];
-
-        tabs.forEach(function (tab, n) {
-          var on = n === i;
-          tab.classList.toggle('is-active', on);
-          tab.setAttribute('aria-selected', on ? 'true' : 'false');
-          tab.tabIndex = on ? 0 : -1;
-        });
-
-        panel.setAttribute('aria-labelledby', tabs[i].id);
-        panel.classList.add('is-swapping');
-
-        photo.onload = photo.onerror = function () {
-          panel.classList.remove('is-swapping');
-        };
-        photo.src = v.img;
-        photo.alt = v.alt;
-
-        chipText.textContent = v.chip;
-        cardIcon.innerHTML = v.icon;
-        cardTitle.textContent = v.title;
-        cardMeta.textContent = v.meta;
-
-        current = i;
-        if (focus) tabs[i].focus();
-      }
-
-      tabs.forEach(function (tab, i) {
-        tab.addEventListener('click', function () { select(i); });
-
-        tab.addEventListener('keydown', function (e) {
-          var k = e.key;
-          if (k === 'Enter' || k === ' ') {
-            e.preventDefault();
-            select(i);
-          } else if (k === 'ArrowDown' || k === 'ArrowRight') {
-            e.preventDefault();
-            select((i + 1) % tabs.length, true);
-          } else if (k === 'ArrowUp' || k === 'ArrowLeft') {
-            e.preventDefault();
-            select((i - 1 + tabs.length) % tabs.length, true);
-          } else if (k === 'Home') {
-            e.preventDefault();
-            select(0, true);
-          } else if (k === 'End') {
-            e.preventDefault();
-            select(tabs.length - 1, true);
-          }
-        });
-      });
-    })();
-
     // Draws the dotted travel route connecting the floating hero cards.
     (function () {
       var wrap = document.querySelector('.hero-floats');

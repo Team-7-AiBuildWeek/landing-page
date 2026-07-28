@@ -1,29 +1,24 @@
 /* ============ TOKENS ============ */
 :root {
-  --cream: #f2edf3;
-  --cream-deep: #e7dfeb;
-  --ink: #221826;
-  --muted: #6e6473;
-  --accent: #cf4f6f;
-  --accent-dark: #b83e5c;
-  --line: rgba(34, 24, 38, 0.1);
+  --cream: #eaf0f2;
+  --cream-deep: #dde7ea;
+  --ink: #142430;
+  --muted: #5d6f78;
+  --accent: #0e9c8b;
+  --accent-dark: #0b8375;
+  --line: rgba(20, 36, 48, 0.1);
   --radius: 24px;
-  --serif: "Archivo", Arial, sans-serif;
-  --sans: "Archivo", Arial, sans-serif;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 * { box-sizing: border-box; }
 
-/* The page colour lives on <html>, not <body>, so the ambient layer
-   (z-index -1) can sit between it and the content. */
-html {
-  scroll-behavior: smooth;
-  background: var(--cream);
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: transparent;
+  background: var(--cream);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
@@ -56,7 +51,7 @@ a { color: inherit; text-decoration: none; }
 .btn-primary {
   background: var(--accent);
   color: #fff;
-  box-shadow: 0 10px 22px -12px rgba(207, 79, 111, 0.9);
+  box-shadow: 0 10px 22px -12px rgba(14, 156, 139, 0.9);
 }
 .btn-primary:hover { background: var(--accent-dark); }
 
@@ -100,7 +95,7 @@ a { color: inherit; text-decoration: none; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(242, 237, 243, 0.82);
+  background: rgba(234, 240, 242, 0.82);
   backdrop-filter: blur(12px);
 }
 .nav {
@@ -162,8 +157,8 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   border-radius: 22px;
   box-shadow:
-    0 2px 6px -2px rgba(34, 24, 38, 0.18),
-    0 34px 54px -30px rgba(34, 24, 38, 0.55);
+    0 2px 6px -2px rgba(20, 36, 48, 0.18),
+    0 34px 54px -30px rgba(20, 36, 48, 0.55);
 }
 
 /* ---- audio-guide badge on each stop ---- */
@@ -179,7 +174,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(6px);
-  box-shadow: 0 8px 16px -12px rgba(34, 24, 38, 0.6);
+  box-shadow: 0 8px 16px -12px rgba(20, 36, 48, 0.6);
   opacity: 0.86;
 }
 .audio-play {
@@ -190,7 +185,7 @@ a { color: inherit; text-decoration: none; }
   height: 22px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 4px 9px -4px rgba(207, 79, 111, 0.95);
+  box-shadow: 0 4px 9px -4px rgba(14, 156, 139, 0.95);
   /* the floats layer is pointer-events:none — re-enable just this control */
   pointer-events: auto;
   cursor: pointer;
@@ -217,7 +212,7 @@ a { color: inherit; text-decoration: none; }
   max-width: 3px;
   height: 100%;
   border-radius: 2px;
-  background: rgba(207, 79, 111, 0.8);
+  background: rgba(14, 156, 139, 0.8);
   transform: scaleY(0.3);
   transform-origin: center;
   transition: transform 0.3s ease;
@@ -252,13 +247,13 @@ a { color: inherit; text-decoration: none; }
 }
 .route-map .route-line {
   fill: none;
-  stroke: rgba(34, 24, 38, 0.45);
+  stroke: rgba(20, 36, 48, 0.45);
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-dasharray: 0.1 9;
 }
 /* marker that walks the loop */
-.route-runner .halo { fill: rgba(207, 79, 111, 0.16); }
+.route-runner .halo { fill: rgba(14, 156, 139, 0.16); }
 .route-runner .core {
   fill: var(--accent);
   stroke: var(--cream);
@@ -362,7 +357,7 @@ a { color: inherit; text-decoration: none; }
   background: #fff;
   font-size: 12.5px;
   font-weight: 600;
-  box-shadow: 0 18px 34px -26px rgba(34, 24, 38, 0.8);
+  box-shadow: 0 18px 34px -26px rgba(20, 36, 48, 0.8);
 }
 .chip svg {
   width: 15px;
@@ -378,12 +373,12 @@ a { color: inherit; text-decoration: none; }
   height: 7px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 0 rgba(207, 79, 111, 0.55);
+  box-shadow: 0 0 0 0 rgba(14, 156, 139, 0.55);
   animation: pulse 2s ease-out infinite;
 }
 @keyframes pulse {
-  70% { box-shadow: 0 0 0 8px rgba(207, 79, 111, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(207, 79, 111, 0); }
+  70% { box-shadow: 0 0 0 8px rgba(14, 156, 139, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(14, 156, 139, 0); }
 }
 
 .showcase-panel .chip { position: absolute; z-index: 3; }
@@ -399,7 +394,7 @@ a { color: inherit; text-decoration: none; }
   padding: 11px;
   border-radius: 46px;
   background: linear-gradient(160deg, #2a221d, #100c0a);
-  box-shadow: 0 50px 90px -50px rgba(34, 24, 38, 0.9), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 50px 90px -50px rgba(20, 36, 48, 0.9), 0 0 0 1px rgba(0, 0, 0, 0.06);
 }
 .phone-screen {
   position: relative;
@@ -420,7 +415,7 @@ a { color: inherit; text-decoration: none; }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(242, 237, 243, 0.55) 0%, rgba(20, 14, 10, 0.15) 45%, rgba(20, 14, 10, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(234, 240, 242, 0.55) 0%, rgba(20, 14, 10, 0.15) 45%, rgba(20, 14, 10, 0.6) 100%);
 }
 .notch {
   position: absolute;
@@ -558,7 +553,7 @@ a { color: inherit; text-decoration: none; }
   height: 46px !important;
   border: none !important;
   background: var(--accent) !important;
-  box-shadow: 0 10px 20px -10px rgba(207, 79, 111, 0.9);
+  box-shadow: 0 10px 20px -10px rgba(14, 156, 139, 0.9);
 }
 .app-pause svg { width: 17px; height: 17px; stroke: #fff; stroke-width: 2.2; }
 
@@ -611,6 +606,86 @@ a { color: inherit; text-decoration: none; }
   stroke-width: 1.6;
 }
 
+/* ============ CITY CARDS ============ */
+.dest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.dest-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  isolation: isolate;
+}
+.dest-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.dest-card:hover img { transform: scale(1.05); }
+.dest-card::after {
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(to top, rgba(20, 14, 10, 0.78), transparent);
+}
+
+.dest-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 600;
+}
+.dest-tag svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dest-info {
+  position: absolute;
+  z-index: 2;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  color: #fff;
+}
+.dest-info h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+}
+.dest-info p { margin: 2px 0 0; font-size: 13px; opacity: 0.78; }
+.dest-price {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+}
+
 /* ============ HOW IT WORKS ============ */
 .how-grid {
   display: grid;
@@ -638,7 +713,7 @@ a { color: inherit; text-decoration: none; }
   padding: 12px 18px 12px 12px;
   border-radius: 18px;
   background: #fff;
-  box-shadow: 0 20px 40px -24px rgba(34, 24, 38, 0.5);
+  box-shadow: 0 20px 40px -24px rgba(20, 36, 48, 0.5);
 }
 .chip-card-icon {
   display: grid;
@@ -659,9 +734,6 @@ a { color: inherit; text-decoration: none; }
 }
 .chip-card strong { display: block; font-size: 14px; }
 .chip-card span { font-size: 12px; color: var(--muted); }
-
-.how-media { transition: opacity 0.28s ease; }
-.how-media.is-swapping { opacity: 0.35; }
 
 .steps { display: flex; flex-direction: column; }
 .step { padding: 26px 0 26px 26px; border-left: 2px solid var(--line); }
@@ -749,9 +821,10 @@ a { color: inherit; text-decoration: none; }
 }
 .quote blockquote {
   margin: 0;
-  font-family: var(--sans);
-  font-size: 16.5px;
-  line-height: 1.55;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.34;
+  letter-spacing: -0.01em;
 }
 .quote figcaption {
   display: flex;
@@ -837,6 +910,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .hero-floats { display: none; }
   .nav-links { display: none; }
+  .dest-grid { grid-template-columns: repeat(2, 1fr); }
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
   .quote-grid { grid-template-columns: 1fr; }
   .how-grid { grid-template-columns: 1fr; gap: 44px; }
@@ -857,7 +931,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 620px) {
   .section { padding: 64px 0; }
   .hero { padding: 52px 0 56px; }
-  .feature-grid { grid-template-columns: 1fr; }
+  .dest-grid, .feature-grid { grid-template-columns: 1fr; }
   .chip-card { right: 10px; }
   .nav-login { display: none; }
   .trust-text { flex-direction: column; gap: 5px; text-align: center; }
@@ -867,8 +941,6 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .wave span, .live i, .chip .dot, .float,
   .audio-tag.is-playing .audio-wave i { animation: none; }
-  .how-media { transition: none; }
-  .how-media.is-swapping { opacity: 1; }
   .audio-wave i { transform: scaleY(0.6); }
   .wave span { transform: scaleY(0.6); opacity: 0.8; }
   * { transition: none !important; }
