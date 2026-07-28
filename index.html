@@ -180,7 +180,15 @@
         <a href="#" class="btn btn-primary">Browse all 140 cities</a>
       </div>
 
-      <div class="dest-grid">
+      <div class="dest-carousel">
+        <button class="dest-nav dest-prev" type="button" aria-label="Previous cities" aria-controls="cities-track">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+        </button>
+        <button class="dest-nav dest-next" type="button" aria-label="Next cities" aria-controls="cities-track">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+
+      <div class="dest-track" id="cities-track" role="region" aria-label="City routes" tabindex="0">
         <article class="dest-card">
           <img src="https://picsum.photos/seed/romecity/800/1000" alt="Rome" />
           <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 9 routes</span>
@@ -228,6 +236,55 @@
             <span class="dest-price">Free</span>
           </div>
         </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/portocity/800/1000" alt="Porto" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 5 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Porto</h3>
+              <p>7 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/istanbulcity/800/1000" alt="Istanbul" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 12 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Istanbul</h3>
+              <p>21 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/praguecity/800/1000" alt="Prague" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 8 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Prague</h3>
+              <p>12 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/buenosairescity/800/1000" alt="Buenos Aires" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 6 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Buenos Aires</h3>
+              <p>9 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+      </div>
       </div>
     </div>
   </section>
@@ -405,6 +462,45 @@
   </footer>
 
   <script>
+    // Cities carousel — arrows page the scroll-snap track.
+    (function () {
+      var track = document.getElementById('cities-track');
+      if (!track) return;
+
+      var prev = document.querySelector('.dest-prev');
+      var next = document.querySelector('.dest-next');
+      if (!prev || !next) return;
+
+      function page() {
+        // Advance by whole cards so the snap points stay aligned.
+        var card = track.querySelector('.dest-card');
+        if (!card) return track.clientWidth;
+        var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        var step = card.getBoundingClientRect().width + gap;
+        var fits = Math.max(1, Math.floor(track.clientWidth / step));
+        return step * fits;
+      }
+
+      function sync() {
+        var max = track.scrollWidth - track.clientWidth;
+        // Tolerance absorbs sub-pixel scroll positions from fractional widths.
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max - 2;
+      }
+
+      prev.addEventListener('click', function () {
+        track.scrollBy({ left: -page(), behavior: 'smooth' });
+      });
+      next.addEventListener('click', function () {
+        track.scrollBy({ left: page(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      if (window.ResizeObserver) new ResizeObserver(sync).observe(track);
+      sync();
+    })();
+
     // "How it works" — selecting a step swaps the media beside it.
     (function () {
       var tabs = [].slice.call(document.querySelectorAll('.steps .step'));
