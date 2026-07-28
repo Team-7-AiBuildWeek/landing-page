@@ -101,11 +101,6 @@
         <span><small>Get it on</small><strong>Google Play</strong></span>
       </a>
     </div>
-
-    <a href="#" class="btn btn-ghost hero-sample">
-      <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-      Hear a 30-second sample
-    </a>
   </section>
 
   <!-- ============ APP SHOWCASE ============ -->
@@ -450,9 +445,8 @@
         // right — so no part of it disappears behind either.
         var f4 = wrap.querySelector('.float-4');
 
-        // Clear the right edge of every centred control the heart could reach —
-        // the store badges are wider than the sample link below them.
-        var blockers = document.querySelectorAll('.hero-cta .store, .hero-sample');
+        // Clear the right edge of every centred control the heart could reach.
+        var blockers = document.querySelectorAll('.hero-cta .store');
         var copyRight = w * 0.62;
         blockers.forEach(function (el) {
           copyRight = Math.max(copyRight, el.offsetLeft + el.offsetWidth);
@@ -460,10 +454,11 @@
 
         var leftBound = copyRight + 20;
         var rightBound = f4.offsetLeft - 12;
-        var span = Math.max(110, rightBound - leftBound);
+        var span = rightBound - leftBound;
 
-        // The lobes span the full HW, so solve HW from the gap we have.
-        var HW = Math.max(90, Math.min(span, 200));
+        // The lobes span the full HW, so solve HW from the gap we have. The
+        // floor stays below any real gap so fitting always wins over size.
+        var HW = Math.max(78, Math.min(span, 200));
         var HH = HW * 0.88;
         var curlX = (leftBound + rightBound) / 2;
 

@@ -1,0 +1,4 @@
+# Static site — no build step. index.html and styles.css are served as-is
+# from the repo root.
+[build]
+  publish = "."
