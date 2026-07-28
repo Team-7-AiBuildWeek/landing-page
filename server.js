@@ -48,10 +48,27 @@ const SERVABLE = new Set([
   ".ico", ".woff", ".woff2", ".ttf", ".map", ".txt", ".webmanifest",
 ]);
 
+// Browser JavaScript is the one exception, and only from /assets/. Allowing
+// .js everywhere would expose server.js and lib/*.js as plain downloads.
+//
+// The path MUST be decoded and normalized before it is tested. Checking the
+// raw string lets "/assets/../server.js" pass — it starts with /assets/ and
+// ends with .js — and express.static then resolves it to the real server.js.
+const isBrowserScript = (rawPath) => {
+  let decoded;
+  try {
+    decoded = decodeURIComponent(rawPath);
+  } catch {
+    return false; // malformed percent-encoding
+  }
+  const resolved = path.posix.normalize(decoded);
+  return resolved.startsWith("/assets/") && resolved.endsWith(".js");
+};
+
 app.use((req, res, next) => {
   if (req.path.startsWith("/api/")) return next();
   const ext = path.extname(req.path).toLowerCase();
-  if (ext === "" || SERVABLE.has(ext)) return next();
+  if (ext === "" || SERVABLE.has(ext) || isBrowserScript(req.path)) return next();
   res.status(404).type("text/plain").send("Not found");
 });
 

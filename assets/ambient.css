@@ -1,0 +1,127 @@
+/* ============================================================
+   AMBIENT BACKGROUND
+   A soft pool of light that drifts toward the cursor. It sits
+   behind every other layer and never intercepts a click.
+
+   ── TUNING ──────────────────────────────────────────────────
+   Colour and size live here. Speed and sensitivity live in
+   assets/ambient.js — the two constants at the top of the file.
+   ============================================================ */
+
+:root {
+  /* Diameter of the main glow. vmax so it scales with the larger
+     viewport axis rather than jumping about between screen shapes.
+       24vmax  a tight spot, reads as a blob
+       34vmax  a defined pool of light  ← current
+       62vmax  a broad wash across half the page
+     The far layer is 1.35x this, set on .ambient-glow-far. */
+  --ambient-size: 34vmax;
+
+  /* Visibility — peak opacity at the centre of each glow, fading to
+     nothing at its edge.
+       0.05  a whisper you have to hunt for
+       0.20  present but easy to miss
+       0.36  clearly readable as a moving light  ← current
+       0.50+ starts to compete with the content
+     The far layer sits lower so the two read as depth, not as one
+     flat wash. Keep it around 0.6x the near value. */
+  --ambient-strength: 0.36;
+  --ambient-strength-far: 0.21;
+
+  /* Colours, pulled from the site palette so it can't clash. */
+  --ambient-tint: 108, 150, 178;     /* --orange, the dusty blue */
+  --ambient-tint-far: 202, 194, 125; /* --orange-dark, soft gold  */
+}
+
+/* The stage. Fixed to the viewport so the light belongs to the
+   screen rather than to the document. */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;          /* behind content, above the page canvas */
+  overflow: hidden;     /* oversized glows must not create scrollbars */
+  pointer-events: none; /* every button and link above stays clickable */
+  contain: layout paint;
+}
+
+.ambient-glow {
+  --size: var(--ambient-size);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  /* Pull back by half so the element's centre — not its corner —
+     lands on the translated coordinate. */
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  border-radius: 50%;
+  /* Promote to its own compositor layer: moving it then costs no
+     layout and no repaint, just a transform on the GPU. */
+  will-change: transform;
+  transform: translate3d(50vw, 50vh, 0);
+}
+
+/* Near layer — tracks the cursor closely. */
+.ambient-glow-near {
+  background: radial-gradient(
+    circle closest-side,
+    rgba(var(--ambient-tint), var(--ambient-strength)),
+    rgba(var(--ambient-tint), 0) 100%
+  );
+}
+
+/* Far layer — larger, dimmer, and moves less, which is what sells
+   the sense of depth. */
+.ambient-glow-far {
+  --size: calc(var(--ambient-size) * 1.35);
+  background: radial-gradient(
+    circle closest-side,
+    rgba(var(--ambient-tint-far), var(--ambient-strength-far)),
+    rgba(var(--ambient-tint-far), 0) 100%
+  );
+}
+
+/* ============================================================
+   FALLBACK — touch devices, and anything before JS runs
+   No cursor to follow, so the light drifts on its own instead of
+   sitting frozen. Pure CSS, composited, effectively free.
+   ============================================================ */
+@keyframes ambient-drift {
+  0%   { transform: translate3d(36vw, 32vh, 0); }
+  50%  { transform: translate3d(66vw, 64vh, 0); }
+  100% { transform: translate3d(36vw, 32vh, 0); }
+}
+
+.ambient-glow-near { animation: ambient-drift 34s ease-in-out infinite; }
+.ambient-glow-far  { animation: ambient-drift 52s ease-in-out infinite reverse; }
+
+/* JS adds this to <html> once it takes over cursor tracking, so the
+   two never fight over the same transform. */
+.ambient-live .ambient-glow { animation: none; }
+
+/* ============================================================
+   REDUCED MOTION
+   Nothing moves. The glow still exists — it is a static wash of
+   colour, which is atmosphere without vestibular risk.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-glow {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Small screens: one softer layer is plenty, and it saves a
+   compositor layer on the devices least able to spare one. */
+@media (max-width: 620px) {
+  :root {
+    /* Larger in relative terms than desktop: on a narrow screen a
+       34vmax circle would be a small dot adrift in the middle. */
+    --ambient-size: 52vmax;
+    /* Slightly softer than desktop: with only one layer left, and the
+       glow spanning most of a small screen, the same alpha reads
+       heavier than it does on a wide viewport. */
+    --ambient-strength: 0.30;
+  }
+  .ambient-glow-far { display: none; }
+}

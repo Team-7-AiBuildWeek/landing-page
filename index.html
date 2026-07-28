@@ -8,8 +8,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="assets/ambient.css" />
+<script src="assets/ambient.js" defer></script>
 </head>
 <body>
+
+  <!-- ============ AMBIENT BACKGROUND ============ -->
+  <!-- Decorative only: aria-hidden, and pointer-events:none in CSS. -->
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-glow ambient-glow-far"></div>
+    <div class="ambient-glow ambient-glow-near"></div>
+  </div>
 
   <!-- ============ NAV ============ -->
   <header class="nav-wrap">
@@ -20,7 +29,6 @@
       </a>
 
       <ul class="nav-links">
-        <li><a href="#cities">Cities</a></li>
         <li><a href="#how">How it works</a></li>
         <li><a href="#voice">The voice</a></li>
         <li><a href="#stories">Reviews</a></li>
@@ -168,124 +176,6 @@
       <span class="brand"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>Citylore</span>
       <span class="brand"><svg viewBox="0 0 24 24"><path d="M3 18 12 4l9 14z"/></svg>Everpeak</span>
       <span class="brand"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/></svg>Latitude</span>
-    </div>
-  </section>
-
-  <!-- ============ CITIES ============ -->
-  <section class="section" id="cities">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">Cities that talk back</h2>
-        <p class="section-sub">Every route written by local historians, then narrated live by your guide</p>
-        <a href="#" class="btn btn-primary">Browse all 140 cities</a>
-      </div>
-
-      <div class="dest-carousel">
-        <button class="dest-nav dest-prev" type="button" aria-label="Previous cities" aria-controls="cities-track">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
-        </button>
-        <button class="dest-nav dest-next" type="button" aria-label="Next cities" aria-controls="cities-track">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
-        </button>
-
-      <div class="dest-track" id="cities-track" role="region" aria-label="City routes" tabindex="0">
-        <article class="dest-card">
-          <img src="https://picsum.photos/seed/romecity/800/1000" alt="Rome" />
-          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 9 routes</span>
-          <div class="dest-info">
-            <div>
-              <h3>Rome</h3>
-              <p>14 hrs narrated</p>
-            </div>
-            <span class="dest-price">Free</span>
-          </div>
-        </article>
-
-        <article class="dest-card">
-          <img src="https://picsum.photos/seed/lisboncity/800/1000" alt="Lisbon" />
-          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 6 routes</span>
-          <div class="dest-info">
-            <div>
-              <h3>Lisbon</h3>
-              <p>8 hrs narrated</p>
-            </div>
-            <span class="dest-price">Free</span>
-          </div>
-        </article>
-
-        <article class="dest-card">
-          <img src="https://picsum.photos/seed/tokyocity/800/1000" alt="Tokyo" />
-          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 11 routes</span>
-          <div class="dest-info">
-            <div>
-              <h3>Tokyo</h3>
-              <p>19 hrs narrated</p>
-            </div>
-            <span class="dest-price">Free</span>
-          </div>
-        </article>
-
-        <article class="dest-card">
-          <img src="https://picsum.photos/seed/mexicocity/800/1000" alt="Mexico City" />
-          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 7 routes</span>
-          <div class="dest-info">
-            <div>
-              <h3>Mexico City</h3>
-              <p>11 hrs narrated</p>
-            </div>
-            <span class="dest-price">Free</span>
-          </div>
-        </article>
-
-        <article class="dest-card">
-          <img src="https://picsum.photos/seed/portocity/800/1000" alt="Porto" />
-          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 5 routes</span>
-          <div class="dest-info">
-            <div>
-              <h3>Porto</h3>
-              <p>7 hrs narrated</p>
-            </div>
-            <span class="dest-price">Free</span>
-          </div>
-        </article>
-
-        <article class="dest-card">
-          <img src="https://picsum.photos/seed/istanbulcity/800/1000" alt="Istanbul" />
-          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 12 routes</span>
-          <div class="dest-info">
-            <div>
-              <h3>Istanbul</h3>
-              <p>21 hrs narrated</p>
-            </div>
-            <span class="dest-price">Free</span>
-          </div>
-        </article>
-
-        <article class="dest-card">
-          <img src="https://picsum.photos/seed/praguecity/800/1000" alt="Prague" />
-          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 8 routes</span>
-          <div class="dest-info">
-            <div>
-              <h3>Prague</h3>
-              <p>12 hrs narrated</p>
-            </div>
-            <span class="dest-price">Free</span>
-          </div>
-        </article>
-
-        <article class="dest-card">
-          <img src="https://picsum.photos/seed/buenosairescity/800/1000" alt="Buenos Aires" />
-          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 6 routes</span>
-          <div class="dest-info">
-            <div>
-              <h3>Buenos Aires</h3>
-              <p>9 hrs narrated</p>
-            </div>
-            <span class="dest-price">Free</span>
-          </div>
-        </article>
-      </div>
-      </div>
     </div>
   </section>
 
@@ -444,7 +334,7 @@
 
       <div class="footer-col">
         <h4>App</h4>
-        <a href="#cities">Cities</a><a href="#how">How it works</a><a href="#voice">The voice</a>
+        <a href="#how">How it works</a><a href="#voice">The voice</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -462,45 +352,6 @@
   </footer>
 
   <script>
-    // Cities carousel — arrows page the scroll-snap track.
-    (function () {
-      var track = document.getElementById('cities-track');
-      if (!track) return;
-
-      var prev = document.querySelector('.dest-prev');
-      var next = document.querySelector('.dest-next');
-      if (!prev || !next) return;
-
-      function page() {
-        // Advance by whole cards so the snap points stay aligned.
-        var card = track.querySelector('.dest-card');
-        if (!card) return track.clientWidth;
-        var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-        var step = card.getBoundingClientRect().width + gap;
-        var fits = Math.max(1, Math.floor(track.clientWidth / step));
-        return step * fits;
-      }
-
-      function sync() {
-        var max = track.scrollWidth - track.clientWidth;
-        // Tolerance absorbs sub-pixel scroll positions from fractional widths.
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= max - 2;
-      }
-
-      prev.addEventListener('click', function () {
-        track.scrollBy({ left: -page(), behavior: 'smooth' });
-      });
-      next.addEventListener('click', function () {
-        track.scrollBy({ left: page(), behavior: 'smooth' });
-      });
-
-      track.addEventListener('scroll', sync, { passive: true });
-      window.addEventListener('resize', sync);
-      if (window.ResizeObserver) new ResizeObserver(sync).observe(track);
-      sync();
-    })();
-
     // "How it works" — selecting a step swaps the media beside it.
     (function () {
       var tabs = [].slice.call(document.querySelectorAll('.steps .step'));
