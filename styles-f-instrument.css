@@ -8,8 +8,8 @@
   --accent-dark: #b83e5c;
   --line: rgba(34, 24, 38, 0.1);
   --radius: 24px;
-  --serif: "Archivo", Arial, sans-serif;
-  --sans: "Archivo", Arial, sans-serif;
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans: "Inter", system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -607,66 +607,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============ CITY CARDS ============ */
-.dest-carousel { position: relative; }
-
-.dest-track {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  /* room for the cards' shadows and focus ring; the matching scroll-padding
-     keeps the first card's snap position at scrollLeft 0 */
-  padding: 4px;
-  margin: -4px;
-  scroll-padding-inline: 4px;
-  scrollbar-width: none;
-}
-.dest-track::-webkit-scrollbar { display: none; }
-.dest-track:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: var(--radius);
-}
-
-.dest-nav {
-  position: absolute;
-  top: 50%;
-  z-index: 3;
+.dest-grid {
   display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  transform: translateY(-50%);
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: #fff;
-  cursor: pointer;
-  box-shadow: 0 12px 24px -14px rgba(24, 59, 38, 0.85);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
-.dest-nav svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 1.9;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.dest-nav:hover { transform: translateY(-50%) scale(1.06); }
-.dest-nav[disabled] {
-  opacity: 0;
-  pointer-events: none;
-}
-.dest-prev { left: -18px; }
-.dest-next { right: -18px; }
-
 .dest-card {
   position: relative;
-  flex: 0 0 clamp(226px, 25vw, 282px);
-  scroll-snap-align: start;
   border-radius: var(--radius);
   overflow: hidden;
   aspect-ratio: 3 / 4;
@@ -788,9 +735,6 @@ a { color: inherit; text-decoration: none; }
 .chip-card strong { display: block; font-size: 14px; }
 .chip-card span { font-size: 12px; color: var(--muted); }
 
-.how-media { transition: opacity 0.28s ease; }
-.how-media.is-swapping { opacity: 0.35; }
-
 .steps { display: flex; flex-direction: column; }
 .step { padding: 26px 0 26px 26px; border-left: 2px solid var(--line); }
 .step.is-active { border-left-color: var(--accent); }
@@ -877,9 +821,10 @@ a { color: inherit; text-decoration: none; }
 }
 .quote blockquote {
   margin: 0;
-  font-family: var(--sans);
-  font-size: 16.5px;
-  line-height: 1.55;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.34;
+  letter-spacing: -0.01em;
 }
 .quote figcaption {
   display: flex;
@@ -965,9 +910,8 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .hero-floats { display: none; }
   .nav-links { display: none; }
+  .dest-grid { grid-template-columns: repeat(2, 1fr); }
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
-  /* touch devices swipe the track instead */
-  .dest-nav { display: none; }
   .quote-grid { grid-template-columns: 1fr; }
   .how-grid { grid-template-columns: 1fr; gap: 44px; }
   .stats { grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
@@ -987,8 +931,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 620px) {
   .section { padding: 64px 0; }
   .hero { padding: 52px 0 56px; }
-  .feature-grid { grid-template-columns: 1fr; }
-  .dest-card { flex-basis: min(78vw, 300px); }
+  .dest-grid, .feature-grid { grid-template-columns: 1fr; }
   .chip-card { right: 10px; }
   .nav-login { display: none; }
   .trust-text { flex-direction: column; gap: 5px; text-align: center; }
@@ -998,9 +941,6 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .wave span, .live i, .chip .dot, .float,
   .audio-tag.is-playing .audio-wave i { animation: none; }
-  .how-media { transition: none; }
-  .how-media.is-swapping { opacity: 1; }
-  .dest-track { scroll-behavior: auto; }
   .audio-wave i { transform: scaleY(0.6); }
   .wave span { transform: scaleY(0.6); opacity: 0.8; }
   * { transition: none !important; }

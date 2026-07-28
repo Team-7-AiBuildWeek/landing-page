@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Narro — palette &amp; font comparison</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #17151a; color: #f5f2f6; font-family: system-ui, sans-serif; padding: 32px 40px 64px; }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  p.hint { color: #9a93a2; font-size: 13px; margin-bottom: 28px; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.12em; color: #b9b2c2; margin: 36px 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 24px; }
+  figure { background: #221f26; border-radius: 14px; padding: 12px 12px 10px; }
+  figcaption { display: flex; align-items: baseline; justify-content: space-between; padding: 10px 6px 2px; }
+  figcaption strong { font-size: 14px; }
+  figcaption span { font-size: 12px; color: #9a93a2; }
+  .badge { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+           background: #cf4f6f; color: #fff; border-radius: 99px; padding: 3px 8px; margin-left: 8px; }
+  .frame { width: 100%; aspect-ratio: 1280 / 780; overflow: hidden; border-radius: 8px; position: relative; }
+  .frame iframe { width: 1280px; height: 780px; border: 0; transform-origin: top left; position: absolute; top: 0; left: 0; }
+</style>
+</head>
+<body>
+  <h1>Narro — all the options</h1>
+  <p class="hint">Each tile is the real page, live. Scroll inside a tile to explore below the hero.</p>
+
+  <h2>Colour palettes <span style="text-transform:none;letter-spacing:0">(all shown with Fraunces)</span></h2>
+  <div class="grid">
+    <figure><div class="frame"><iframe src="index-p-warm.html"></iframe></div>
+      <figcaption><strong>Original warm</strong><span>cream · ink · orange</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-p-coastal.html"></iframe></div>
+      <figcaption><strong>Coastal</strong><span>grey-blue · navy · teal</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-p-plum.html"></iframe></div>
+      <figcaption><strong>Plum dusk <span class="badge">current</span></strong><span>lilac-grey · aubergine · berry</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-p-cobalt.html"></iframe></div>
+      <figcaption><strong>Mono + cobalt</strong><span>off-white · near-black · cobalt</span></figcaption></figure>
+  </div>
+
+  <h2>Grotesque sans options <span style="text-transform:none;letter-spacing:0">(Arial family, but nicer)</span></h2>
+  <div class="grid">
+    <figure><div class="frame"><iframe src="index-f-arimo.html"></iframe></div>
+      <figcaption><strong>Arimo</strong><span>literal Arial sibling — metric-compatible</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-f-archivo.html"></iframe></div>
+      <figcaption><strong>Archivo <span class="badge">current</span></strong><span>tighter grotesque, more presence</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-f-hanken.html"></iframe></div>
+      <figcaption><strong>Hanken Grotesk</strong><span>softer, friendlier grotesque</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-f-spaceg.html"></iframe></div>
+      <figcaption><strong>Space Grotesk + Inter</strong><span>grotesque with quirk in the headline</span></figcaption></figure>
+  </div>
+
+  <h2>Serif pairings <span style="text-transform:none;letter-spacing:0">(for reference)</span></h2>
+  <div class="grid">
+    <figure><div class="frame"><iframe src="index-f-instrument.html"></iframe></div>
+      <figcaption><strong>Instrument Serif + Inter</strong><span>delicate, light, high-contrast</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-f-fraunces.html"></iframe></div>
+      <figcaption><strong>Fraunces + Inter</strong><span>warm, soft, characterful</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-f-arial.html"></iframe></div>
+      <figcaption><strong>Arial everywhere</strong><span>neutral grotesque, no serif</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-f-playfair.html"></iframe></div>
+      <figcaption><strong>Playfair Display + Work Sans</strong><span>classic, elegant, editorial</span></figcaption></figure>
+    <figure><div class="frame"><iframe src="index-f-dm.html"></iframe></div>
+      <figcaption><strong>DM Serif Display + DM Sans</strong><span>bold, dramatic, cohesive</span></figcaption></figure>
+  </div>
+
+  <script>
+    // scale each 1280px-wide iframe to fit its tile
+    function fit() {
+      document.querySelectorAll('.frame').forEach(f => {
+        const s = f.clientWidth / 1280;
+        f.querySelector('iframe').style.transform = `scale(${s})`;
+      });
+    }
+    addEventListener('resize', fit); fit();
+    // same-origin: make sure every tile starts at the top of the page
+    document.querySelectorAll('iframe').forEach(f =>
+      f.addEventListener('load', () => f.contentWindow.scrollTo(0, 0)));
+  </script>
+</body>
+</html>
