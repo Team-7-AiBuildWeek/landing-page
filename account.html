@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Your account — Voxa</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+
+<header class="nav-wrap">
+  <nav class="nav container">
+    <a class="logo" href="/">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
+      <span>Voxa</span>
+    </a>
+    <div class="nav-actions">
+      <a href="/" class="nav-login">Back to site</a>
+    </div>
+  </nav>
+</header>
+
+<p class="account-loading" id="loading">Checking your session…</p>
+
+<main class="account-wrap gate" id="gate">
+
+  <span class="account-badge">
+    <span class="dot" aria-hidden="true"></span> Signed in
+  </span>
+
+  <h1 class="account-title">Hello, <span id="firstName">there</span></h1>
+  <p class="account-sub">This page is only reachable with a valid session cookie.</p>
+
+  <dl class="account-card">
+    <div class="account-row">
+      <dt>Name</dt>
+      <dd id="fName">—</dd>
+    </div>
+    <div class="account-row">
+      <dt>Email</dt>
+      <dd id="fEmail">—</dd>
+    </div>
+    <div class="account-row">
+      <dt>User ID</dt>
+      <dd id="fId">—</dd>
+    </div>
+    <div class="account-row">
+      <dt>Registered</dt>
+      <dd id="fCreated">—</dd>
+    </div>
+    <div class="account-row">
+      <dt>Previous sign-in</dt>
+      <dd id="fLastLogin">—</dd>
+    </div>
+    <div class="account-row">
+      <dt>Session expires</dt>
+      <dd id="fExpires">—</dd>
+    </div>
+  </dl>
+
+  <div class="account-actions">
+    <button type="button" class="btn btn-dark" id="logoutBtn">Sign out</button>
+    <a class="nav-login" href="/">Back to the landing page</a>
+  </div>
+
+  <p class="account-note">
+    Every field above came from the <code>users</code> table in
+    <code>data/users.db</code>. To see the whole table from a terminal, run
+    <code>npm run users</code>.
+  </p>
+
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const el = (id) => document.getElementById(id);
+
+  /** SQLite stores 'YYYY-MM-DD HH:MM:SS' in UTC; render it in local time. */
+  function formatDate(value) {
+    if (!value) return "—";
+    const date = new Date(value.replace(" ", "T") + "Z");
+    if (Number.isNaN(date.getTime())) return value;
+    return date.toLocaleString(undefined, {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+  }
+
+  function render({ user, sessionExpiresAt }) {
+    el("firstName").textContent = user.name.split(" ")[0];
+    el("fName").textContent = user.name;
+    el("fEmail").textContent = user.email;
+    el("fId").textContent = "#" + user.id;
+    el("fCreated").textContent = formatDate(user.createdAt);
+    el("fLastLogin").textContent = formatDate(user.lastLoginAt);
+    el("fExpires").textContent = formatDate(sessionExpiresAt);
+
+    el("loading").remove();
+    el("gate").classList.add("is-ready");
+  }
+
+  el("logoutBtn").addEventListener("click", async (event) => {
+    event.target.disabled = true;
+    try {
+      await fetch("/api/logout", { method: "POST", credentials: "same-origin" });
+    } finally {
+      location.replace("/login.html");
+    }
+  });
+
+  fetch("/api/me", { credentials: "same-origin" })
+    .then((res) => {
+      if (res.status === 401) {
+        location.replace("/login.html");
+        return null;
+      }
+      if (!res.ok) throw new Error("Request failed: " + res.status);
+      return res.json();
+    })
+    .then((data) => { if (data) render(data); })
+    .catch(() => {
+      el("loading").textContent = "Couldn't reach the server. Is it running?";
+    });
+})();
+</script>
+
+</body>
+</html>

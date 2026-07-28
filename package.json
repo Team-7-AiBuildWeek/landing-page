@@ -1,0 +1,19 @@
+{
+  "name": "voxa-auth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Auth server for the Voxa landing page — registration, login, sessions, SQLite user store.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "users": "node scripts/list-users.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "express": "^5.1.0"
+  }
+}

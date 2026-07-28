@@ -1,0 +1,384 @@
+/* ============================================================
+   Auth pages — login.html, account.html
+   Relies on the tokens and .btn styles defined in styles.css.
+   ============================================================ */
+
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.02fr 1fr;
+}
+
+/* ---------- left brand panel ---------- */
+.auth-aside {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 40px 48px;
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* Soft light bloom so the flat ink panel has some depth. */
+.auth-aside::after {
+  content: "";
+  position: absolute;
+  width: 620px;
+  height: 620px;
+  right: -230px;
+  bottom: -300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108, 150, 178, 0.42), transparent 68%);
+  pointer-events: none;
+}
+.auth-aside > * { position: relative; z-index: 1; }
+
+.auth-aside .logo { color: var(--cream); }
+.auth-aside .logo svg { fill: var(--orange); }
+
+.auth-quote {
+  max-width: 26ch;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(34px, 3.4vw, 52px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+.auth-quote em {
+  color: var(--orange);
+  font-style: italic;
+}
+
+.auth-aside-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  color: rgba(250, 250, 251, 0.62);
+}
+.auth-aside-foot .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex: none;
+}
+
+/* ---------- right form panel ---------- */
+.auth-main {
+  display: grid;
+  place-items: center;
+  padding: 56px 24px;
+  background: var(--cream);
+}
+
+.auth-card { width: min(408px, 100%); }
+
+.auth-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 30px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.auth-back:hover { color: var(--ink); }
+.auth-back svg { width: 14px; height: 14px; fill: currentColor; }
+
+.auth-title {
+  margin: 0 0 6px;
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.auth-sub {
+  margin: 0 0 26px;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+/* ---------- segmented mode switch ---------- */
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 26px;
+  border-radius: 999px;
+  background: var(--cream-deep);
+}
+.auth-tab {
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.auth-tab[aria-selected="true"] {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(24, 59, 38, 0.09);
+}
+
+/* ---------- fields ---------- */
+.field { margin-bottom: 16px; }
+
+.field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.field input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15px;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.field input::placeholder { color: #b3bdb6; }
+.field input:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(108, 150, 178, 0.16);
+}
+.field input[aria-invalid="true"] {
+  border-color: #c2593f;
+  background: #fffafa;
+}
+
+/* password field + reveal toggle */
+/* The wrapper is what the toggle is anchored to — anchoring to .field instead
+   would drop the button below the input as soon as an error or hint appears. */
+.input-wrap { position: relative; }
+.field-password input { padding-right: 62px; }
+.reveal {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 7px 11px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.reveal:hover { color: var(--ink); background: var(--cream-deep); }
+
+.field-error {
+  display: none;
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: #c2593f;
+}
+.field-error:not(:empty) { display: block; }
+
+.field-hint {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- form-level alert ---------- */
+.auth-alert {
+  display: none;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border-radius: 13px;
+  border: 1px solid rgba(194, 89, 63, 0.24);
+  background: rgba(194, 89, 63, 0.07);
+  color: #a4472f;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+.auth-alert.is-visible { display: flex; }
+.auth-alert svg { width: 16px; height: 16px; margin-top: 1px; flex: none; fill: currentColor; }
+
+/* ---------- submit ---------- */
+.auth-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+  border: 0;
+  font-family: inherit;
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.auth-submit[disabled] {
+  opacity: 0.62;
+  cursor: progress;
+  transform: none;
+}
+
+.spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.34);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2s; }
+}
+
+.auth-foot {
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.55;
+}
+.auth-foot button {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ============================================================
+   Account page
+   ============================================================ */
+.account-wrap {
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding: 72px 24px 96px;
+}
+
+.account-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 10px;
+  margin-bottom: 22px;
+  border-radius: 999px;
+  background: rgba(108, 150, 178, 0.14);
+  color: #47708b;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.account-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+.account-title {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.6vw, 46px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.account-sub { margin: 0 0 34px; color: var(--muted); font-size: 15px; }
+
+.account-card {
+  padding: 6px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.account-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--line);
+}
+.account-row:last-child { border-bottom: 0; }
+.account-row dt {
+  font-size: 13px;
+  color: var(--muted);
+  flex: none;
+}
+.account-row dd {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 500;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.account-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+.account-actions .btn { border: 0; font-family: inherit; cursor: pointer; }
+
+.account-note {
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.account-note code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--cream-deep);
+  font-size: 12px;
+}
+
+/* Hidden until the session check resolves, so a signed-out visitor never
+   sees a flash of somebody's account shell before the redirect. */
+.gate { display: none; }
+.gate.is-ready { display: block; }
+
+.account-loading {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .auth-shell { grid-template-columns: 1fr; }
+  .auth-aside {
+    gap: 26px;
+    padding: 26px 24px 32px;
+  }
+  .auth-quote { font-size: 30px; max-width: none; }
+  .auth-aside-foot { display: none; }
+  .auth-main { padding: 40px 24px 64px; }
+}
