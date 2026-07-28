@@ -131,7 +131,144 @@ a { color: inherit; text-decoration: none; }
 .nav-login:hover { color: var(--ink); }
 
 /* ============ HERO ============ */
-.hero { padding: 84px 0 72px; text-align: center; }
+.hero { position: relative; padding: 84px 0 72px; text-align: center; }
+.hero > *:not(.hero-floats) { position: relative; z-index: 2; }
+
+/* ---- floating photo cards ---- */
+/* Above the hero copy so the play buttons are hit-testable — the layer itself
+   stays pointer-events:none, so text below remains selectable. The cards clear
+   the text visually, so painting above it changes nothing. */
+.hero-floats {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.float {
+  position: absolute;
+  margin: 0;
+  transform: rotate(var(--rot));
+  animation: floaty var(--dur, 8s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+.float img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow:
+    0 2px 6px -2px rgba(27, 22, 19, 0.18),
+    0 34px 54px -30px rgba(27, 22, 19, 0.55);
+}
+
+/* ---- audio-guide badge on each stop ---- */
+.audio-tag {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 9px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 11px 4px 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 16px -12px rgba(27, 22, 19, 0.6);
+  opacity: 0.86;
+}
+.audio-play {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 4px 9px -4px rgba(242, 102, 31, 0.95);
+  /* the floats layer is pointer-events:none — re-enable just this control */
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.audio-play:hover { transform: scale(1.12); }
+.audio-play:active { transform: scale(0.92); }
+.audio-play svg {
+  width: 9px;
+  height: 9px;
+  fill: #fff;
+  margin-left: 1px;
+}
+.audio-wave {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 13px;
+  min-width: 0;
+}
+.audio-wave i {
+  flex: 1 1 auto;
+  max-width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: rgba(242, 102, 31, 0.8);
+  transform: scaleY(0.3);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+/* one pass through the waveform, triggered by the play button */
+.audio-tag.is-playing .audio-wave i {
+  animation: wave 1.15s ease-in-out 1;
+}
+/* resting shape: a static waveform rather than a row of equal dots */
+.audio-wave i:nth-child(6n + 1) { transform: scaleY(0.45); animation-delay: 0s; }
+.audio-wave i:nth-child(6n + 2) { transform: scaleY(0.8);  animation-delay: 0.07s; }
+.audio-wave i:nth-child(6n + 3) { transform: scaleY(0.55); animation-delay: 0.14s; }
+.audio-wave i:nth-child(6n + 4) { transform: scaleY(1);    animation-delay: 0.21s; }
+.audio-wave i:nth-child(6n + 5) { transform: scaleY(0.62); animation-delay: 0.28s; }
+.audio-wave i:nth-child(6n + 6) { transform: scaleY(0.38); animation-delay: 0.35s; }
+
+.audio-tag em {
+  flex: none;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+/* ---- dotted route looping between the cards ---- */
+.route-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.route-map .route-line {
+  fill: none;
+  stroke: rgba(27, 22, 19, 0.45);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 9;
+}
+/* marker that walks the loop */
+.route-runner .halo { fill: rgba(242, 102, 31, 0.16); }
+.route-runner .core {
+  fill: var(--orange);
+  stroke: var(--cream);
+  stroke-width: 2;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+  50% { transform: translateY(-14px) rotate(var(--rot)); }
+}
+
+.float-1 { --rot: -8deg; --dur: 8s;   --delay: -0.4s; width: 172px; top: 34px;  left: 4px; }
+.float-2 { --rot: 6deg;  --dur: 9.5s; --delay: -2.6s; width: 152px; bottom: 8px; left: 74px; }
+.float-3 { --rot: 9deg;  --dur: 7.4s; --delay: -1.5s; width: 158px; top: 12px;  right: 12px; }
+.float-4 { --rot: -7deg; --dur: 8.8s; --delay: -3.4s; width: 176px; bottom: 22px; right: 82px; }
 
 .trust { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .avatars { display: flex; }
@@ -764,9 +901,15 @@ a { color: inherit; text-decoration: none; }
   .chip-a { left: 2%; }
   .chip-b { right: 1%; }
   .chip-c { left: 2%; }
+
+  .float-1 { width: 138px; left: 0; }
+  .float-2 { width: 122px; left: 46px; }
+  .float-3 { width: 128px; right: 0; }
+  .float-4 { width: 142px; right: 50px; }
 }
 
 @media (max-width: 900px) {
+  .hero-floats { display: none; }
   .nav-links { display: none; }
   .dest-grid { grid-template-columns: repeat(2, 1fr); }
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
@@ -797,7 +940,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wave span, .live i, .chip .dot { animation: none; }
+  .wave span, .live i, .chip .dot, .float,
+  .audio-tag.is-playing .audio-wave i { animation: none; }
+  .audio-wave i { transform: scaleY(0.6); }
   .wave span { transform: scaleY(0.6); opacity: 0.8; }
   * { transition: none !important; }
 }
