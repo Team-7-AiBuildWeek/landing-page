@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Voxa — The city tells its own story, out loud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav-wrap">
+    <nav class="nav container">
+      <a class="logo" href="#">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
+        <span>Voxa</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#cities">Cities</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#voice">The voice</a></li>
+        <li><a href="#stories">Reviews</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#" class="nav-login">Log in</a>
+        <a href="#get" class="btn btn-dark">Get the app</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero container">
+    <div class="trust">
+      <div class="avatars">
+        <img src="https://i.pravatar.cc/80?img=12" alt="" />
+        <img src="https://i.pravatar.cc/80?img=32" alt="" />
+        <img src="https://i.pravatar.cc/80?img=45" alt="" />
+      </div>
+      <div class="trust-text">
+        <span class="stars">★★★★★</span>
+        <span>4.9 on the App Store · 10k+ walks narrated</span>
+      </div>
+    </div>
+
+    <h1 class="hero-title">Stories of the city,<br /><em>told as you walk</em></h1>
+
+    <p class="hero-sub">
+      An AI guide that narrates the street you're standing on — in real time,
+      in your ear, at your pace. Press play and start walking.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#" class="store">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.13-3.85 2.23-3.91-1.22-1.78-3.11-2.02-3.78-2.05-1.61-.16-3.14.95-3.96.95-.82 0-2.07-.93-3.41-.9-1.75.03-3.37 1.02-4.27 2.59-1.82 3.16-.47 7.84 1.31 10.4.87 1.25 1.9 2.66 3.26 2.61 1.31-.05 1.8-.85 3.39-.85s2.03.85 3.42.82c1.41-.02 2.3-1.28 3.16-2.54.99-1.45 1.4-2.86 1.42-2.93-.03-.01-2.73-1.05-2.77-4.19ZM14.6 4.5c.72-.88 1.21-2.1 1.08-3.32-1.04.04-2.3.69-3.05 1.57-.67.78-1.25 2.02-1.09 3.21 1.16.09 2.34-.59 3.06-1.46Z"/></svg>
+        <span><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a href="#" class="store">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l8.8-9.7L3.6 2.3Zm10.3 8.2 2.9-3.2-9.5-5.4c-.5-.3-1-.3-1.4-.1l8 8.7Zm0 2.6-8 8.7c.4.2.9.2 1.4-.1l9.5-5.4-2.9-3.2Zm6-4.2-2.4-1.4-3.2 3.5 3.2 3.5 2.4-1.4c1-.6 1-2.2 0-2.8Z"/></svg>
+        <span><small>Get it on</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+
+    <a href="#" class="btn btn-ghost hero-sample">
+      <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+      Hear a 30-second sample
+    </a>
+  </section>
+
+  <!-- ============ APP SHOWCASE ============ -->
+  <section class="showcase">
+    <div class="container showcase-panel">
+      <div class="chip chip-a">
+        <span class="dot"></span> Now narrating · Trevi Fountain
+      </div>
+      <div class="chip chip-b">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/></svg>
+        You stopped walking — so did the story
+      </div>
+      <div class="chip chip-c">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M12 4v16"/></svg>
+        “Who built this?” — ask out loud, anytime
+      </div>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <img class="phone-map" src="https://picsum.photos/seed/oldtownlanes/700/1400" alt="" />
+          <span class="notch"></span>
+
+          <div class="app-top">
+            <span class="app-city">Rome · Baroque Loop</span>
+            <span class="app-progress">Stop 4 of 12</span>
+          </div>
+
+          <div class="app-player">
+            <div class="app-player-head">
+              <span class="live"><i></i> Live</span>
+              <span>02:14</span>
+            </div>
+            <strong>The fountain that ate a whole aqueduct</strong>
+            <div class="wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="app-controls">
+              <button type="button" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24"><path d="M11 4 7 8l4 4"/><path d="M7 8h6a5 5 0 1 1 0 10h-2"/></svg></button>
+              <button type="button" class="app-pause" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg></button>
+              <button type="button" aria-label="Ask a question"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="stats">
+        <div class="stat"><strong>140+</strong><span>Cities narrated</span></div>
+        <div class="stat"><strong>32</strong><span>Languages, one voice</span></div>
+        <div class="stat"><strong>4.9</strong><span>Average rating</span></div>
+        <div class="stat"><strong>0</strong><span>Group tours joined</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRESS STRIP ============ -->
+  <section class="logos">
+    <div class="container logo-row">
+      <span class="brand"><svg viewBox="0 0 24 24"><path d="M12 2 2 12l10 10 10-10z"/></svg>Wanderlight</span>
+      <span class="brand"><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8Z"/></svg>Nomad Weekly</span>
+      <span class="brand"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>Citylore</span>
+      <span class="brand"><svg viewBox="0 0 24 24"><path d="M3 18 12 4l9 14z"/></svg>Everpeak</span>
+      <span class="brand"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/></svg>Latitude</span>
+    </div>
+  </section>
+
+  <!-- ============ CITIES ============ -->
+  <section class="section" id="cities">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Cities that talk back</h2>
+        <p class="section-sub">Every route written by local historians, then narrated live by your guide</p>
+        <a href="#" class="btn btn-primary">Browse all 140 cities</a>
+      </div>
+
+      <div class="dest-grid">
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/romecity/800/1000" alt="Rome" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 9 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Rome</h3>
+              <p>14 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/lisboncity/800/1000" alt="Lisbon" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 6 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Lisbon</h3>
+              <p>8 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/tokyocity/800/1000" alt="Tokyo" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 11 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Tokyo</h3>
+              <p>19 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+
+        <article class="dest-card">
+          <img src="https://picsum.photos/seed/mexicocity/800/1000" alt="Mexico City" />
+          <span class="dest-tag"><svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg> 7 routes</span>
+          <div class="dest-info">
+            <div>
+              <h3>Mexico City</h3>
+              <p>11 hrs narrated</p>
+            </div>
+            <span class="dest-price">Free</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section" id="how">
+    <div class="container how-grid">
+      <div class="how-media">
+        <img class="how-photo" src="https://picsum.photos/seed/walkingcity/1000/1100" alt="A traveller walking through a city with headphones" />
+
+        <div class="chip chip-tl">
+          <span class="dot"></span> Narrating · 02:14
+        </div>
+
+        <div class="chip-card">
+          <span class="chip-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg>
+          </span>
+          <div>
+            <strong>Baroque Loop</strong>
+            <span>12 stops · 2 hrs · hands-free</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article class="step is-active">
+          <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <h3>Pick your city</h3>
+          <p>Open the app anywhere and it already knows which streets are around you.</p>
+        </article>
+
+        <article class="step">
+          <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <h3>Press play, start walking</h3>
+          <p>Your guide reads the city aloud, triggering each story the moment you arrive.</p>
+        </article>
+
+        <article class="step">
+          <span class="step-icon"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></span>
+          <h3>Talk back to it</h3>
+          <p>Interrupt with a question out loud and get an answer before the next corner.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VOICE FEATURES ============ -->
+  <section class="section voice-section" id="voice">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">A guide, not an audiobook</h2>
+        <p class="section-sub">The narration reacts to where you are, how fast you move, and what you ask</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 12h3l2.5-6 3 13L14 9l2 3h5"/></svg></span>
+          <h3>Live, not pre-recorded</h3>
+          <p>Every story is generated for the exact spot you're standing on, the day you're standing there.</p>
+        </article>
+
+        <article class="feature">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></span>
+          <h3>Interrupt it anytime</h3>
+          <p>Say “wait, who was she?” and the guide stops, answers, then picks the thread back up.</p>
+        </article>
+
+        <article class="feature">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <h3>Keeps your pace</h3>
+          <p>Linger at a doorway and it goes deeper. Walk fast and it gets to the point.</p>
+        </article>
+
+        <article class="feature">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0"/><path d="M2 12a10 10 0 0 1 20 0"/><circle cx="12" cy="17" r="2"/></svg></span>
+          <h3>Works underground</h3>
+          <p>Download a city before you land. No signal, no data, no silence.</p>
+        </article>
+
+        <article class="feature">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span>
+          <h3>32 languages, one voice</h3>
+          <p>Switch mid-walk. The same guide, the same tone, a different tongue.</p>
+        </article>
+
+        <article class="feature">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <h3>No umbrella to follow</h3>
+          <p>No meeting point, no start time, no group of forty. Leave when you feel like it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="section" id="stories">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">What walkers say</h2>
+        <p class="section-sub">Pulled from the App Store, unedited</p>
+      </div>
+
+      <div class="quote-grid">
+        <figure class="quote">
+          <span class="stars">★★★★★</span>
+          <blockquote>I asked it why the street was named that. It answered, then tied it back to the church we'd passed ten minutes earlier.</blockquote>
+          <figcaption><img src="https://i.pravatar.cc/80?img=5" alt="" /><span><strong>Amara Okafor</strong>Walked Lisbon · 6 routes</span></figcaption>
+        </figure>
+
+        <figure class="quote">
+          <span class="stars">★★★★★</span>
+          <blockquote>I stopped to buy coffee and the narration just waited for me. First audio guide that didn't leave me behind.</blockquote>
+          <figcaption><img src="https://i.pravatar.cc/80?img=15" alt="" /><span><strong>Jonas Weber</strong>Walked Rome · 3 routes</span></figcaption>
+        </figure>
+
+        <figure class="quote">
+          <span class="stars">★★★★★</span>
+          <blockquote>Used it in Tokyo with zero signal for four hours straight. It never once stopped talking.</blockquote>
+          <figcaption><img src="https://i.pravatar.cc/80?img=24" alt="" /><span><strong>Priya Nair</strong>Walked Tokyo · 11 routes</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-wrap container" id="get">
+    <div class="cta">
+      <img src="https://picsum.photos/seed/nightwalk/1600/700" alt="" />
+      <div class="cta-inner">
+        <h2>Your next walk has a voice</h2>
+        <p>Free to download. First route in every city is on us.</p>
+        <div class="hero-cta">
+          <a href="#" class="store store-light">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.13-3.85 2.23-3.91-1.22-1.78-3.11-2.02-3.78-2.05-1.61-.16-3.14.95-3.96.95-.82 0-2.07-.93-3.41-.9-1.75.03-3.37 1.02-4.27 2.59-1.82 3.16-.47 7.84 1.31 10.4.87 1.25 1.9 2.66 3.26 2.61 1.31-.05 1.8-.85 3.39-.85s2.03.85 3.42.82c1.41-.02 2.3-1.28 3.16-2.54.99-1.45 1.4-2.86 1.42-2.93-.03-.01-2.73-1.05-2.77-4.19ZM14.6 4.5c.72-.88 1.21-2.1 1.08-3.32-1.04.04-2.3.69-3.05 1.57-.67.78-1.25 2.02-1.09 3.21 1.16.09 2.34-.59 3.06-1.46Z"/></svg>
+            <span><small>Download on the</small><strong>App Store</strong></span>
+          </a>
+          <a href="#" class="store store-light">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l8.8-9.7L3.6 2.3Zm10.3 8.2 2.9-3.2-9.5-5.4c-.5-.3-1-.3-1.4-.1l8 8.7Zm0 2.6-8 8.7c.4.2.9.2 1.4-.1l9.5-5.4-2.9-3.2Zm6-4.2-2.4-1.4-3.2 3.5 3.2 3.5 2.4-1.4c1-.6 1-2.2 0-2.8Z"/></svg>
+            <span><small>Get it on</small><strong>Google Play</strong></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="logo" href="#">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
+          <span>Voxa</span>
+        </a>
+        <p class="footer-note">An AI guide for people who'd rather walk alone — and still hear the whole story.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>App</h4>
+        <a href="#cities">Cities</a><a href="#how">How it works</a><a href="#voice">The voice</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Press kit</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">Help centre</a><a href="#">Offline guide</a><a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="container footer-base">
+      <span>© 2026 Voxa. All rights reserved.</span>
+      <span>Made for people who walk slowly.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
