@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sign in — Voxa</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+
+<main class="auth-shell">
+
+  <!-- ============ BRAND PANEL ============ -->
+  <aside class="auth-aside">
+    <a class="logo" href="/">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
+      <span>Voxa</span>
+    </a>
+
+    <p class="auth-quote">Every street you<br /><em>haven't heard yet</em></p>
+
+    <div class="auth-aside-foot">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Your walks, saved across every device you carry.</span>
+    </div>
+  </aside>
+
+  <!-- ============ FORM PANEL ============ -->
+  <section class="auth-main">
+    <div class="auth-card">
+
+      <a class="auth-back" href="/">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 7 12l8.5 7.5 1.3-1.5L10 12l6.8-6z"/></svg>
+        Back to Voxa
+      </a>
+
+      <h1 class="auth-title" id="authTitle">Welcome back</h1>
+      <p class="auth-sub" id="authSub">Sign in to pick up where your last walk ended.</p>
+
+      <div class="auth-tabs" role="tablist" aria-label="Sign in or create an account">
+        <button type="button" class="auth-tab" role="tab" id="tabSignin"
+                aria-selected="true" aria-controls="authForm">Sign in</button>
+        <button type="button" class="auth-tab" role="tab" id="tabRegister"
+                aria-selected="false" aria-controls="authForm">Create account</button>
+      </div>
+
+      <div class="auth-alert" id="authAlert" role="alert">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1 21h22L12 2Zm0 6 1 7h-2l1-7Zm0 9.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/></svg>
+        <span id="authAlertText"></span>
+      </div>
+
+      <form id="authForm" novalidate>
+
+        <div class="field" id="nameField" hidden>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name"
+                 placeholder="Ada Lovelace" maxlength="80" />
+          <p class="field-error" id="nameError"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email"
+                 placeholder="you@example.com" maxlength="254" required />
+          <p class="field-error" id="emailError"></p>
+        </div>
+
+        <div class="field field-password">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="password" name="password"
+                   autocomplete="current-password" placeholder="••••••••" required />
+            <button type="button" class="reveal" id="reveal"
+                    aria-label="Show password">Show</button>
+          </div>
+          <p class="field-error" id="passwordError"></p>
+          <p class="field-hint" id="passwordHint" hidden>At least 8 characters.</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary auth-submit" id="submitBtn">
+          <span id="submitLabel">Sign in</span>
+        </button>
+      </form>
+
+      <p class="auth-foot" id="authFoot">
+        New to Voxa? <button type="button" data-switch="register">Create an account</button>
+      </p>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const el = (id) => document.getElementById(id);
+  const form = el("authForm");
+  const alertBox = el("authAlert");
+  const alertText = el("authAlertText");
+  const submitBtn = el("submitBtn");
+  const submitLabel = el("submitLabel");
+  const nameField = el("nameField");
+  const passwordInput = el("password");
+  const passwordHint = el("passwordHint");
+
+  const FIELDS = ["name", "email", "password"];
+
+  const COPY = {
+    signin: {
+      title: "Welcome back",
+      sub: "Sign in to pick up where your last walk ended.",
+      submit: "Sign in",
+      endpoint: "/api/login",
+      foot: 'New to Voxa? <button type="button" data-switch="register">Create an account</button>',
+    },
+    register: {
+      title: "Start listening",
+      sub: "Create an account and the city starts talking.",
+      submit: "Create account",
+      endpoint: "/api/register",
+      foot: 'Already have an account? <button type="button" data-switch="signin">Sign in</button>',
+    },
+  };
+
+  let mode = "signin";
+  let submitting = false;
+
+  /* ---------- errors ---------- */
+
+  function clearErrors() {
+    alertBox.classList.remove("is-visible");
+    alertText.textContent = "";
+    for (const name of FIELDS) {
+      el(name + "Error").textContent = "";
+      el(name).removeAttribute("aria-invalid");
+    }
+    passwordHint.hidden = mode !== "register";
+  }
+
+  function showFieldErrors(errors) {
+    let first = null;
+    for (const [name, message] of Object.entries(errors)) {
+      const input = el(name);
+      const slot = el(name + "Error");
+      if (!input || !slot) continue;
+      slot.textContent = message;
+      input.setAttribute("aria-invalid", "true");
+      if (!first) first = input;
+    }
+    // The error already states the length rule; showing the hint too just
+    // repeats it back.
+    if (errors.password) passwordHint.hidden = true;
+    if (first) first.focus();
+  }
+
+  function showAlert(message) {
+    alertText.textContent = message;
+    alertBox.classList.add("is-visible");
+  }
+
+  /* ---------- mode switching ---------- */
+
+  function setMode(next, { focus = false } = {}) {
+    mode = next;
+    const copy = COPY[mode];
+    const isRegister = mode === "register";
+
+    el("authTitle").textContent = copy.title;
+    el("authSub").textContent = copy.sub;
+    submitLabel.textContent = copy.submit;
+    el("authFoot").innerHTML = copy.foot;
+
+    el("tabSignin").setAttribute("aria-selected", String(!isRegister));
+    el("tabRegister").setAttribute("aria-selected", String(isRegister));
+
+    nameField.hidden = !isRegister;
+    el("name").required = isRegister;
+    passwordHint.hidden = !isRegister;
+    passwordInput.autocomplete = isRegister ? "new-password" : "current-password";
+
+    document.title = (isRegister ? "Create account" : "Sign in") + " — Voxa";
+    history.replaceState(null, "", isRegister ? "?mode=register" : location.pathname);
+
+    clearErrors();
+    if (focus) (isRegister ? el("name") : el("email")).focus();
+  }
+
+  el("tabSignin").addEventListener("click", () => setMode("signin", { focus: true }));
+  el("tabRegister").addEventListener("click", () => setMode("register", { focus: true }));
+
+  // The footer link is re-rendered on every switch, so listen on the container.
+  el("authFoot").addEventListener("click", (event) => {
+    const target = event.target.closest("[data-switch]");
+    if (target) setMode(target.dataset.switch, { focus: true });
+  });
+
+  /* ---------- password reveal ---------- */
+
+  el("reveal").addEventListener("click", () => {
+    const hidden = passwordInput.type === "password";
+    passwordInput.type = hidden ? "text" : "password";
+    el("reveal").textContent = hidden ? "Hide" : "Show";
+    el("reveal").setAttribute("aria-label", hidden ? "Hide password" : "Show password");
+    passwordInput.focus();
+  });
+
+  /* ---------- submit ---------- */
+
+  function setSubmitting(on) {
+    submitting = on;
+    submitBtn.disabled = on;
+    submitLabel.textContent = on
+      ? (mode === "register" ? "Creating account…" : "Signing in…")
+      : COPY[mode].submit;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (submitting) return;
+    clearErrors();
+
+    const payload = {
+      email: el("email").value.trim(),
+      password: passwordInput.value,
+    };
+    if (mode === "register") payload.name = el("name").value.trim();
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(COPY[mode].endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        // Full navigation rather than a client-side swap: the session cookie is
+        // already set, so the account page loads authenticated on first paint.
+        location.assign("/account.html");
+        return;
+      }
+
+      const data = await res.json().catch(() => ({}));
+      if (data.errors) showFieldErrors(data.errors);
+      if (data.error) showAlert(data.error);
+      if (!data.errors && !data.error) showAlert("Something went wrong. Please try again.");
+    } catch {
+      showAlert("Can't reach the server. Is it running on this address?");
+    } finally {
+      setSubmitting(false);
+    }
+  });
+
+  /* ---------- boot ---------- */
+
+  if (new URLSearchParams(location.search).get("mode") === "register") {
+    setMode("register");
+  }
+
+  // Already signed in? Skip the form entirely.
+  fetch("/api/me", { credentials: "same-origin" })
+    .then((res) => { if (res.ok) location.replace("/account.html"); })
+    .catch(() => {});
+})();
+</script>
+
+</body>
+</html>

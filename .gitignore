@@ -14,6 +14,12 @@ node_modules/
 dist/
 .cache/
 
+# App data — the SQLite user database and its write-ahead log
+data/
+
+# Secrets
+.env
+
 # Logs
 *.log
 npm-debug.log*
