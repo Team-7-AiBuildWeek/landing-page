@@ -735,8 +735,22 @@ a { color: inherit; text-decoration: none; }
 .chip-card strong { display: block; font-size: 14px; }
 .chip-card span { font-size: 12px; color: var(--muted); }
 
+.how-media { transition: opacity 0.28s ease; }
+.how-media.is-swapping { opacity: 0.35; }
+
 .steps { display: flex; flex-direction: column; }
-.step { padding: 26px 0 26px 26px; border-left: 2px solid var(--line); }
+.step {
+  padding: 26px 0 26px 26px;
+  border-left: 2px solid var(--line);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.step:hover { border-left-color: color-mix(in srgb, var(--orange) 45%, transparent); }
+.step:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
 .step.is-active { border-left-color: var(--orange); }
 .step-icon {
   display: grid;
@@ -941,6 +955,8 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .wave span, .live i, .chip .dot, .float,
   .audio-tag.is-playing .audio-wave i { animation: none; }
+  .how-media { transition: none; }
+  .how-media.is-swapping { opacity: 1; }
   .audio-wave i { transform: scaleY(0.6); }
   .wave span { transform: scaleY(0.6); opacity: 0.8; }
   * { transition: none !important; }
