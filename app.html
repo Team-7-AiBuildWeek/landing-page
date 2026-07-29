@@ -55,12 +55,29 @@
     </main>
   </div>
 
-  <script src="assets/data.js"></script>
+  <script src="assets/data.js?v=2"></script>
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
-      var found = window.NARRO_FIND_ROUTE(params.get('route')) ||
-                  window.NARRO_FIND_ROUTE('rome-baroque');
+      var found;
+
+      // A "walk" is any sight or activity promoted to the top of an
+      // itinerary day — the guide narrates it as a short standalone session.
+      var walk = params.get('walk');
+      if (walk) {
+        var cityRef = params.get('city') || '';
+        var cityObj = window.NARRO_FIND_CITY(cityRef) || {
+          name: cityRef || 'Your walk',
+          image: 'https://picsum.photos/seed/narro-' + encodeURIComponent((cityRef || walk).toLowerCase().replace(/\s+/g, '-')) + '/1200/800'
+        };
+        found = {
+          city: cityObj,
+          route: { id: 'walk', name: walk, stops: 6, minutes: 45, blurb: '' }
+        };
+      } else {
+        found = window.NARRO_FIND_ROUTE(params.get('route')) ||
+                window.NARRO_FIND_ROUTE('rome-baroque');
+      }
       var city = found.city, route = found.route;
 
       // Story titles for the demo player — rotated across stops.

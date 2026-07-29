@@ -238,6 +238,135 @@ app.get("/api/me", requireAuth, (req, res) => {
   res.json({ user: publicUser(req.user), sessionExpiresAt: req.user.expires_at });
 });
 
+/* ============ PLACE RATINGS ============ */
+
+// Real visitor ratings need a keyed provider. The key stays here — the
+// browser only ever talks to this endpoint, never to the upstream. With no
+// key configured the planner falls back to its Wikipedia readership signal,
+// so the feature degrades instead of breaking.
+const TRIPADVISOR_KEY = process.env.TRIPADVISOR_API_KEY;
+const GOOGLE_PLACES_KEY = process.env.GOOGLE_PLACES_API_KEY;
+const RATINGS_PROVIDER = TRIPADVISOR_KEY
+  ? "tripadvisor"
+  : GOOGLE_PLACES_KEY
+    ? "google"
+    : null;
+
+// Ratings barely move day to day, and the free tiers are small (TripAdvisor
+// allows ~5k calls/month), so answers are cached for a day.
+const RATINGS_TTL_MS = 24 * 60 * 60 * 1000;
+const ratingsCache = new Map();
+
+function cacheGet(key) {
+  const hit = ratingsCache.get(key);
+  if (!hit) return undefined;
+  if (Date.now() - hit.at > RATINGS_TTL_MS) {
+    ratingsCache.delete(key);
+    return undefined;
+  }
+  return hit.value;
+}
+
+function cacheSet(key, value) {
+  // Bounded so a long-running process can't grow this without limit.
+  if (ratingsCache.size > 5000) ratingsCache.clear();
+  ratingsCache.set(key, { at: Date.now(), value });
+}
+
+async function lookupTripadvisor(name, city) {
+  const search = new URL("https://api.content.tripadvisor.com/api/v1/location/search");
+  search.searchParams.set("key", TRIPADVISOR_KEY);
+  search.searchParams.set("searchQuery", name);
+  search.searchParams.set("category", "attractions");
+  if (city) search.searchParams.set("address", city);
+
+  const found = await fetch(search, { headers: { accept: "application/json" } });
+  if (!found.ok) return null;
+  const hit = (await found.json())?.data?.[0];
+  if (!hit?.location_id) return null;
+
+  const details = new URL(`https://api.content.tripadvisor.com/api/v1/location/${hit.location_id}/details`);
+  details.searchParams.set("key", TRIPADVISOR_KEY);
+  const res = await fetch(details, { headers: { accept: "application/json" } });
+  if (!res.ok) return null;
+  const d = await res.json();
+  if (!d.rating) return null;
+
+  return {
+    rating: Number(d.rating),
+    reviews: Number(d.num_reviews) || 0,
+    url: d.web_url || null,
+  };
+}
+
+async function lookupGooglePlaces(name, city) {
+  const res = await fetch("https://places.googleapis.com/v1/places:searchText", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "X-Goog-Api-Key": GOOGLE_PLACES_KEY,
+      "X-Goog-FieldMask": "places.rating,places.userRatingCount,places.googleMapsUri",
+    },
+    body: JSON.stringify({ textQuery: city ? `${name}, ${city}` : name, maxResultCount: 1 }),
+  });
+  if (!res.ok) return null;
+  const place = (await res.json())?.places?.[0];
+  if (!place?.rating) return null;
+
+  return {
+    rating: Number(place.rating),
+    reviews: Number(place.userRatingCount) || 0,
+    url: place.googleMapsUri || null,
+  };
+}
+
+const ratingsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 60,
+  message: "Too many rating lookups. Try again in a few minutes.",
+});
+
+app.post("/api/ratings", ratingsLimiter, async (req, res) => {
+  const { city, names } = req.body ?? {};
+
+  if (!RATINGS_PROVIDER) {
+    // Not an error: the planner asks first and adapts to the answer.
+    return res.json({ configured: false, provider: null, results: {} });
+  }
+  if (!Array.isArray(names) || !names.length) {
+    return res.status(400).json({ error: "names must be a non-empty array" });
+  }
+
+  const wanted = names
+    .filter((n) => typeof n === "string" && n.trim())
+    .slice(0, 12) // one itinerary's worth, so a single call can't fan out
+    .map((n) => n.trim().slice(0, 120));
+
+  const lookup = RATINGS_PROVIDER === "tripadvisor" ? lookupTripadvisor : lookupGooglePlaces;
+  const cityName = typeof city === "string" ? city.slice(0, 80) : "";
+
+  const entries = await Promise.all(
+    wanted.map(async (name) => {
+      const key = `${RATINGS_PROVIDER}:${cityName}:${name}`.toLowerCase();
+      const cached = cacheGet(key);
+      if (cached !== undefined) return [name, cached];
+      try {
+        const value = await lookup(name, cityName);
+        cacheSet(key, value);
+        return [name, value];
+      } catch {
+        // One bad lookup shouldn't sink the whole itinerary.
+        return [name, null];
+      }
+    })
+  );
+
+  const results = {};
+  for (const [name, value] of entries) if (value) results[name] = value;
+
+  res.json({ configured: true, provider: RATINGS_PROVIDER, results });
+});
+
 /* ============ ERRORS ============ */
 
 app.use("/api", (req, res) => res.status(404).json({ error: "Unknown endpoint" }));

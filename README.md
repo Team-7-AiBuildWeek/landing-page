@@ -52,6 +52,28 @@ every account.
 | `POST` | `/api/login`    | `{email, password}` → 200, sets cookie       |
 | `POST` | `/api/logout`   | 204, deletes the session row                 |
 | `GET`  | `/api/me`       | Current user, or 401                         |
+| `POST` | `/api/ratings`  | `{city, names[]}` → visitor ratings, or `{configured:false}` |
+
+## Where the planner's data comes from
+
+The trip planner (`plan.html`) runs on live sources, none of which need a key:
+
+- **Weather** — [Open-Meteo](https://open-meteo.com): geocoding plus a ~16-day
+  daily forecast. Rainy days push the itinerary indoors. Beyond the forecast
+  horizon, or offline, it falls back to a deterministic stand-in and the badge
+  says "Forecast preview" instead of "Live forecast".
+- **Sights** — Wikipedia geosearch around the city centre, with descriptions and
+  Wikimedia Commons thumbnails. Ranked by 60-day pageviews, classified into the
+  questionnaire's interest categories, and scheduled across the days so the
+  answers actually change the plan.
+
+**Real visitor ratings** are the one thing a keyless source cannot give — page
+readership says how famous a place is, not how people liked it. `POST
+/api/ratings` is the way in: set `TRIPADVISOR_API_KEY` (Content API, ~5k
+calls/month free) or `GOOGLE_PLACES_API_KEY` in the environment and the planner
+switches from "readers/mo" to "12,340 reviews" on its own. The key never leaves
+the server, answers are cached for a day to stay inside the free tier, and with
+no key set the endpoint reports `configured:false` so the page keeps working.
 
 ## How the auth works
 

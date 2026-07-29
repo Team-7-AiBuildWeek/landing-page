@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css?v=10" />
-<link rel="stylesheet" href="pages.css?v=3" />
+<link rel="stylesheet" href="pages.css?v=5" />
 </head>
 <body>
 
@@ -20,6 +20,7 @@
       </a>
       <ul class="nav-links">
         <li><a href="cities.html">Cities</a></li>
+        <li><a href="plan.html">Plan a trip</a></li>
         <li><a href="index.html#how">How it works</a></li>
         <li><a href="index.html#voice">The voice</a></li>
         <li><a href="index.html#stories">Reviews</a></li>
@@ -44,7 +45,7 @@
       </div>
       <div class="footer-col">
         <h4>App</h4>
-        <a href="app.html">Open the app</a><a href="cities.html">Cities</a><a href="index.html#how">How it works</a>
+        <a href="app.html">Open the app</a><a href="cities.html">Cities</a><a href="plan.html">Plan a trip</a><a href="index.html#how">How it works</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -61,7 +62,7 @@
     </div>
   </footer>
 
-  <script src="assets/data.js"></script>
+  <script src="assets/data.js?v=2"></script>
   <script>
     (function () {
       var main = document.getElementById('cityMain');
@@ -92,7 +93,7 @@
               '<p>' + r.blurb + '</p>' +
             '</div>' +
             '<div class="route-meta"><strong>' + r.stops + ' stops</strong>~' + Math.round(r.minutes / 60 * 10) / 10 + ' hrs</div>' +
-            '<a class="btn btn-primary" href="app.html?route=' + r.id + '">Start walking</a>' +
+            '<a class="btn btn-outline" href="app.html?route=' + r.id + '">Start walking</a>' +
           '</div>';
       }
 
@@ -109,6 +110,14 @@
             '<p>' + city.tagline + ' · ' + city.hours + ' hours narrated · ' + city.country + '</p>' +
           '</div>' +
         '</div>' +
+        '<section class="tailor-cta">' +
+          '<div class="tailor-copy">' +
+            '<h2>Make ' + city.name + ' fit your days</h2>' +
+            '<p>Dates, budget, pace, live weather — answer five quick questions and Narro drafts a personal day-by-day itinerary.</p>' +
+          '</div>' +
+          '<a class="btn btn-primary tailor-btn" href="plan.html?city=' + city.slug + '">Build my ' + city.name + ' itinerary</a>' +
+        '</section>' +
+        '<h2 class="routes-title">Prefer to pick a single walk?</h2>' +
         '<div class="route-list">' + city.routes.map(routeRow).join('') + '</div>';
     })();
   </script>

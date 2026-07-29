@@ -20,7 +20,7 @@ window.NARRO_CITIES = [
     name: "Lisbon",
     country: "Portugal",
     tagline: "Seven hills, one earthquake, and the saudade in between",
-    image: "https://picsum.photos/seed/voxalisbon/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Bel%C3%A9m_Tower_in_Lisbon%2C_Portugal.jpg/960px-Bel%C3%A9m_Tower_in_Lisbon%2C_Portugal.jpg",
     hours: 8,
     routes: [
       { id: "lisbon-alfama", name: "Alfama Staircases", stops: 11, minutes: 110, blurb: "The maze the earthquake spared, and the fado it started.", free: true },
@@ -32,7 +32,7 @@ window.NARRO_CITIES = [
     name: "Tokyo",
     country: "Japan",
     tagline: "A city rebuilt twice, narrated one lantern at a time",
-    image: "https://picsum.photos/seed/voxatokyo/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Sensoji_2023.jpg/960px-Sensoji_2023.jpg",
     hours: 19,
     routes: [
       { id: "tokyo-yanaka", name: "Yanaka Backstreets", stops: 12, minutes: 115, blurb: "The Tokyo that survived — temples, cats, and wooden houses.", free: true },
@@ -45,7 +45,7 @@ window.NARRO_CITIES = [
     name: "Mexico City",
     country: "Mexico",
     tagline: "A capital on a lake that isn't there anymore",
-    image: "https://picsum.photos/seed/mexicocity/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Bellas_Artes_01.jpg/960px-Bellas_Artes_01.jpg",
     hours: 11,
     routes: [
       { id: "cdmx-centro", name: "Centro Histórico", stops: 12, minutes: 120, blurb: "Aztec stones under baroque facades, and the square that sinks.", free: true },
@@ -57,7 +57,7 @@ window.NARRO_CITIES = [
     name: "Paris",
     country: "France",
     tagline: "Every doorway has an opinion",
-    image: "https://picsum.photos/seed/voxaparis/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/960px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg",
     hours: 16,
     routes: [
       { id: "paris-marais", name: "Marais Courtyards", stops: 11, minutes: 105, blurb: "Aristocrats, ateliers, and the square built for duels.", free: true },
@@ -69,7 +69,7 @@ window.NARRO_CITIES = [
     name: "Prague",
     country: "Czechia",
     tagline: "Alchemy, defenestrations, and astronomically good beer",
-    image: "https://picsum.photos/seed/voxaprague/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg/960px-Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg",
     hours: 9,
     routes: [
       { id: "prague-oldtown", name: "Old Town & the Clock", stops: 10, minutes: 95, blurb: "The astronomer, the mob, and the skeleton that rings the hour.", free: true },
@@ -81,7 +81,7 @@ window.NARRO_CITIES = [
     name: "Barcelona",
     country: "Spain",
     tagline: "A grid with a grudge and a cathedral that grows",
-    image: "https://picsum.photos/seed/voxabarcelona/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/SF_maig_2_cropped.jpg/960px-SF_maig_2_cropped.jpg",
     hours: 12,
     routes: [
       { id: "bcn-gothic", name: "Gothic Quarter", stops: 11, minutes: 100, blurb: "Roman walls, civil war shrapnel, and alleys that predate maps.", free: true },
@@ -93,7 +93,7 @@ window.NARRO_CITIES = [
     name: "Vienna",
     country: "Austria",
     tagline: "Empire, espresso, and the waltz of the Ringstrasse",
-    image: "https://picsum.photos/seed/voxavienna/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Wien_-_Schloss_Sch%C3%B6nbrunn.JPG/960px-Wien_-_Schloss_Sch%C3%B6nbrunn.JPG",
     hours: 10,
     routes: [
       { id: "vienna-ring", name: "Ringstrasse Sweep", stops: 10, minutes: 95, blurb: "The boulevard an emperor built to show off — and who paid.", free: true },
@@ -105,7 +105,7 @@ window.NARRO_CITIES = [
     name: "Istanbul",
     country: "Türkiye",
     tagline: "Two continents, three empires, one bridge queue",
-    image: "https://picsum.photos/seed/voxaistanbul/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Hagia_Sophia_%28228968325%29.jpeg/960px-Hagia_Sophia_%28228968325%29.jpeg",
     hours: 13,
     routes: [
       { id: "ist-sultanahmet", name: "Sultanahmet Domes", stops: 10, minutes: 110, blurb: "Byzantium to Constantinople to now, dome by dome.", free: true },
@@ -117,7 +117,7 @@ window.NARRO_CITIES = [
     name: "Kyoto",
     country: "Japan",
     tagline: "A thousand years of capital, whispered through bamboo",
-    image: "https://picsum.photos/seed/voxakyoto/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg/960px-Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg",
     hours: 11,
     routes: [
       { id: "kyoto-higashiyama", name: "Higashiyama Lanes", stops: 11, minutes: 105, blurb: "Teahouses, temple bells, and the philosopher's shortcut.", free: true },
@@ -129,7 +129,7 @@ window.NARRO_CITIES = [
     name: "New York",
     country: "United States",
     tagline: "A grid that never shuts up — finally, a guide that keeps pace",
-    image: "https://picsum.photos/seed/voxanewyork/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Front_view_of_Statue_of_Liberty_%28cropped%29.jpg/960px-Front_view_of_Statue_of_Liberty_%28cropped%29.jpg",
     hours: 15,
     routes: [
       { id: "nyc-downtown", name: "Downtown Layers", stops: 12, minutes: 115, blurb: "Dutch walls under skyscrapers and the street called Wall.", free: true },
@@ -141,7 +141,7 @@ window.NARRO_CITIES = [
     name: "Marrakech",
     country: "Morocco",
     tagline: "A medina with no straight lines and no dull ones either",
-    image: "https://picsum.photos/seed/voxamarrakech/800/1000",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Djemaa_el_Fna.jpg/960px-Djemaa_el_Fna.jpg",
     hours: 7,
     routes: [
       { id: "mrk-medina", name: "Medina & the Souks", stops: 10, minutes: 100, blurb: "Dyers, storytellers, and the square that becomes a theatre at dusk.", free: true }
