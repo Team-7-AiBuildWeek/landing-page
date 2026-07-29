@@ -4,6 +4,7 @@
 window.NARRO_CITIES = [
   {
     slug: "rome",
+    centre: { lat: 41.8986, lng: 12.4769 },
     name: "Rome",
     country: "Italy",
     tagline: "Baroque fountains, buried stadiums, and streets that argue back",
@@ -17,10 +18,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "lisbon",
+    centre: { lat: 38.7139, lng: -9.1394 },
     name: "Lisbon",
     country: "Portugal",
     tagline: "Seven hills, one earthquake, and the saudade in between",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Bel%C3%A9m_Tower_in_Lisbon%2C_Portugal.jpg/960px-Bel%C3%A9m_Tower_in_Lisbon%2C_Portugal.jpg",
+    image: "images/city-lisbon.jpg",
     hours: 8,
     routes: [
       { id: "lisbon-alfama", name: "Alfama Staircases", stops: 11, minutes: 110, blurb: "The maze the earthquake spared, and the fado it started.", free: true },
@@ -29,10 +31,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "tokyo",
+    centre: { lat: 35.7101, lng: 139.8107 },
     name: "Tokyo",
     country: "Japan",
     tagline: "A city rebuilt twice, narrated one lantern at a time",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Sensoji_2023.jpg/960px-Sensoji_2023.jpg",
+    image: "images/city-tokyo.jpg",
     hours: 19,
     routes: [
       { id: "tokyo-yanaka", name: "Yanaka Backstreets", stops: 12, minutes: 115, blurb: "The Tokyo that survived — temples, cats, and wooden houses.", free: true },
@@ -42,10 +45,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "mexico-city",
+    centre: { lat: 19.4326, lng: -99.1332 },
     name: "Mexico City",
     country: "Mexico",
     tagline: "A capital on a lake that isn't there anymore",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Bellas_Artes_01.jpg/960px-Bellas_Artes_01.jpg",
+    image: "images/city-mexico-city.jpg",
     hours: 11,
     routes: [
       { id: "cdmx-centro", name: "Centro Histórico", stops: 12, minutes: 120, blurb: "Aztec stones under baroque facades, and the square that sinks.", free: true },
@@ -54,10 +58,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "paris",
+    centre: { lat: 48.8566, lng: 2.3522 },
     name: "Paris",
     country: "France",
     tagline: "Every doorway has an opinion",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/960px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg",
+    image: "images/city-paris.jpg",
     hours: 16,
     routes: [
       { id: "paris-marais", name: "Marais Courtyards", stops: 11, minutes: 105, blurb: "Aristocrats, ateliers, and the square built for duels.", free: true },
@@ -66,10 +71,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "prague",
+    centre: { lat: 50.0875, lng: 14.4213 },
     name: "Prague",
     country: "Czechia",
     tagline: "Alchemy, defenestrations, and astronomically good beer",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg/960px-Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg",
+    image: "images/city-prague.jpg",
     hours: 9,
     routes: [
       { id: "prague-oldtown", name: "Old Town & the Clock", stops: 10, minutes: 95, blurb: "The astronomer, the mob, and the skeleton that rings the hour.", free: true },
@@ -78,10 +84,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "barcelona",
+    centre: { lat: 41.3825, lng: 2.1769 },
     name: "Barcelona",
     country: "Spain",
     tagline: "A grid with a grudge and a cathedral that grows",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/SF_maig_2_cropped.jpg/960px-SF_maig_2_cropped.jpg",
+    image: "images/city-barcelona.jpg",
     hours: 12,
     routes: [
       { id: "bcn-gothic", name: "Gothic Quarter", stops: 11, minutes: 100, blurb: "Roman walls, civil war shrapnel, and alleys that predate maps.", free: true },
@@ -90,10 +97,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "vienna",
+    centre: { lat: 48.2082, lng: 16.3738 },
     name: "Vienna",
     country: "Austria",
     tagline: "Empire, espresso, and the waltz of the Ringstrasse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Wien_-_Schloss_Sch%C3%B6nbrunn.JPG/960px-Wien_-_Schloss_Sch%C3%B6nbrunn.JPG",
+    image: "images/city-vienna.jpg",
     hours: 10,
     routes: [
       { id: "vienna-ring", name: "Ringstrasse Sweep", stops: 10, minutes: 95, blurb: "The boulevard an emperor built to show off — and who paid.", free: true },
@@ -102,10 +110,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "istanbul",
+    centre: { lat: 41.0086, lng: 28.9802 },
     name: "Istanbul",
     country: "Türkiye",
     tagline: "Two continents, three empires, one bridge queue",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Hagia_Sophia_%28228968325%29.jpeg/960px-Hagia_Sophia_%28228968325%29.jpeg",
+    image: "images/city-istanbul.jpg",
     hours: 13,
     routes: [
       { id: "ist-sultanahmet", name: "Sultanahmet Domes", stops: 10, minutes: 110, blurb: "Byzantium to Constantinople to now, dome by dome.", free: true },
@@ -114,10 +123,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "kyoto",
+    centre: { lat: 35.0037, lng: 135.7788 },
     name: "Kyoto",
     country: "Japan",
     tagline: "A thousand years of capital, whispered through bamboo",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg/960px-Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg",
+    image: "images/city-kyoto.jpg",
     hours: 11,
     routes: [
       { id: "kyoto-higashiyama", name: "Higashiyama Lanes", stops: 11, minutes: 105, blurb: "Teahouses, temple bells, and the philosopher's shortcut.", free: true },
@@ -126,10 +136,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "new-york",
+    centre: { lat: 40.7074, lng: -74.0113 },
     name: "New York",
     country: "United States",
     tagline: "A grid that never shuts up — finally, a guide that keeps pace",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Front_view_of_Statue_of_Liberty_%28cropped%29.jpg/960px-Front_view_of_Statue_of_Liberty_%28cropped%29.jpg",
+    image: "images/city-new-york.jpg",
     hours: 15,
     routes: [
       { id: "nyc-downtown", name: "Downtown Layers", stops: 12, minutes: 115, blurb: "Dutch walls under skyscrapers and the street called Wall.", free: true },
@@ -138,10 +149,11 @@ window.NARRO_CITIES = [
   },
   {
     slug: "marrakech",
+    centre: { lat: 31.6258, lng: -7.9891 },
     name: "Marrakech",
     country: "Morocco",
     tagline: "A medina with no straight lines and no dull ones either",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Djemaa_el_Fna.jpg/960px-Djemaa_el_Fna.jpg",
+    image: "images/city-marrakech.jpg",
     hours: 7,
     routes: [
       { id: "mrk-medina", name: "Medina & the Souks", stops: 10, minutes: 100, blurb: "Dyers, storytellers, and the square that becomes a theatre at dusk.", free: true }

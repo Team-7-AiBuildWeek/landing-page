@@ -93,7 +93,7 @@
   </div>
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="assets/data.js?v=2"></script>
+  <script src="assets/data.js?v=4"></script>
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
@@ -108,16 +108,20 @@
 
       // Opened directly, with nothing handed over: fall back to a catalogue
       // route so the page still means something, but never to a fixed city.
+      var catalogueCentre = null;
       if (!walkTitle) {
         var fallback = window.NARRO_FIND_ROUTE(params.get('route') || '');
         if (fallback) {
           walkTitle = fallback.route.name;
           cityName = fallback.city.name;
           note = fallback.route.blurb;
+          // The catalogue knows where each city's walking centre is, which
+          // a geocoder's administrative centroid often is not.
+          catalogueCentre = fallback.city.centre || null;
         }
       }
 
-      var centre = (isFinite(lat) && isFinite(lng)) ? { lat: lat, lng: lng } : null;
+      var centre = (isFinite(lat) && isFinite(lng)) ? { lat: lat, lng: lng } : catalogueCentre;
 
       // Opened cold from the nav, with no city to walk: there is nothing
       // honest to show, so send them where a walk is chosen rather than
@@ -199,40 +203,83 @@
           });
       }
 
-      /* Nothing handed over: find the notable places around the centre. */
+      /* Wikipedia's nearby articles include battles, treaties and whole
+         cities — all with coordinates, none of them somewhere you stand and
+         listen. Rather than blocklisting history forever, prefer the things
+         a description calls a place. */
+      var IS_A_PLACE = /(church|cathedral|basilica|chapel|mosque|synagogue|temple|shrine|monastery|abbey|convent|palace|castle|fortress|citadel|tower|bridge|gate|square|plaza|piazza|fountain|monument|memorial|statue|museum|gallery|theatre|theater|opera|library|market|hall|garden|park|cemetery|villa|mansion|house|building|observatory|zoo|aquarium|stadium|arena|baths|ruins|arch|column|clock|obelisk|pavilion|quarter|promenade)/i;
+      var NOT_A_SIGHT = /(city in|town in|capital of|metro|underground station|railway station|bus station|road in|street in|administrative|university|hospital|company|football club)/i;
+
+      /* Nothing handed over: find the notable places around the centre. A
+         wide net, then ranked by readership — the nearest dozen articles to
+         a city's exact centroid are rarely the ones anyone walks to. */
       function loadNearbyStops(c) {
-        return wikiApi('list=geosearch&gscoord=' + c.lat + '%7C' + c.lng + '&gsradius=3000&gslimit=12')
+        return wikiApi('list=geosearch&gscoord=' + c.lat + '%7C' + c.lng + '&gsradius=4000&gslimit=50')
           .then(function (data) {
             var ids = (data.query.geosearch || []).map(function (g) { return g.pageid; });
             if (!ids.length) return [];
-            return wikiApi('pageids=' + ids.join('%7C') +
-                           '&prop=coordinates%7Cextracts%7Cdescription%7Cpageviews&exintro=1&explaintext=1&exsentences=3')
-              .then(function (d2) {
-                var pages = d2.query.pages;
-                return Object.keys(pages).map(function (k) {
+
+            // Wikipedia only writes intro extracts for 20 pages per request
+            // and silently drops the rest, so ask in twenties.
+            var batches = [];
+            for (var i = 0; i < ids.length; i += 20) batches.push(ids.slice(i, i + 20));
+
+            return Promise.all(batches.map(function (batch) {
+              return wikiApi('pageids=' + batch.join('%7C') +
+                '&prop=coordinates%7Cextracts%7Cdescription%7Cpageviews' +
+                '&exintro=1&explaintext=1&exsentences=3&exlimit=20');
+            })).then(function (results) {
+              var all = [];
+              results.forEach(function (d2) {
+                var pages = (d2.query && d2.query.pages) || {};
+                Object.keys(pages).forEach(function (k) {
                   var p = pages[k];
                   var views = 0;
                   if (p.pageviews) for (var day in p.pageviews) views += p.pageviews[day] || 0;
-                  return {
+                  all.push({
                     title: p.title,
                     desc: p.description || '',
                     script: p.extract || '',
                     lat: p.coordinates ? p.coordinates[0].lat : null,
                     lng: p.coordinates ? p.coordinates[0].lon : null,
                     views: views
-                  };
-                }).filter(function (p) { return p.lat && p.script; })
-                  .sort(function (a, b) { return b.views - a.views; })
-                  .slice(0, 5);
+                  });
+                });
               });
+              var usable = all.filter(function (p) {
+                return p.lat && p.script && p.views > 0 && !NOT_A_SIGHT.test(p.desc);
+              }).sort(function (a, b) { return b.views - a.views; });
+
+              // Places first; if a city's articles are described oddly, fall
+              // back to the merely popular rather than showing nothing.
+              var places = usable.filter(function (p) { return IS_A_PLACE.test(p.desc); });
+              return (places.length >= 3 ? places : usable).slice(0, 5);
+            });
           });
+      }
+
+      /* A catalogue route arrives with a city name but no coordinates, so
+         the city is looked up before anything can be found around it. */
+      function geocodeCity(name) {
+        return fetch('https://geocoding-api.open-meteo.com/v1/search?count=1&language=en&format=json&name=' +
+                     encodeURIComponent(name))
+          .then(function (r) { return r.json(); })
+          .then(function (g) {
+            if (!g.results || !g.results.length) return null;
+            return { lat: g.results[0].latitude, lng: g.results[0].longitude };
+          })
+          .catch(function () { return null; });
       }
 
       briefStops.innerHTML = '<li class="loading">Finding the stops…</li>';
 
-      var ready = stopNames.length
-        ? loadNamedStops(stopNames)
-        : (centre ? loadNearbyStops(centre) : Promise.resolve([]));
+      var ready = (centre ? Promise.resolve(centre) : (cityName ? geocodeCity(cityName) : Promise.resolve(null)))
+        .then(function (c) {
+          if (c) centre = c;
+          if (stopNames.length) return loadNamedStops(stopNames);
+          if (centre) return loadNearbyStops(centre);
+          return [];
+        });
 
       ready.then(function (found) {
         stops = found;
