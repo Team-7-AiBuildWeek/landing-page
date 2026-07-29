@@ -382,16 +382,24 @@ app.use((err, req, res, _next) => {
 purgeExpiredSessions();
 setInterval(purgeExpiredSessions, 60 * 60 * 1000).unref();
 
-const server = app.listen(PORT, () => {
-  console.log(`Narro running at http://localhost:${PORT}`);
-  console.log(`Database: ${dbPath}`);
-  if (!PRODUCTION) console.log(`Sign in: http://localhost:${PORT}/login.html`);
-});
+// On a serverless host (Vercel) the platform owns the listener and imports the
+// app instead, so only bind a port when this file is run directly.
+const RUN_DIRECTLY = !process.env.VERCEL;
 
-server.on("error", (err) => {
-  if (err.code === "EADDRINUSE") {
-    console.error(`Port ${PORT} is already in use. Try: PORT=${PORT + 1} npm start`);
-    process.exit(1);
-  }
-  throw err;
-});
+if (RUN_DIRECTLY) {
+  const server = app.listen(PORT, () => {
+    console.log(`Narro running at http://localhost:${PORT}`);
+    console.log(`Database: ${dbPath}`);
+    if (!PRODUCTION) console.log(`Sign in: http://localhost:${PORT}/login.html`);
+  });
+
+  server.on("error", (err) => {
+    if (err.code === "EADDRINUSE") {
+      console.error(`Port ${PORT} is already in use. Try: PORT=${PORT + 1} npm start`);
+      process.exit(1);
+    }
+    throw err;
+  });
+}
+
+export default app;

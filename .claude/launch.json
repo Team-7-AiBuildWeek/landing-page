@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "guide3",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173"],
-      "port": 4173
+      "name": "narro",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "port": 4000
     }
   ]
 }
