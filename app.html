@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 <link rel="stylesheet" href="styles.css?v=10" />
-<link rel="stylesheet" href="app.css?v=6" />
+<link rel="stylesheet" href="app.css?v=8" />
 </head>
 <body class="app-body">
 
@@ -48,6 +48,15 @@
   <!-- Everything below only exists once the walk has started. -->
   <div class="walk" id="walk" hidden>
     <div class="walk-map" id="map"></div>
+
+    <!-- Turn-by-turn, once a walking route has been fetched. -->
+    <div class="turn-banner" id="turnBanner" hidden>
+      <span class="turn-icon" id="turnIcon"></span>
+      <span class="turn-copy">
+        <strong id="turnText">…</strong>
+        <em id="turnDist"></em>
+      </span>
+    </div>
 
     <div class="stage-chip" id="stageChip"><span class="dot"></span> <span>Now narrating</span></div>
     <button type="button" class="recentre" id="recentreBtn" hidden aria-label="Centre on me">
@@ -274,21 +283,32 @@
           var line = stops.filter(function (s) { return s.lat; })
                           .map(function (s) { return [s.lng, s.lat]; });
           if (line.length > 1) {
+            // Straight hops between stops until the walking route arrives;
+            // fetchWalkingRoute() replaces this with the real streets.
             map.addSource('route', {
               type: 'geojson',
               data: { type: 'Feature', geometry: { type: 'LineString', coordinates: line } }
             });
             map.addLayer({
+              id: 'route-casing',
+              type: 'line',
+              source: 'route',
+              layout: { 'line-join': 'round', 'line-cap': 'round' },
+              paint: { 'line-color': '#ffffff', 'line-width': 9, 'line-opacity': 0.9 }
+            });
+            map.addLayer({
               id: 'route',
               type: 'line',
               source: 'route',
+              layout: { 'line-join': 'round', 'line-cap': 'round' },
               paint: {
                 'line-color': '#3f5fbe',
-                'line-width': 4,
-                'line-opacity': 0.85,
+                'line-width': 5,
+                'line-opacity': 0.9,
                 'line-dasharray': [0.5, 1.6]
               }
             });
+            fetchWalkingRoute();
           }
 
           stops.forEach(function (s, i) {
@@ -358,6 +378,108 @@
         }
         speak((s.script || s.desc || s.title));
         updateNav();
+      }
+
+      /* ============ WALKING ROUTE ============ */
+      /* The line between stops is drawn straight until this returns: a real
+         pedestrian route down real streets, with the turns spelled out.
+         Valhalla's public OSM instance needs no key. */
+      var routeManeuvers = [];   // { lat, lng, text, type, legIndex }
+      var nextManeuver = -1;
+
+      function decodePolyline6(str) {
+        var index = 0, lat = 0, lng = 0, out = [];
+        while (index < str.length) {
+          var b, shift = 0, result = 0;
+          do { b = str.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+          lat += (result & 1) ? ~(result >> 1) : (result >> 1);
+          shift = 0; result = 0;
+          do { b = str.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+          lng += (result & 1) ? ~(result >> 1) : (result >> 1);
+          out.push([lng / 1e6, lat / 1e6]);
+        }
+        return out;
+      }
+
+      function fetchWalkingRoute() {
+        var pts = stops.filter(function (s) { return s.lat; });
+        if (pts.length < 2) return;
+
+        fetch('https://valhalla1.openstreetmap.de/route', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            locations: pts.map(function (s) { return { lat: s.lat, lon: s.lng }; }),
+            costing: 'pedestrian',
+            directions_options: { units: 'kilometers', language: 'en-US' }
+          })
+        })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) {
+            var legs = data && data.trip && data.trip.legs;
+            if (!legs || !legs.length) return;
+
+            var coords = [];
+            routeManeuvers = [];
+            legs.forEach(function (leg, li) {
+              var shape = decodePolyline6(leg.shape);
+              (leg.maneuvers || []).forEach(function (m) {
+                var at = shape[m.begin_shape_index] || shape[0];
+                if (!at) return;
+                routeManeuvers.push({
+                  lng: at[0], lat: at[1],
+                  text: m.instruction || '',
+                  type: m.type,
+                  legIndex: li
+                });
+              });
+              // Legs share their joining point; drop the duplicate.
+              coords = coords.concat(li === 0 ? shape : shape.slice(1));
+            });
+
+            if (map.getSource('route')) {
+              map.getSource('route').setData({
+                type: 'Feature', geometry: { type: 'LineString', coordinates: coords }
+              });
+              map.setPaintProperty('route', 'line-dasharray', [1, 0]);
+            }
+            nextManeuver = 0;
+            updateTurn();
+          })
+          .catch(function () { /* no route: the straight line stays, and it is honest */ });
+      }
+
+      var TURN_ICONS = {
+        left: '<svg viewBox="0 0 24 24"><path d="M15 20V9a4 4 0 0 0-4-4H5"/><path d="m11 1-5 4 5 4"/></svg>',
+        right: '<svg viewBox="0 0 24 24"><path d="M9 20V9a4 4 0 0 1 4-4h6"/><path d="m13 1 5 4-5 4"/></svg>',
+        straight: '<svg viewBox="0 0 24 24"><path d="M12 21V4"/><path d="m6 10 6-6 6 6"/></svg>',
+        arrive: '<svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>'
+      };
+
+      function turnShape(type) {
+        // Valhalla maneuver types, grouped to the four arrows a walker needs.
+        if ([4, 5, 6].indexOf(type) !== -1) return 'arrive';
+        if ([9, 10, 11, 12].indexOf(type) !== -1) return 'right';
+        if ([13, 14, 15, 16].indexOf(type) !== -1) return 'left';
+        return 'straight';
+      }
+
+      function updateTurn() {
+        var banner = document.getElementById('turnBanner');
+        if (nextManeuver < 0 || !routeManeuvers.length || !me) { banner.hidden = true; return; }
+
+        // Step past turns already taken, so the banner shows what is coming.
+        while (nextManeuver < routeManeuvers.length - 1 &&
+               haversineM(me, routeManeuvers[nextManeuver]) < 18) {
+          nextManeuver++;
+        }
+        var m = routeManeuvers[nextManeuver];
+        var d = haversineM(me, m);
+
+        banner.hidden = false;
+        document.getElementById('turnIcon').innerHTML = TURN_ICONS[turnShape(m.type)];
+        document.getElementById('turnText').textContent = m.text;
+        document.getElementById('turnDist').textContent = d < 15 ? 'now' : 'in ' + fmtDistance(d);
       }
 
       /* ============ LIVE NAVIGATION ============ */
@@ -442,6 +564,7 @@
         me = { lat: lat, lng: lng, accuracy: accuracy || 0 };
         drawMe();
         updateNav();
+        updateTurn();
         maybeTrigger();
       }
 
@@ -456,6 +579,7 @@
         following = false;
         drawMe();
         updateNav();
+        updateTurn();
         maybeTrigger();
       }
 
