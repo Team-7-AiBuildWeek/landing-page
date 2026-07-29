@@ -308,17 +308,40 @@
         card.innerHTML = stepRender[step]();
       }
 
-      /* Each wizard step is a history entry, so the browser Back button
-         steps back through the questionnaire instead of leaving the page. */
+      /* Each wizard step is a history entry, so the browser Back button steps
+         back through the questionnaire instead of leaving the page. Answers
+         and the finished plan also go to sessionStorage, keyed to the history
+         entry, so leaving for the app and coming back resumes where you were
+         rather than starting over. */
+      var SESSION_KEY = 'narro-planner';
+      var sessionId = String(Date.now());
+
+      function persist(view) {
+        try {
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+            id: sessionId, view: view, step: step, state: state, plan: plan
+          }));
+        } catch (e) { /* private mode — the wizard still works, just not resumable */ }
+      }
+
+      function readSaved() {
+        try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)); }
+        catch (e) { return null; }
+      }
+
       function gotoStep(n) {
         step = n;
         renderStep();
-        history.pushState({ v: 'step', step: n }, '');
+        persist('step');
+        history.pushState({ v: 'step', step: n, id: sessionId }, '');
       }
 
       window.addEventListener('popstate', function (e) {
         var s = e.state;
-        if (s && s.v === 'result' && plan) { renderItinerary(); return; }
+        if (s && s.v === 'result') {
+          if (!plan) { var saved = readSaved(); if (saved && saved.plan) plan = saved.plan; }
+          if (plan) { renderItinerary(); return; }
+        }
         if (s && s.v === 'step') { step = s.step; renderStep(); return; }
         step = preset ? 1 : 0;
         renderStep();
@@ -690,7 +713,8 @@
         Promise.all([fetchWeather(cityName, state.start, state.days), fetchSightsData(cityName), minDelay])
           .then(function (out) {
             generate(out[0], out[1]);
-            history.pushState({ v: 'result' }, '');
+            persist('result');
+            history.pushState({ v: 'result', id: sessionId }, '');
           });
       }
 
@@ -705,6 +729,7 @@
           var arr = plan.days[+m[0]].slots, si = +m[1], dir = +m[2];
           var tmp = arr[si]; arr[si] = arr[si + dir]; arr[si + dir] = tmp;
           renderItinerary();
+          persist('result');
           return;
         }
         if (t.dataset.swap) {
@@ -714,6 +739,7 @@
           else if (slot.kind === 'sight') slot.idx = (slot.idx + 1) % plan.sights.length;
           else slot.idx = (slot.idx + 1) % ACTIVITIES[slot.pool].length;
           renderItinerary();
+          persist('result');
           return;
         }
 
@@ -757,8 +783,29 @@
         }
       });
 
-      renderStep();
-      history.replaceState({ v: 'step', step: step }, '');
+      /* Resume when this history entry already had a plan on it — coming back
+         from the app, or a reload. A fresh visit starts clean. */
+      (function boot() {
+        var hs = history.state;
+        var saved = readSaved();
+
+        if (hs && hs.id && saved && saved.id === hs.id) {
+          sessionId = saved.id;
+          state = saved.state;
+          step = hs.v === 'step' ? hs.step : saved.step;
+          if (hs.v === 'result' && saved.plan) {
+            plan = saved.plan;
+            renderItinerary();
+            return;
+          }
+          renderStep();
+          return;
+        }
+
+        renderStep();
+        persist('step');
+        history.replaceState({ v: 'step', step: step, id: sessionId }, '');
+      })();
     })();
   </script>
 
