@@ -275,6 +275,16 @@ a { color: inherit; text-decoration: none; }
 .float-3 { --rot: 9deg;  --dur: 7.4s; --delay: -1.5s; width: 158px; top: 12px;  right: 12px; }
 .float-4 { --rot: -7deg; --dur: 8.8s; --delay: -3.4s; width: 176px; bottom: 22px; right: 82px; }
 
+/* The hero's one-line promise, in place of invented ratings. */
+.trust-line {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+
 .trust { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .avatars { display: flex; }
 .avatars img {

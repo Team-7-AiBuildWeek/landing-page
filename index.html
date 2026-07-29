@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=10" />
+<link rel="stylesheet" href="styles.css?v=11" />
 </head>
 <body>
 
@@ -21,15 +21,13 @@
 
       <ul class="nav-links">
         <li><a href="cities.html">Cities</a></li>
-        <li><a href="plan.html">Plan a trip</a></li>
         <li><a href="#how">How it works</a></li>
-        <li><a href="#voice">The voice</a></li>
-        <li><a href="#stories">Reviews</a></li>
+        <li><a href="#voice">What it does</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="login.html" class="nav-login">Log in</a>
-        <a href="app.html" class="btn btn-dark">Open the app</a>
+        <a href="cities.html" class="nav-login">Browse cities</a>
+        <a href="plan.html" class="btn btn-dark">Plan a trip</a>
       </div>
     </nav>
   </header>
@@ -73,29 +71,21 @@
       </figure>
     </div>
 
-    <div class="trust">
-      <div class="avatars">
-        <img src="https://i.pravatar.cc/80?img=12" alt="" />
-        <img src="https://i.pravatar.cc/80?img=32" alt="" />
-        <img src="https://i.pravatar.cc/80?img=45" alt="" />
-      </div>
-      <div class="trust-text">
-        <span class="stars">★★★★★</span>
-        <span>4.9 from walkers · 10k+ walks narrated</span>
-      </div>
-    </div>
+    <p class="trust-line">
+      Free · no account · nothing to install · works in any browser
+    </p>
 
     <h1 class="hero-title">Stories of the city,<br /><em>told as you walk</em></h1>
 
     <p class="hero-sub">
-      An AI guide that narrates the street you're standing on — in real time,
-      in your ear, at your pace. No app to install: it runs right in your
-      browser. Press play and start walking.
+      A walking guide that follows your position, tells you what you are
+      standing in front of, and gets you to the next stop — turn by turn,
+      out loud, at your own pace.
     </p>
 
     <div class="hero-cta">
-      <a href="app.html" class="btn btn-primary">Start walking — it's free</a>
-      <a href="cities.html" class="btn btn-dark">Browse 140 cities</a>
+      <a href="plan.html" class="btn btn-primary">Plan my trip</a>
+      <a href="cities.html" class="btn btn-dark">Or pick a city</a>
     </div>
   </section>
 
@@ -148,24 +138,14 @@
 
     <div class="container">
       <div class="stats">
-        <div class="stat"><strong>140+</strong><span>Cities narrated</span></div>
-        <div class="stat"><strong>32</strong><span>Languages, one voice</span></div>
-        <div class="stat"><strong>4.9</strong><span>Average rating</span></div>
-        <div class="stat"><strong>0</strong><span>Group tours joined</span></div>
+        <div class="stat"><strong>12</strong><span>Cities in the catalogue</span></div>
+        <div class="stat"><strong>Any</strong><span>Other city you name</span></div>
+        <div class="stat"><strong>0</strong><span>Accounts or installs</span></div>
+        <div class="stat"><strong>Free</strong><span>Every walk, no limits</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PRESS STRIP ============ -->
-  <section class="logos">
-    <div class="container logo-row">
-      <span class="brand"><svg viewBox="0 0 24 24"><path d="M12 2 2 12l10 10 10-10z"/></svg>Wanderlight</span>
-      <span class="brand"><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8Z"/></svg>Nomad Weekly</span>
-      <span class="brand"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>Citylore</span>
-      <span class="brand"><svg viewBox="0 0 24 24"><path d="M3 18 12 4l9 14z"/></svg>Everpeak</span>
-      <span class="brand"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/></svg>Latitude</span>
-    </div>
-  </section>
 
   <!-- ============ HOW IT WORKS ============ -->
   <section class="section" id="how">
@@ -215,83 +195,60 @@
     </div>
   </section>
 
-  <!-- ============ VOICE FEATURES ============ -->
+  <!-- ============ WHAT IT DOES ============ -->
   <section class="section voice-section" id="voice">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">A guide, not an audiobook</h2>
-        <p class="section-sub">The narration reacts to where you are, how fast you move, and what you ask</p>
+        <h2 class="section-title">What it actually does</h2>
+        <p class="section-sub">No pre-recorded tours, no meeting point, and nothing to install</p>
       </div>
 
       <div class="feature-grid">
         <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 12h3l2.5-6 3 13L14 9l2 3h5"/></svg></span>
-          <h3>Live, not pre-recorded</h3>
-          <p>Every story is generated for the exact spot you're standing on, the day you're standing there.</p>
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <h3>Real places, real coordinates</h3>
+          <p>Every stop is somewhere you can stand: found around you, with the opening
+             lines of its own story read out when you get there.</p>
         </article>
 
         <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></span>
-          <h3>Interrupt it anytime</h3>
-          <p>Say “wait, who was she?” and the guide stops, answers, then picks the thread back up.</p>
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M13 4.5 9 8l4 3.5"/><path d="M9 8h6a4.5 4.5 0 0 1 0 9H8"/><circle cx="6" cy="17.5" r="2"/></svg></span>
+          <h3>Turn by turn, on foot</h3>
+          <p>The route follows pavements and crossings rather than a straight line, and
+             the next instruction counts down the metres as you walk it.</p>
         </article>
 
         <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-          <h3>Keeps your pace</h3>
-          <p>Linger at a doorway and it goes deeper. Walk fast and it gets to the point.</p>
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <h3>Each stop starts itself</h3>
+          <p>Arrive and the story begins — no pressing play at every corner. The trigger
+             widens when your signal is poor, so nothing is missed in a narrow street.</p>
+        </article>
+
+        <article class="feature">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span>
+          <h3>Planned around the forecast</h3>
+          <p>The trip planner reads a real 16-day forecast. Rainy afternoons move indoors,
+             and the days rearrange themselves rather than pretending it is sunny.</p>
+        </article>
+
+        <article class="feature">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M9 12h6M12 9v6"/></svg></span>
+          <h3>Any city you name</h3>
+          <p>Twelve cities are written up in the catalogue. Type any other and the guide
+             finds what is worth seeing there — the walk is built the same way.</p>
         </article>
 
         <article class="feature">
           <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0"/><path d="M2 12a10 10 0 0 1 20 0"/><circle cx="12" cy="17" r="2"/></svg></span>
-          <h3>Works underground</h3>
-          <p>Download a city before you land. No signal, no data, no silence.</p>
-        </article>
-
-        <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span>
-          <h3>32 languages, one voice</h3>
-          <p>Switch mid-walk. The same guide, the same tone, a different tongue.</p>
-        </article>
-
-        <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
-          <h3>No umbrella to follow</h3>
-          <p>No meeting point, no start time, no group of forty. Leave when you feel like it.</p>
+          <h3>Try it from your desk</h3>
+          <p>Not in the city yet? Simulate the walk and it plays out on the map, or click
+             where you are standing. Nothing is hidden behind being there.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ============ REVIEWS ============ -->
-  <section class="section" id="stories">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">What walkers say</h2>
-        <p class="section-sub">From our walkers, unedited</p>
-      </div>
-
-      <div class="quote-grid">
-        <figure class="quote">
-          <span class="stars">★★★★★</span>
-          <blockquote>I asked it why the street was named that. It answered, then tied it back to the church we'd passed ten minutes earlier.</blockquote>
-          <figcaption><img src="https://i.pravatar.cc/80?img=5" alt="" /><span><strong>Amara Okafor</strong>Walked Lisbon · 6 routes</span></figcaption>
-        </figure>
-
-        <figure class="quote">
-          <span class="stars">★★★★★</span>
-          <blockquote>I stopped to buy coffee and the narration just waited for me. First audio guide that didn't leave me behind.</blockquote>
-          <figcaption><img src="https://i.pravatar.cc/80?img=15" alt="" /><span><strong>Jonas Weber</strong>Walked Rome · 3 routes</span></figcaption>
-        </figure>
-
-        <figure class="quote">
-          <span class="stars">★★★★★</span>
-          <blockquote>Used it in Tokyo with zero signal for four hours straight. It never once stopped talking.</blockquote>
-          <figcaption><img src="https://i.pravatar.cc/80?img=24" alt="" /><span><strong>Priya Nair</strong>Walked Tokyo · 11 routes</span></figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
 
   <!-- ============ CTA ============ -->
   <section class="cta-wrap container" id="get">
@@ -299,19 +256,12 @@
       <img src="https://picsum.photos/seed/nightwalk/1600/700" alt="" />
       <div class="cta-inner">
         <h2>Your next walk has a voice</h2>
-        <p>Nothing to download. First route in every city is on us.</p>
+        <p>Nothing to download, no account. Answer five questions, or just open a city.</p>
         <div class="hero-cta">
-          <a href="app.html" class="store store-light">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            <span><small>Open Narro</small><strong>In your browser</strong></span>
-          </a>
-          <a href="plan.html" class="store store-light">
+          <a href="plan.html" class="btn btn-primary">Plan my trip</a>
+          <a href="cities.html" class="store store-light">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-            <span><small>Let Narro</small><strong>Plan your trip</strong></span>
-          </a>
-          <a href="login.html" class="store store-light">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4 0-8 2-8 5v2h16v-2c0-3-4-5-8-5Z"/></svg>
-            <span><small>Create a</small><strong>Free account</strong></span>
+            <span><small>Or take a single</small><strong>Walk in one city</strong></span>
           </a>
         </div>
       </div>
@@ -331,7 +281,7 @@
 
       <div class="footer-col">
         <h4>App</h4>
-        <a href="app.html">Open the app</a><a href="cities.html">Cities</a><a href="plan.html">Plan a trip</a><a href="#how">How it works</a><a href="#voice">The voice</a>
+        <a href="plan.html">Plan a trip</a><a href="cities.html">Cities</a><a href="#how">How it works</a><a href="#voice">What it does</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -339,7 +289,7 @@
       </div>
       <div class="footer-col">
         <h4>Support</h4>
-        <a href="#">Help centre</a><a href="#">Offline guide</a><a href="#">Privacy</a>
+        <a href="#">Help centre</a><a href="#">Privacy</a>
       </div>
     </div>
     <div class="container footer-base">
