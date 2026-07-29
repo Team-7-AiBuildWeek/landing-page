@@ -332,6 +332,8 @@ body.is-walking { overflow: hidden; }
 .player-nav[data-state="here"] .nav-dot { background: #35b07a; }
 .player-nav[data-state="off"] { color: #a15b1e; cursor: pointer; }
 .player-nav[data-state="off"] .nav-dot { background: #d08a2e; }
+.player-nav[data-state="rough"] { color: #a15b1e; }
+.player-nav[data-state="rough"] .nav-dot { background: #d08a2e; }
 .player-nav[data-sim="1"]::after {
   content: "simulated";
   padding: 2px 8px;
@@ -387,7 +389,12 @@ body.is-walking { overflow: hidden; }
   stroke: var(--accent);
   stroke-width: 1.9;
   stroke-linecap: round;
+  stroke-linejoin: round;
 }
+/* Sits under the recentre button; on a desktop it is the way to move. */
+.sim-toggle { top: 144px; }
+.sim-toggle.is-on { background: var(--accent); }
+.sim-toggle.is-on svg { stroke: #fff; }
 
 .brief-sim {
   margin-top: 14px;

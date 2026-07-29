@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 <link rel="stylesheet" href="styles.css?v=10" />
-<link rel="stylesheet" href="app.css?v=5" />
+<link rel="stylesheet" href="app.css?v=6" />
 </head>
 <body class="app-body">
 
@@ -52,6 +52,9 @@
     <div class="stage-chip" id="stageChip"><span class="dot"></span> <span>Now narrating</span></div>
     <button type="button" class="recentre" id="recentreBtn" hidden aria-label="Centre on me">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.4"/><circle cx="12" cy="12" r="8"/><path d="M12 1.6v3M12 19.4v3M1.6 12h3M19.4 12h3"/></svg>
+    </button>
+    <button type="button" class="recentre sim-toggle" id="simToggle" aria-label="Simulate the walk">
+      <svg viewBox="0 0 24 24"><path d="M13 4.5 9 8l4 3.5"/><path d="M9 8h6a4.5 4.5 0 0 1 0 9H8"/><circle cx="6" cy="17.5" r="2"/></svg>
     </button>
 
     <div class="player" id="player">
@@ -263,6 +266,10 @@
         });
         map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
+        // Standing somewhere, with a mouse.
+        map.on('click', function (e) { placeMe(e.lngLat.lat, e.lngLat.lng); });
+        map.getCanvas().style.cursor = 'crosshair';
+
         map.on('load', function () {
           var line = stops.filter(function (s) { return s.lat; })
                           .map(function (s) { return [s.lng, s.lat]; });
@@ -399,6 +406,11 @@
       function updateNav() {
         var s = stops[current];
         if (!me) return;
+        if (me.accuracy > POOR_ACCURACY_M && !placedByHand) {
+          setNav('Rough position — click the map to place yourself', 'rough');
+          document.getElementById('playerNav').onclick = null;
+          return;
+        }
         if (!s || !s.lat) { setNav('Walking with you', 'ok'); return; }
         var d = haversineM(me, s);
         if (d < 30) setNav('You’re at ' + s.title, 'here');
@@ -419,8 +431,29 @@
         }
       }
 
+      /* A laptop has no GPS: its position comes from Wi-Fi or the IP address
+         and can be a kilometre out. Rather than pretend, say so and let the
+         walker place themselves on the map instead. */
+      var POOR_ACCURACY_M = 150;
+      var placedByHand = false;
+
       function onFix(lat, lng, accuracy) {
+        if (placedByHand) return; // their own pin wins over a rough fix
         me = { lat: lat, lng: lng, accuracy: accuracy || 0 };
+        drawMe();
+        updateNav();
+        maybeTrigger();
+      }
+
+      /* Clicking the map is the desktop equivalent of standing somewhere. */
+      function placeMe(lat, lng) {
+        placedByHand = true;
+        if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
+        if (simTimer) { clearInterval(simTimer); simTimer = null; }
+        document.getElementById('playerNav').dataset.sim = '';
+        document.getElementById('simToggle').classList.remove('is-on');
+        me = { lat: lat, lng: lng, accuracy: 10 };
+        following = false;
         drawMe();
         updateNav();
         maybeTrigger();
@@ -465,6 +498,20 @@
       document.getElementById('recentreBtn').addEventListener('click', function () {
         following = true;
         if (me && map) map.easeTo({ center: [me.lng, me.lat], zoom: 16, duration: 600 });
+      });
+
+      document.getElementById('simToggle').addEventListener('click', function () {
+        if (simTimer) {
+          clearInterval(simTimer);
+          simTimer = null;
+          document.getElementById('playerNav').dataset.sim = '';
+          this.classList.remove('is-on');
+          setNav('Simulation paused', '');
+          return;
+        }
+        placedByHand = false;
+        this.classList.add('is-on');
+        startSimulation();
       });
 
       function beginWalk(simulate) {
