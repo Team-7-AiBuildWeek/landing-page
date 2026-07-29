@@ -170,6 +170,7 @@
           .then(function (g) {
             if (!g.results || !g.results.length) throw new Error('city not found');
             var loc = g.results[0];
+            geocoded = { lat: loc.latitude, lng: loc.longitude };
             return fetch('https://api.open-meteo.com/v1/forecast?latitude=' + loc.latitude + '&longitude=' + loc.longitude +
               '&daily=weather_code,temperature_2m_max&timezone=auto&start_date=' + startISO + '&end_date=' + endISO);
           })
@@ -347,6 +348,28 @@
         renderStep();
       });
 
+      /* ============ HANDOFF TO THE WALK ============ */
+      /* A day becomes a walk: what it is about, where it happens, and which
+         sights to visit. The player reads these from the URL, and only shows
+         a map once the walk actually starts. */
+      var geocoded = null;
+
+      function walkHref(title, note) {
+        var city = plan && plan.city ? plan.city.name : '';
+        var q = 'app.html?walk=' + encodeURIComponent(title) +
+                '&city=' + encodeURIComponent(city);
+        if (note) q += '&note=' + encodeURIComponent(note);
+        if (geocoded) q += '&lat=' + geocoded.lat + '&lng=' + geocoded.lng;
+
+        // The sights already chosen for this trip become the stops, so the
+        // walk matches the itinerary rather than starting from scratch.
+        var stops = (plan && plan.sights ? plan.sights : []).slice(0, 6).map(function (s) {
+          return s.title;
+        });
+        if (stops.length) q += '&stops=' + encodeURIComponent(stops.join('|'));
+        return q;
+      }
+
       /* ============ GENERATOR ============ */
       function fmtDate(iso) {
         var d = new Date(iso + 'T12:00:00');
@@ -451,7 +474,6 @@
       function slotHtml(day, di, slot, si) {
         var rainy = day.wx.cond === 'rainy';
         var body, startBtn = '';
-        var cityRef = plan.city.slug === '__custom__' ? plan.city.name : plan.city.slug;
         var walkTitle = null; // set for non-route slots so the day can start with them
 
         if (slot.kind === 'route') {
@@ -459,7 +481,7 @@
           body = '<strong>' + r.name + '</strong>' +
             '<p>' + r.blurb + ' · ' + r.stops + ' stops · ~' + Math.round(r.minutes / 60 * 10) / 10 + ' hrs</p>' +
             (rainy ? '<span class="slot-note">' + W_ICON.rainy + ' Rain plan: the guide reroutes through arcades and porticoes</span>' : '');
-          if (si === 0) startBtn = '<a class="btn btn-dark" href="app.html?route=' + r.id + '">Start</a>';
+          if (si === 0) startBtn = '<a class="btn btn-dark" href="' + walkHref(r.name, r.blurb) + '">Start</a>';
         } else if (slot.kind === 'sight') {
           var sg = plan.sights[slot.idx];
           var matchCat = null;
@@ -488,8 +510,7 @@
 
         // Whatever sits on top of the day is where the day starts.
         if (!startBtn && si === 0 && walkTitle) {
-          startBtn = '<a class="btn btn-dark" href="app.html?walk=' + encodeURIComponent(walkTitle) +
-            '&city=' + encodeURIComponent(cityRef) + '">Start</a>';
+          startBtn = '<a class="btn btn-dark" href="' + walkHref(walkTitle) + '">Start</a>';
         }
 
         var tools = '<span class="slot-tools">' +
@@ -555,7 +576,7 @@
             '<span>Estimated for ' + state.travelers + (state.travelers === 1 ? ' person' : ' people') + ' × ' + plan.days.length +
             ' days, incl. ' + routeCount + (routeCount === 1 ? ' route (free)' : ' routes') + '. First route is on us.</span></div>' +
           '<div class="itin-actions">' +
-            '<a class="btn btn-primary" href="app.html?route=' + firstRoute.id + '">Start day 1 in the app</a>' +
+            '<a class="btn btn-primary" href="' + walkHref(firstRoute.name, firstRoute.blurb) + '">Start day 1</a>' +
             '<button type="button" class="btn btn-dark" id="restart">Plan another trip</button>' +
           '</div>';
 
