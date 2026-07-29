@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 <link rel="stylesheet" href="styles.css?v=10" />
-<link rel="stylesheet" href="app.css?v=8" />
+<link rel="stylesheet" href="app.css?v=10" />
 </head>
 <body class="app-body">
 
@@ -88,6 +88,7 @@
       <p class="player-nav" id="playerNav">
         <span class="nav-dot" id="navDot"></span>
         <span id="navText">Finding you…</span>
+        <button type="button" class="nav-locate" id="locateBtn">Use my location</button>
       </p>
     </div>
   </div>
@@ -630,19 +631,50 @@
         maybeTrigger();
       }
 
-      function startLocating() {
-        if (!('geolocation' in navigator)) {
-          setNav('This browser cannot locate you — simulate the walk instead', 'off');
+      /* Getting a first fix outdoors can take half a minute, and the first
+         attempt often times out while the phone is still warming up its GPS.
+         Treating that as failure is why this looked broken: one timeout and
+         the walk gave up for good. */
+      function locateError(err) {
+        var denied = err && err.code === 1;      // PERMISSION_DENIED
+        var noSignal = err && err.code === 2;    // POSITION_UNAVAILABLE
+
+        if (denied) {
+          setNav('Location permission was refused — allow it, then tap here', 'off');
+          document.getElementById('playerNav').onclick = function () { startLocating(true); };
           return;
         }
-        setNav('Finding you…', '');
-        watchId = navigator.geolocation.watchPosition(
+        // A timeout or a lost signal is not a verdict: keep the watch alive,
+        // say so plainly, and let a tap force a fresh attempt.
+        setNav(noSignal ? 'No signal yet — still trying' : 'Still finding you…', '');
+        document.getElementById('playerNav').onclick = function () { startLocating(true); };
+      }
+
+      function startLocating(retry) {
+        if (!('geolocation' in navigator)) {
+          setNav('This browser cannot locate you — simulate the walk instead', 'off');
+          document.getElementById('playerNav').onclick = startSimulation;
+          return;
+        }
+        if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
+        placedByHand = false;
+        setNav(retry ? 'Trying again…' : 'Finding you…', '');
+
+        // A quick coarse fix first, so something appears while the GPS
+        // settles; the watch then refines it.
+        navigator.geolocation.getCurrentPosition(
           function (pos) { onFix(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy); },
-          function () {
-            setNav('Location is off — tap to simulate the walk', 'off');
-            document.getElementById('playerNav').onclick = startSimulation;
+          function () { /* the watch below is the real attempt */ },
+          { enableHighAccuracy: false, maximumAge: 60000, timeout: 8000 }
+        );
+
+        watchId = navigator.geolocation.watchPosition(
+          function (pos) {
+            document.getElementById('playerNav').onclick = null;
+            onFix(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
           },
-          { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 }
+          locateError,
+          { enableHighAccuracy: true, maximumAge: 10000, timeout: 45000 }
         );
       }
 
@@ -669,6 +701,16 @@
       document.getElementById('recentreBtn').addEventListener('click', function () {
         following = true;
         if (me && map) map.easeTo({ center: [me.lng, me.lat], zoom: 16, duration: 600 });
+      });
+
+      /* Asking again from a real tap: iOS in particular is happier to raise
+         the permission prompt from a fresh gesture than from page load. */
+      document.getElementById('locateBtn').addEventListener('click', function (e) {
+        e.stopPropagation();
+        document.getElementById('simToggle').classList.remove('is-on');
+        if (simTimer) { clearInterval(simTimer); simTimer = null; }
+        document.getElementById('playerNav').dataset.sim = '';
+        startLocating(true);
       });
 
       document.getElementById('simToggle').addEventListener('click', function () {
