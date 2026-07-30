@@ -27,7 +27,7 @@
       </ul>
       <div class="nav-actions">
         <a href="login.html" class="nav-login">Log in</a>
-        <a href="app.html" class="btn btn-dark">Open the app</a>
+        <a href="https://ai-guide-phi.vercel.app/" class="btn btn-dark">Open the app</a>
       </div>
     </nav>
   </header>
@@ -56,7 +56,7 @@
       </div>
       <div class="footer-col">
         <h4>App</h4>
-        <a href="app.html">Open the app</a><a href="cities.html">Cities</a><a href="plan.html">Plan a trip</a>
+        <a href="https://ai-guide-phi.vercel.app/">Open the app</a><a href="cities.html">Cities</a><a href="plan.html">Plan a trip</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -354,20 +354,13 @@
          a map once the walk actually starts. */
       var geocoded = null;
 
-      function walkHref(title, note) {
-        var city = plan && plan.city ? plan.city.name : '';
-        var q = 'app.html?walk=' + encodeURIComponent(title) +
-                '&city=' + encodeURIComponent(city);
-        if (note) q += '&note=' + encodeURIComponent(note);
-        if (geocoded) q += '&lat=' + geocoded.lat + '&lng=' + geocoded.lng;
+      // The local walk page is gone; walks now open in the hosted app. It does
+      // not read our itinerary parameters, so the trip context is NOT carried
+      // over — the walker lands on the app's own start screen.
+      var WALK_APP = 'https://ai-guide-phi.vercel.app/';
 
-        // The sights already chosen for this trip become the stops, so the
-        // walk matches the itinerary rather than starting from scratch.
-        var stops = (plan && plan.sights ? plan.sights : []).slice(0, 6).map(function (s) {
-          return s.title;
-        });
-        if (stops.length) q += '&stops=' + encodeURIComponent(stops.join('|'));
-        return q;
+      function walkHref() {
+        return WALK_APP;
       }
 
       /* ============ GENERATOR ============ */

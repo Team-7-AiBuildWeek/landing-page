@@ -270,13 +270,13 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   overflow: visible;
 }
-/* The path is geometry only now — the footprints are drawn along it, and the
-   runner's animateMotion still references it. */
 .route-map .route-line {
   fill: none;
-  stroke: none;
+  stroke: rgba(17, 24, 39, 0.45);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 9;
 }
-.route-map .footstep { fill: rgba(17, 24, 39, 0.4); }
 /* marker that walks the loop */
 .route-runner .halo { fill: rgba(94, 218, 155, 0.16); }
 .route-runner .core {
@@ -323,14 +323,16 @@ a { color: inherit; text-decoration: none; }
   font-size: 13px;
   color: var(--muted);
 }
-.stars { color: var(--accent-ink); letter-spacing: 2px; font-size: 12px; }
+/* Gold, not the accent — ratings read as stars, and mint/green does not.
+   A saturated yellow washes out on the near-white canvas, so this sits darker. */
+.stars { color: #f0b429; letter-spacing: 2px; font-size: 12px; }
 
 .hero-title {
   margin: 26px 0 0;
   font-family: var(--serif);
   font-weight: 400;
   font-size: clamp(44px, 6.4vw, 82px);
-  line-height: 1.06;
+  line-height: 0.95;
   letter-spacing: -0.02em;
 }
 /* The second line stays an <em> for emphasis semantics, but reads upright —
