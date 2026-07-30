@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Narro — The city tells its own story, out loud</title>
+<title>Narro - AI-guided city tours</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=11" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=12" />
 </head>
 <body>
 
@@ -71,10 +71,6 @@
       </figure>
     </div>
 
-    <p class="trust-line">
-      Free · works in any browser · any city on Earth
-    </p>
-
     <h1 class="hero-title">Stories of the city,<br /><em>told as you walk</em></h1>
 
     <p class="hero-sub">
@@ -104,36 +100,15 @@
         Turn by turn, down real streets
       </div>
 
-      <div class="phone">
-        <div class="phone-screen">
-          <img class="phone-map" src="images/map.svg" alt="" />
-          <span class="notch"></span>
-
-          <div class="app-top">
-            <span class="app-city">Rome · Baroque Loop</span>
-            <span class="app-progress">Stop 4 of 12</span>
-          </div>
-
-          <div class="app-player">
-            <div class="app-player-head">
-              <span class="live"><i></i> Live</span>
-              <span>02:14</span>
-            </div>
-            <strong>The fountain that ate a whole aqueduct</strong>
-            <div class="wave" aria-hidden="true">
-              <span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span>
-            </div>
-            <div class="app-controls">
-              <button type="button" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24"><path d="M11 4 7 8l4 4"/><path d="M7 8h6a5 5 0 1 1 0 10h-2"/></svg></button>
-              <button type="button" class="app-pause" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg></button>
-              <button type="button" aria-label="Next stop"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Screenshot of the real app. It ships with its own device frame and
+           transparent corners, so no CSS bezel is drawn around it. -->
+      <img
+        class="phone-shot"
+        src="images/Phone.png"
+        width="317"
+        height="666"
+        alt="The Narro app mid-walk: a five-stop route through Bratislava on the map, the next turn up top, and the current stop playing in the bar below."
+      />
     </div>
 
     <div class="container">
@@ -255,7 +230,7 @@
     <div class="cta">
       <img src="https://picsum.photos/seed/nightwalk/1600/700" alt="" />
       <div class="cta-inner">
-        <h2>Your next walk has a voice</h2>
+        <h2 class="footer-title">Your next walk has a voice</h2>
         <p>Answer five questions and the days write themselves, or just open a city.</p>
         <div class="hero-cta">
           <a href="plan.html" class="btn btn-primary">Plan my trip</a>
@@ -485,6 +460,37 @@
         d += ' Z';
 
         var markup = '<path id="narro-route" class="route-line" d="' + d + '"/>';
+
+        svg.innerHTML = markup;
+
+        // Footprints instead of a dashed line. The dash pattern can only draw
+        // rectangles or round caps, so each print is placed individually:
+        // walk the path, take the tangent to get the heading, and step the
+        // print left/right of the centre line so it reads as a pair of feet.
+        var guide = svg.querySelector('#narro-route');
+        var total = guide.getTotalLength();
+        var STRIDE = 26;      // distance between successive prints
+        var SPREAD = 3.6;     // how far each print sits off the centre line
+        var prints = '';
+
+        for (var t = 0, foot = 0; t < total; t += STRIDE, foot++) {
+          var at = guide.getPointAtLength(t);
+          var ahead = guide.getPointAtLength(Math.min(t + 4, total));
+          var angle = Math.atan2(ahead.y - at.y, ahead.x - at.x);
+
+          // Perpendicular to the heading, alternating each step.
+          var side = foot % 2 ? 1 : -1;
+          var ox = Math.cos(angle + Math.PI / 2) * SPREAD * side;
+          var oy = Math.sin(angle + Math.PI / 2) * SPREAD * side;
+
+          // Ellipses point along +x at 0deg, so add 90deg to stand them upright
+          // relative to the direction of travel.
+          prints += '<ellipse class="footstep" cx="0" cy="0" rx="1.7" ry="3.1" transform="translate(' +
+            (at.x + ox).toFixed(1) + ' ' + (at.y + oy).toFixed(1) + ') rotate(' +
+            (angle * 180 / Math.PI + 90).toFixed(1) + ')"/>';
+        }
+
+        markup += prints;
 
         // A marker that walks the loop, the way the guide walks with you.
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>City — Narro</title>
+<title>City - Narro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=11" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=12" />
 <link rel="stylesheet" href="pages.css?v=5" />
 </head>
 <body>
@@ -70,7 +70,7 @@
       var city = window.NARRO_FIND_CITY(slug);
 
       if (!city) {
-        document.title = 'City not found — Narro';
+        document.title = 'City not found - Narro';
         main.innerHTML =
           '<div class="not-found">' +
             '<h1 class="page-title">We haven\'t walked there <em>yet</em></h1>' +
@@ -80,7 +80,7 @@
         return;
       }
 
-      document.title = city.name + ' — Narro';
+      document.title = city.name + ' - Narro';
 
       function routeRow(r) {
         return '' +
