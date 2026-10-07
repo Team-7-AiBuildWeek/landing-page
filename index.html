@@ -1,523 +1,468 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Narro - AI-guided city tours</title>
+<title>Walk — Audio tours anywhere</title>
+<meta name="description" content="Walk builds an audio tour wherever you're standing, narrates it as you go, and answers anything you ask along the way." />
+<meta name="theme-color" content="#5eda9b" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=12" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="walk.css" />
+<script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body>
 
+  <!-- The app's own mark: a route through three stops. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="walk-mark" viewBox="0 0 512 512">
+      <path d="M150 368 L256 232 L362 300" fill="none" stroke="#5eda9b" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="150" cy="368" r="42" fill="#f9fafb"/>
+      <circle cx="362" cy="300" r="42" fill="#f9fafb"/>
+      <circle cx="256" cy="232" r="54" fill="#5eda9b"/>
+    </symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </svg>
+
   <!-- ============ NAV ============ -->
   <header class="nav-wrap">
-    <nav class="nav container">
-      <a class="logo" href="#">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
-        <span>Narro</span>
+    <nav class="nav container" aria-label="Main">
+      <a class="logo" href="#" aria-label="Walk home">
+        <span class="logo-mark"><svg><use href="#walk-mark"/></svg></span>
+        <span class="logo-word">walk</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="#how">How it works</a></li>
-        <li><a href="#voice">What it does</a></li>
-        <li><a href="#stories">Reviews</a></li>
+        <li><a href="#product">Product</a></li>
+        <li><a href="#pace">Your pace</a></li>
+        <li><a href="#start">How to start</a></li>
+        <li><a href="cities.html">Cities</a></li>
+        <li><a href="plan.html">Plan a trip</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="https://ai-guide-phi.vercel.app/" class="btn btn-primary">Get the app</a>
+        <a href="login.html" class="nav-login">Sign in</a>
+        <a href="https://ai-guide-phi.vercel.app" class="btn btn-ink">Start walking</a>
       </div>
     </nav>
   </header>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero container">
-    <div class="hero-floats" aria-hidden="true">
-      <svg class="route-map"></svg>
-
-      <figure class="float float-1">
-        <img src="images/roman-forum.jpeg" alt="" />
-        <span class="audio-tag">
-          <span class="audio-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          <span class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          <em>2:14</em>
-        </span>
-      </figure>
-      <figure class="float float-2">
-        <img src="images/piazza-venezia.jpeg" alt="" />
-        <span class="audio-tag">
-          <span class="audio-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          <span class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          <em>1:38</em>
-        </span>
-      </figure>
-      <figure class="float float-3">
-        <img src="images/trevi-fountain.jpeg" alt="" />
-        <span class="audio-tag">
-          <span class="audio-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          <span class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          <em>3:02</em>
-        </span>
-      </figure>
-      <figure class="float float-4">
-        <img src="images/colosseum.jpeg" alt="" />
-        <span class="audio-tag">
-          <span class="audio-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          <span class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          <em>2:47</em>
-        </span>
-      </figure>
-    </div>
-
-    <h1 class="hero-title">Stories of the city,<br /><em>told as you walk</em></h1>
-
-    <p class="hero-sub">
-      Pick any city, then say what you actually want to see — in a sentence, or
-      by moving a few sliders. The guide is written for you and read aloud as
-      you walk, in any of 17 languages.
-    </p>
-
-    <div class="hero-cta">
-      <a href="https://ai-guide-phi.vercel.app/" class="btn btn-dark">Get the app</a>
-    </div>
-  </section>
-
-  <!-- ============ APP SHOWCASE ============ -->
-  <section class="showcase">
-    <div class="container showcase-panel">
-      <div class="chip chip-a">
-        <span class="dot"></span> Now narrating · stop 1 of 5
-      </div>
-      <div class="chip chip-b">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/></svg>
-        Each stop starts itself as you arrive
-      </div>
-      <div class="chip chip-c">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 4.5 9 8l4 3.5"/><path d="M9 8h6a4.5 4.5 0 0 1 0 9H8"/><circle cx="6" cy="17.5" r="2"/></svg>
-        Turn by turn, down real streets
-      </div>
-
-      <!-- Screenshot of the real app. It ships with its own device frame and
-           transparent corners, so no CSS bezel is drawn around it. -->
-      <img
-        class="phone-shot"
-        src="images/Phone.png"
-        width="317"
-        height="666"
-        alt="The Narro app mid-walk: a five-stop route through Bratislava on the map, the next turn up top, and the current stop playing in the bar below."
-      />
-    </div>
-
-    <div class="container">
-      <div class="stats">
-        <div class="stat"><strong>Any</strong><span>City you can name</span></div>
-        <div class="stat"><strong>17</strong><span>Languages to listen in</span></div>
-        <div class="stat"><strong>Yours</strong><span>Written to your prompt</span></div>
-        <div class="stat"><strong>Free</strong><span>Every tour, no limits</span></div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="section" id="how">
-    <div class="container how-grid">
-      <div class="how-media" id="how-panel" role="tabpanel" aria-labelledby="how-tab-0">
-        <img class="how-photo" src="images/city-prague.jpg" alt="Prague rooftops and the river at midday" />
-
-        <div class="chip chip-tl">
-          <span class="dot"></span> <span class="chip-text">12 cities narrated</span>
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Audio tours anywhere</p>
+          <h1 class="display display-xl">You didn’t fly all this way to read a plaque.</h1>
+          <p class="lead">
+            Walk builds an audio tour wherever you’re standing, then talks you
+            through it as you go. Ask it anything along the way. No booking,
+            no group, nothing to download.
+          </p>
+          <div class="btn-row">
+            <a href="https://ai-guide-phi.vercel.app" class="btn btn-white">
+              Start walking free
+              <svg><use href="#arrow"/></svg>
+            </a>
+            <a href="#product" class="btn btn-ghost">See how it works</a>
+          </div>
         </div>
 
-        <div class="chip-card">
-          <span class="chip-card-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          </span>
+        <div class="hero-visual">
+          <div class="hero-rings" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="orbit orbit-1" aria-hidden="true">🏛️</span>
+          <span class="orbit orbit-2" aria-hidden="true">🎧</span>
+          <span class="orbit orbit-3" aria-hidden="true">☕</span>
+          <span class="orbit orbit-4" aria-hidden="true">🎨</span>
+
+          <img class="phone" src="images/app-tour.png" width="763" height="1600"
+               alt="The Walk app mid-tour: a five-stop route on the map, a turn arrow, and the narration player" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Footpaths in place of weav's wave strip. -->
+    <div class="divider" aria-hidden="true"></div>
+
+    <!-- ============ CITIES ============ -->
+    <section class="cities" aria-label="Places people have walked">
+      <p>One guide for every street, in every city</p>
+      <div class="marquee">
+        <div class="marquee-track">
+          <span>Rome</span><span>Lisbon</span><span>Kyoto</span><span>Mexico City</span><span>Istanbul</span><span>Edinburgh</span><span>Marrakesh</span><span>Prague</span><span>Buenos Aires</span><span>Seoul</span>
+          <span aria-hidden="true">Rome</span><span aria-hidden="true">Lisbon</span><span aria-hidden="true">Kyoto</span><span aria-hidden="true">Mexico City</span><span aria-hidden="true">Istanbul</span><span aria-hidden="true">Edinburgh</span><span aria-hidden="true">Marrakesh</span><span aria-hidden="true">Prague</span><span aria-hidden="true">Buenos Aires</span><span aria-hidden="true">Seoul</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ASK WALK + PRODUCT ============ -->
+    <section class="section section-white" id="product">
+      <div class="container">
+        <div class="ask-intro reveal">
+          <h2 class="display display-lg">Ask Walk.</h2>
           <div>
-            <strong class="chip-card-title">Prague</strong>
-            <span class="chip-card-meta">3 days planned · weather checked</span>
+            <span class="ask-q">What makes Walk different from an audio guide?</span>
+            <p class="ask-a" id="ask-answer" data-text="Nothing is pre-recorded. Walk builds the tour around wherever you’re standing, narrates it as you move, and answers whatever you ask: who built it, what happened here, whether it’s worth going inside.">Nothing is pre-recorded. Walk builds the tour around wherever you’re standing, narrates it as you move, and answers whatever you ask: who built it, what happened here, whether it’s worth going inside.</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="tour-list reveal" id="tour-list">
+            <div class="tour-item is-open">
+              <h3 style="margin:0"><button type="button" aria-expanded="true" aria-controls="tour-body-0" id="tour-btn-0">A tour built where you stand <i aria-hidden="true"></i></button></h3>
+              <div class="tour-body" id="tour-body-0" role="region" aria-labelledby="tour-btn-0"><div>
+                <p>Type where you are and the tour is built there. Pick what you care about, and Walk strings together the stops worth your feet.</p>
+              </div></div>
+            </div>
+            <div class="tour-item">
+              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-1" id="tour-btn-1">Narration that keeps up <i aria-hidden="true"></i></button></h3>
+              <div class="tour-body" id="tour-body-1" role="region" aria-labelledby="tour-btn-1"><div>
+                <p>The guide talks as you walk, so keep the phone in your pocket if you like. Each story starts when you reach the stop.</p>
+              </div></div>
+            </div>
+            <div class="tour-item">
+              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-2" id="tour-btn-2">Ask anything <i aria-hidden="true"></i></button></h3>
+              <div class="tour-body" id="tour-body-2" role="region" aria-labelledby="tour-btn-2"><div>
+                <p>Ask about what you’re looking at — who built it, what happened here, whether it’s worth going inside — and get an answer before the next corner.</p>
+              </div></div>
+            </div>
+            <div class="tour-item">
+              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-3" id="tour-btn-3">Directions between stops <i aria-hidden="true"></i></button></h3>
+              <div class="tour-body" id="tour-body-3" role="region" aria-labelledby="tour-btn-3"><div>
+                <p>Spoken, turn-by-turn directions to the next stop. Missed it? Say “repeat directions” and it tells you again.</p>
+              </div></div>
+            </div>
+            <div class="tour-item">
+              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-4" id="tour-btn-4">Quick summary <i aria-hidden="true"></i></button></h3>
+              <div class="tour-body" id="tour-body-4" role="region" aria-labelledby="tour-btn-4"><div>
+                <p>Short on time? Get the three things worth knowing about a stop in under a minute, then keep moving.</p>
+              </div></div>
+            </div>
+          </div>
+
+          <div class="tour-stage reveal" aria-hidden="true">
+            <div class="scene is-on">
+              <div class="scene-card">
+                <h4>Where are you?</h4>
+                <span class="meta">Type a neighbourhood, street or landmark</span>
+                <div class="field">
+                  <svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+                  Trastevere, Rome
+                </div>
+                <div class="chips">
+                  <span class="on">🏛️ History</span><span class="on">🎨 Art</span><span>☕ Food</span><span>🎵 Music</span><span class="on">🏰 Hidden spots</span>
+                </div>
+                <ul class="stop-list">
+                  <li class="now"><b>1</b>Piazza di Santa Maria<em>4 min</em></li>
+                  <li><b>2</b>Villa Farnesina<em>9 min</em></li>
+                  <li><b>3</b>Gianicolo Terrace<em>14 min</em></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="scene">
+              <img class="scene-photo" src="images/trevi-fountain.jpeg" alt="" />
+              <div class="scene-card">
+                <small style="font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--mint-ink)">You’ve arrived</small>
+                <h4 style="margin-top:4px">Trevi Fountain</h4>
+                <span class="meta">Stop 4 of 7 · 2:47</span>
+                <div class="wave" style="margin-top:14px">
+                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="scene">
+              <div class="scene-card">
+                <h4>Colosseum</h4>
+                <span class="meta">Listening…</span>
+                <div class="bubble bubble-you">Wait — why is half of it missing?</div>
+                <div class="bubble bubble-walk">Earthquakes, mostly — the big one was in 1349. After that Romans quarried the fallen stone for centuries. Look up at the holes in the walls: those held the iron clamps they pried out.</div>
+              </div>
+            </div>
+
+            <div class="scene">
+              <div class="scene-card">
+                <h4>Next: Piazza Venezia</h4>
+                <span class="meta">6 min walk · 450 m</span>
+                <div class="dir">
+                  <svg viewBox="0 0 24 24"><path d="M9 20V10a4 4 0 0 1 4-4h6M15 2l4 4-4 4"/></svg>
+                  <div><strong>Turn right on Via del Corso</strong><span>then straight for 300 m</span></div>
+                </div>
+                <ul class="stop-list">
+                  <li class="done"><b>✓</b>Trevi Fountain</li>
+                  <li class="now"><b>5</b>Piazza Venezia<em>6 min</em></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="scene">
+              <img class="scene-photo" src="images/roman-forum.jpeg" alt="" />
+              <div class="scene-card">
+                <small style="font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--mint-ink)">Quick summary</small>
+                <h4 style="margin-top:4px">Roman Forum</h4>
+                <div class="summary-lines">
+                  <div>The civic heart of Rome for a thousand years.</div>
+                  <div>Caesar was cremated where the small temple stands.</div>
+                  <div>Skip the queue: enter from Via di San Gregorio.</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="steps" role="tablist" aria-orientation="vertical" aria-label="How it works">
-        <div class="step is-active" role="tab" id="how-tab-0" aria-controls="how-panel" aria-selected="true" tabindex="0">
-          <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
-          <h3>Pick any city</h3>
-          <p>Choose one from the catalogue or type anywhere on Earth. There is no fixed list
-             of tours waiting — the guide is built once you have said where you are.</p>
+    <!-- ============ WASH: CONTEXT FLOW ============ -->
+    <section class="section section-wash">
+      <div class="container split">
+        <div class="reveal">
+          <span class="badge">Context-aware</span>
+          <h2 class="display display-lg">Hear the story, not the signpost.</h2>
+          <p class="lead" style="color:var(--ink-soft)">
+            Walk knows where you’re standing, what you’ve already heard and what
+            you came for — so every answer picks up the thread instead of
+            starting from scratch.
+          </p>
+          <ul class="checks">
+            <li>Built around your exact location</li>
+            <li>Remembers every stop you’ve passed</li>
+            <li>Tuned to the things you actually care about</li>
+          </ul>
         </div>
 
-        <div class="step" role="tab" id="how-tab-1" aria-controls="how-panel" aria-selected="false" tabindex="-1">
-          <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          <h3>Say what you want, or move the sliders</h3>
-          <p>Describe the guide you want in your own words — or skip the writing and set how
-             long it runs, how much detail you want, the pace, and what actually interests
-             you.</p>
-        </div>
-
-        <div class="step" role="tab" id="how-tab-2" aria-controls="how-panel" aria-selected="false" tabindex="-1">
-          <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M13 4.5 9 8l4 3.5"/><path d="M9 8h6a4.5 4.5 0 0 1 0 9H8"/><circle cx="6" cy="17.5" r="2"/></svg></span>
-          <h3>Press play and walk</h3>
-          <p>It reads the city to you as you go, turn by turn down real streets, and each stop
-             starts itself the moment you arrive. Not there yet? Simulate the walk.</p>
+        <div class="flow-card reveal" aria-hidden="true">
+          <div class="bubble bubble-you" style="margin:0 0 0 auto">Is it worth going inside?</div>
+          <div class="flow-line"></div>
+          <div class="flow-group">
+            <small>What Walk considers</small>
+            <div class="flow-node"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>Location<em>Santa Maria, Trastevere</em></div>
+            <div class="flow-node"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span>Tour so far<em>2 of 7 stops</em></div>
+            <div class="flow-node"><span class="ico"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L12 16.6 6.6 19.6l1.2-6.1-4.5-4.2 6.1-.7Z"/></svg></span>Interests<em>Art, hidden spots</em></div>
+          </div>
+          <div class="flow-line"></div>
+          <div class="flow-node is-hero"><span class="ico"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0M2 12a10 10 0 0 1 20 0"/><circle cx="12" cy="17" r="2"/></svg></span>“Yes — the 12th-century apse mosaics alone are worth five minutes.”<em>0:08</em></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============ WHAT IT DOES ============ -->
-  <section class="section voice-section" id="voice">
+    <!-- ============ MINT BAND + SHEET ============ -->
+    <section class="band-mint" id="pace">
+      <div class="container band-head reveal">
+        <h2 class="display display-sm">Pocket the phone.<br />Walk at your own pace.</h2>
+        <p>Use headphones for the best experience. The guide waits when you stop and gets to the point when you hurry.</p>
+      </div>
+    </section>
+
     <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">What it actually does</h2>
-        <p class="section-sub">No pre-recorded tours, no fixed route, no group of forty</p>
-      </div>
+      <div class="sheet split reveal">
+        <div>
+          <span class="badge">Your pace</span>
+          <h2 class="display display-lg">Linger longer. Or don’t.</h2>
+          <p class="lead" style="color:var(--ink-soft)">
+            Stop at a doorway and the story goes deeper. Walk fast and it gives
+            you the brief version. Times vary — every tour bends to how you
+            actually move.
+          </p>
+          <div class="btn-row">
+            <a href="https://ai-guide-phi.vercel.app" class="btn btn-mint">Try a tour <svg><use href="#arrow"/></svg></a>
+          </div>
+        </div>
 
-      <div class="feature-grid">
-        <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
-          <h3>Real places</h3>
-          <p>Every stop is somewhere you can stand: found around you, with the opening
-             lines of its own story read out when you get there.</p>
-        </article>
-
-        <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M13 4.5 9 8l4 3.5"/><path d="M9 8h6a4.5 4.5 0 0 1 0 9H8"/><circle cx="6" cy="17.5" r="2"/></svg></span>
-          <h3>Turn by turn, on foot</h3>
-          <p>The route follows pavements and crossings rather than a straight line, and
-             the next instruction counts down the metres as you walk it.</p>
-        </article>
-
-        <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1"/><path d="M12 18v3"/><path d="M4 7h4M16 7h4"/></svg></span>
-          <h3>Written from one sentence</h3>
-          <p>Tell it what you are into — Baroque facades, where the locals eat, the darker
-             history — and the tour is written around that, not padded with the usual sights.</p>
-        </article>
-
-        <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h13"/><circle cx="17" cy="7" r="2.2"/><circle cx="13" cy="12" r="2.2"/><circle cx="16" cy="17" r="2.2"/></svg></span>
-          <h3>Or just move the sliders</h3>
-          <p>Not in the mood to write anything? Set how long it runs, how much detail you
-             want, the pace, and what interests you — and let it build from that.</p>
-        </article>
-
-        <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15.4 0 18M12 3c-2.6 2.6-2.6 15.4 0 18"/></svg></span>
-          <h3>Seventeen languages</h3>
-          <p>Pick the one you want to listen in and the whole tour is narrated in it — not a
-             translated caption over an English recording.</p>
-        </article>
-
-        <article class="feature">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0"/><path d="M2 12a10 10 0 0 1 20 0"/><circle cx="12" cy="17" r="2"/></svg></span>
-          <h3>Try it from your desk</h3>
-          <p>Not in the city yet? Simulate the walk and it plays out on the map, or click
-             where you are standing. Nothing is hidden behind being there.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ REVIEWS ============ -->
-  <!-- Illustrative copy, not real customer feedback: the names, avatars and
-       quotes are invented. Replace before making any claim about real users. -->
-  <section class="section" id="stories">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">What walkers say</h2>
-        <p class="section-sub">Feedback from the first tours</p>
-      </div>
-
-      <div class="quote-grid">
-        <figure class="quote">
-          <span class="stars">★★★★★</span>
-          <blockquote>I asked it why the street was named that. It answered, then tied it back to the church we'd passed ten minutes earlier.</blockquote>
-          <figcaption><img src="https://i.pravatar.cc/80?img=5" alt="" /><span><strong>Amara Okafor</strong>Walked Lisbon · 6 tours</span></figcaption>
-        </figure>
-
-        <figure class="quote">
-          <span class="stars">★★★★★</span>
-          <blockquote>I stopped to buy coffee and the narration just waited for me. First audio guide that didn't leave me behind.</blockquote>
-          <figcaption><img src="https://i.pravatar.cc/80?img=15" alt="" /><span><strong>Jonas Weber</strong>Walked Rome · 3 tours</span></figcaption>
-        </figure>
-
-        <figure class="quote">
-          <span class="stars">★★★★★</span>
-          <blockquote>Asked for the darker history in my own words and got exactly that — none of the postcard sights.</blockquote>
-          <figcaption><img src="https://i.pravatar.cc/80?img=24" alt="" /><span><strong>Priya Nair</strong>Walked Tokyo · 11 tours</span></figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CTA ============ -->
-  <section class="cta-wrap container" id="get">
-    <div class="cta">
-      <img src="https://picsum.photos/seed/nightwalk/1600/700" alt="" />
-      <div class="cta-inner">
-        <h2 class="footer-title">Your next walk has a voice</h2>
-        <p>Name a city, say what you want to see, and start walking. In 17 languages.</p>
-        <div class="hero-cta">
-          <a href="https://ai-guide-phi.vercel.app/" class="btn btn-primary">Get the app</a>
+        <div class="pace" aria-hidden="true">
+          <div class="pace-row"><strong>Linger</strong><div class="pace-bar"><span style="width:92%"></span></div><em>Full story</em></div>
+          <div class="pace-row"><strong>Stroll</strong><div class="pace-bar"><span style="width:60%"></span></div><em>Highlights</em></div>
+          <div class="pace-row"><strong>Hurry</strong><div class="pace-bar"><span style="width:26%"></span></div><em>Brief</em></div>
+          <div class="pace-row"><strong>Lost?</strong><div class="pace-bar"><span style="width:12%"></span></div><em>Repeat directions</em></div>
         </div>
       </div>
     </div>
-  </section>
+
+    <!-- ============ DARK BAND ============ -->
+    <section class="band-dark" style="margin-top:120px">
+      <div class="container split">
+        <div class="reveal">
+          <span class="ask-chip">
+            <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+            <b>Ask Walk.</b> Does it need an app store?
+          </span>
+          <h2 class="display display-lg">No download. No account. Just go.</h2>
+          <p class="lead">
+            Walk runs in your browser. For the whole screen, tap Share → Add to
+            Home Screen and it opens like any other app.
+          </p>
+          <div class="btn-row">
+            <a href="https://ai-guide-phi.vercel.app" class="btn btn-mint">Open Walk <svg><use href="#arrow"/></svg></a>
+            <a href="#start" class="btn btn-dark-ghost">How to start</a>
+          </div>
+        </div>
+
+        <div class="stat-grid reveal">
+          <div class="stat"><strong>Any</strong><span>street, square or landmark</span></div>
+          <div class="stat"><strong>0</strong><span>apps to install</span></div>
+          <div class="stat"><strong>1</strong><span>tap to start the tour</span></div>
+          <div class="stat"><strong>∞</strong><span>questions along the way</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STEPS ============ -->
+    <section class="section section-white" id="start">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="badge">Zero-effort setup</span>
+          <h2 class="display display-lg">Walking in under a minute.</h2>
+          <p class="lead">Three steps between you and the first story.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step reveal">
+            <span class="step-n">1</span>
+            <h3>Say where you are</h3>
+            <p>Type a street, neighbourhood or landmark. Try the local spelling if it doesn’t find it.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-n">2</span>
+            <h3>Start the tour</h3>
+            <p>Walk lays out the stops and the route between them. Tap once and you’re off.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-n">3</span>
+            <h3>Listen and ask</h3>
+            <p>Phone in your pocket, headphones in. Ask whatever you want, whenever you want.</p>
+          </article>
+        </div>
+
+        <p class="steps-note">
+          <svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg>
+          Use headphones for the best experience.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="final" style="border-top:1px solid var(--line)">
+      <div class="container reveal">
+        <h2 class="display display-xl">You’ve read about it. Now go walk it.</h2>
+        <p class="lead">Open Walk, type where you are, and hear the street you’re standing on.</p>
+        <div class="btn-row">
+          <a href="https://ai-guide-phi.vercel.app" class="btn btn-ink">Start walking <svg><use href="#arrow"/></svg></a>
+          <a href="#product" class="btn btn-soft">Learn more</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <a class="logo" href="#">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
-          <span>Narro</span>
+        <a class="logo" href="#" aria-label="Walk home">
+          <span class="logo-mark"><svg><use href="#walk-mark"/></svg></span>
+          <span class="logo-word">walk</span>
         </a>
-        <p class="footer-note"><em>Narro</em> — Latin for “I tell the story.” An AI guide for people who'd rather walk alone, and still hear all of it.</p>
+        <p class="footer-note">Audio tours anywhere. An AI guide for people who’d rather walk on their own — and still hear all of it.</p>
       </div>
-
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#product">Features</a><a href="#pace">Your pace</a><a href="#start">How to start</a><a href="cities.html">Cities</a><a href="plan.html">Plan a trip</a>
+      </div>
       <div class="footer-col">
         <h4>App</h4>
-        <a href="plan.html">Build a tour</a><a href="cities.html">Cities</a><a href="#how">How it works</a><a href="#voice">What it does</a>
+        <a href="https://ai-guide-phi.vercel.app">Open Walk</a><a href="login.html">Sign in</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="#">About</a><a href="#">Careers</a><a href="#">Press kit</a>
-      </div>
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="#">Help centre</a><a href="#">Privacy</a>
+        <a href="#">About</a><a href="#">Privacy</a><a href="#">Contact</a>
       </div>
     </div>
     <div class="container footer-base">
-      <span>© 2026 Narro. All rights reserved.</span>
+      <span>© 2026 Walk. All rights reserved.</span>
       <span>Made for people who walk slowly.</span>
     </div>
   </footer>
 
   <script>
-    // "How it works" — selecting a step swaps the media beside it.
     (function () {
-      var tabs = [].slice.call(document.querySelectorAll('.steps .step'));
-      var panel = document.getElementById('how-panel');
-      if (!tabs.length || !panel) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      var PIN = '<svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>';
-      var CANS = '<svg viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><path d="M20 15a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM4 15a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2Z"/></svg>';
-      var ROUTE = '<svg viewBox="0 0 24 24"><path d="M13 4.5 9 8l4 3.5"/><path d="M9 8h6a4.5 4.5 0 0 1 0 9H8"/><circle cx="6" cy="17.5" r="2"/></svg>';
+      // Nav gets a hairline once the page scrolls under it.
+      var nav = document.querySelector('.nav-wrap');
+      function onScroll() { nav.classList.toggle('is-stuck', window.scrollY > 8); }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
 
-      var views = [
-        {
-          img: 'images/city-prague.jpg',
-          alt: 'Prague rooftops and the river at midday',
-          chip: '12 cities narrated',
-          title: 'Prague',
-          meta: '3 days planned · weather checked',
-          icon: PIN
-        },
-        {
-          img: 'images/trevi-fountain.jpeg',
-          alt: 'The Trevi Fountain, one stop on a Rome walk',
-          chip: 'Stop 1 of 5 · Pantheon',
-          title: 'Baroque Loop',
-          meta: '5 stops · ~60 min on foot',
-          icon: CANS
-        },
-        {
-          img: 'images/map.svg',
-          alt: 'A walking route drawn between numbered stops',
-          chip: 'Turn left in 80 m',
-          title: 'Following you',
-          meta: '120 m to the next stop',
-          icon: ROUTE
-        }
-      ];
+      // Product accordion — one item open, and it drives the stage beside it.
+      var items = [].slice.call(document.querySelectorAll('#tour-list .tour-item'));
+      var scenes = [].slice.call(document.querySelectorAll('.tour-stage .scene'));
+      var timer;
 
-      var photo = panel.querySelector('.how-photo');
-      var chipText = panel.querySelector('.chip-text');
-      var cardIcon = panel.querySelector('.chip-card-icon');
-      var cardTitle = panel.querySelector('.chip-card-title');
-      var cardMeta = panel.querySelector('.chip-card-meta');
-
-      // Warm the cache so switching doesn't flash an empty frame.
-      views.forEach(function (v) { new Image().src = v.img; });
-
-      var current = 0;
-
-      function select(i, focus) {
-        if (i === current) return;
-        var v = views[i];
-
-        tabs.forEach(function (tab, n) {
+      function open(i) {
+        items.forEach(function (item, n) {
           var on = n === i;
-          tab.classList.toggle('is-active', on);
-          tab.setAttribute('aria-selected', on ? 'true' : 'false');
-          tab.tabIndex = on ? 0 : -1;
+          item.classList.toggle('is-open', on);
+          item.querySelector('button').setAttribute('aria-expanded', on ? 'true' : 'false');
         });
-
-        panel.setAttribute('aria-labelledby', tabs[i].id);
-        panel.classList.add('is-swapping');
-
-        photo.onload = photo.onerror = function () {
-          panel.classList.remove('is-swapping');
-        };
-        photo.src = v.img;
-        photo.alt = v.alt;
-
-        chipText.textContent = v.chip;
-        cardIcon.innerHTML = v.icon;
-        cardTitle.textContent = v.title;
-        cardMeta.textContent = v.meta;
-
-        current = i;
-        if (focus) tabs[i].focus();
+        scenes.forEach(function (s, n) { s.classList.toggle('is-on', n === i); });
       }
 
-      tabs.forEach(function (tab, i) {
-        tab.addEventListener('click', function () { select(i); });
-
-        tab.addEventListener('keydown', function (e) {
-          var k = e.key;
-          if (k === 'Enter' || k === ' ') {
-            e.preventDefault();
-            select(i);
-          } else if (k === 'ArrowDown' || k === 'ArrowRight') {
-            e.preventDefault();
-            select((i + 1) % tabs.length, true);
-          } else if (k === 'ArrowUp' || k === 'ArrowLeft') {
-            e.preventDefault();
-            select((i - 1 + tabs.length) % tabs.length, true);
-          } else if (k === 'Home') {
-            e.preventDefault();
-            select(0, true);
-          } else if (k === 'End') {
-            e.preventDefault();
-            select(tabs.length - 1, true);
-          }
-        });
-      });
-    })();
-
-    // Draws the dotted travel route connecting the floating hero cards.
-    (function () {
-      var wrap = document.querySelector('.hero-floats');
-      if (!wrap) return;
-
-      var svg = wrap.querySelector('.route-map');
-
-      // A closed loop: Rome, Lisbon, along the bottom, then Porto, Tokyo,
-      // and back over the top to Rome. Non-selector entries are open-space
-      // waypoints.
-      var order = [
-        '.float-1', 'leftMid', '.float-2', 'bottom',
-        '.float-4', 'rightMid', '.float-3', 'top'
-      ];
-
-      // Card centre from the layout box, so the cards' rotate/drift transforms
-      // never move the route.
-      function centre(sel) {
-        var el = wrap.querySelector(sel);
-        return {
-          x: el.offsetLeft + el.offsetWidth / 2,
-          y: el.offsetTop + el.offsetHeight / 2
-        };
-      }
-
-      function draw() {
-        var w = wrap.offsetWidth;
-        var h = wrap.offsetHeight;
-
-        if (!w || !h || getComputedStyle(wrap).display === 'none') {
-          svg.innerHTML = '';
-          return;
-        }
-        svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-
-        // The bottom waypoint sits in the clear span between the centred
-        // hero copy and the bottom-right card.
-        var f4 = wrap.querySelector('.float-4');
-        var bottomX = (w * 0.62 + f4.offsetLeft) / 2;
-
-        var c1c = centre('.float-1');
-        var c2c = centre('.float-2');
-        var c3c = centre('.float-3');
-        var c4c = centre('.float-4');
-
-        var pts = order.map(function (sel) {
-          if (sel === 'bottom') return { x: bottomX, y: h - 6 };
-          if (sel === 'top') return { x: w * 0.5, y: 16 };
-          // Side waypoints bow the silhouette outward between the stacked
-          // cards, so the loop reads as a round shape rather than a polygon.
-          if (sel === 'leftMid') {
-            return {
-              x: Math.max(14, Math.min(c1c.x, c2c.x) - 64),
-              y: (c1c.y + c2c.y) / 2
-            };
-          }
-          if (sel === 'rightMid') {
-            return {
-              x: Math.min(w - 14, Math.max(c3c.x, c4c.x) + 64),
-              y: (c3c.y + c4c.y) / 2
-            };
-          }
-          return centre(sel);
-        });
-
-        // Closed Catmull-Rom through the points, converted to cubic beziers.
-        var n = pts.length;
-        var d = 'M' + pts[0].x + ' ' + pts[0].y;
-
-        for (var i = 0; i < n; i++) {
-          var p0 = pts[(i - 1 + n) % n];
-          var p1 = pts[i];
-          var p2 = pts[(i + 1) % n];
-          var p3 = pts[(i + 2) % n];
-
-          var c1 = { x: p1.x + (p2.x - p0.x) / 6, y: p1.y + (p2.y - p0.y) / 6 };
-          var c2 = { x: p2.x - (p3.x - p1.x) / 6, y: p2.y - (p3.y - p1.y) / 6 };
-
-          d += ' C' + c1.x + ' ' + c1.y + ' ' + c2.x + ' ' + c2.y + ' ' + p2.x + ' ' + p2.y;
-        }
-
-        d += ' Z';
-
-        var markup = '<path id="narro-route" class="route-line" d="' + d + '"/>';
-
-        // A marker that walks the loop, the way the guide walks with you.
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          markup +=
-            '<g class="route-runner">' +
-              '<circle class="halo" r="9"/>' +
-              '<circle class="core" r="4"/>' +
-              '<animateMotion dur="44s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">' +
-                '<mpath href="#narro-route"/>' +
-              '</animateMotion>' +
-            '</g>';
-        }
-
-        svg.innerHTML = markup;
-      }
-
-      // Each badge plays its waveform through once per click.
-      wrap.querySelectorAll('.audio-tag').forEach(function (tag) {
-        var btn = tag.querySelector('.audio-play');
-        if (!btn) return;
-
-        btn.addEventListener('click', function () {
-          if (tag.classList.contains('is-playing')) return;
-          tag.classList.add('is-playing');
-          setTimeout(function () {
-            tag.classList.remove('is-playing');
-          }, 1550);
+      items.forEach(function (item, i) {
+        item.querySelector('button').addEventListener('click', function () {
+          clearInterval(timer); // the visitor has taken over
+          open(i);
         });
       });
 
-      draw();
-      window.addEventListener('load', draw);
-      window.addEventListener('resize', draw);
-      if (window.ResizeObserver) new ResizeObserver(draw).observe(wrap);
+      // Until someone clicks, cycle through the features while they're in view.
+      if (!reduce && 'IntersectionObserver' in window) {
+        var current = 0;
+        new IntersectionObserver(function (entries) {
+          clearInterval(timer);
+          if (entries[0].isIntersecting) {
+            timer = setInterval(function () {
+              current = (items.findIndex(function (it) { return it.classList.contains('is-open'); }) + 1) % items.length;
+              open(current);
+            }, 5000);
+          }
+        }, { threshold: 0.4 }).observe(document.getElementById('tour-list'));
+      }
+
+      // "Ask Walk." answer types itself out once it scrolls into view.
+      var answer = document.getElementById('ask-answer');
+      if (answer && !reduce && 'IntersectionObserver' in window) {
+        var full = answer.getAttribute('data-text');
+        answer.setAttribute('aria-label', full);
+        answer.innerHTML = '<span class="caret"></span>';
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          var i = 0;
+          var caret = answer.querySelector('.caret');
+          var text = document.createTextNode('');
+          answer.insertBefore(text, caret);
+          (function tick() {
+            i += 2;
+            text.data = full.slice(0, i);
+            if (i < full.length) setTimeout(tick, 18);
+          })();
+        }, { threshold: 0.6 });
+        io.observe(answer);
+      }
+
+      // Fade sections up as they arrive.
+      var reveals = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('is-in'); });
+      } else {
+        var ro = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('is-in'); ro.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(function (el) { ro.observe(el); });
+      }
     })();
   </script>
 
