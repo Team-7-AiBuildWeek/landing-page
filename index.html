@@ -5,23 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>WalkDots — Audio tours anywhere</title>
 <meta name="description" content="WalkDots builds an audio tour wherever you're standing, narrates it as you go, and answers anything you ask along the way." />
-<meta name="theme-color" content="#5eda9b" />
+<meta name="theme-color" content="#f9fafb" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" href="images/icons/icon-192.png" type="image/png" />
+<link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png" />
 <link rel="stylesheet" href="walk.css" />
 <script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body>
 
-  <!-- The app's own mark: a route through three stops. -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="walk-mark" viewBox="0 0 512 512">
-      <path d="M150 368 L256 232 L362 300" fill="none" stroke="#5eda9b" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="150" cy="368" r="42" fill="#f9fafb"/>
-      <circle cx="362" cy="300" r="42" fill="#f9fafb"/>
-      <circle cx="256" cy="232" r="54" fill="#5eda9b"/>
-    </symbol>
     <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   </svg>
 
@@ -29,8 +25,8 @@
   <header class="nav-wrap">
     <nav class="nav container" aria-label="Main">
       <a class="logo" href="#" aria-label="WalkDots home">
-        <span class="logo-mark"><svg><use href="#walk-mark"/></svg></span>
-        <span class="logo-word">WalkDots</span>
+        <img class="logo-mark" src="images/icons/icon-192.png" width="192" height="192" alt="" />
+        <span class="wordmark">walkdots</span>
       </a>
 
       <ul class="nav-links">
@@ -42,8 +38,8 @@
       </ul>
 
       <div class="nav-actions">
-        <a href="login.html" class="nav-login">Sign in</a>
-        <a href="https://ai-guide-phi.vercel.app" class="btn btn-ink">Start walking</a>
+        <a href="login.html" class="btn btn-quiet nav-login">Sign in</a>
+        <a href="https://ai-guide-phi.vercel.app" class="btn btn-dark">Start walking</a>
       </div>
     </nav>
   </header>
@@ -54,27 +50,37 @@
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">Audio tours anywhere</p>
-          <h1 class="display display-xl">You didn’t fly all this way to read a plaque.</h1>
+          <h1 class="display display-xl">You didn’t fly all this way <span class="accent">to read a plaque.</span></h1>
           <p class="lead">
             WalkDots builds an audio tour wherever you’re standing, then talks you
             through it as you go. Ask it anything along the way. No booking,
             no group, nothing to download.
           </p>
           <div class="btn-row">
-            <a href="https://ai-guide-phi.vercel.app" class="btn btn-white">
-              Start walking free
+            <a href="https://ai-guide-phi.vercel.app" class="glow-btn">
+              Start walking
               <svg><use href="#arrow"/></svg>
             </a>
-            <a href="#product" class="btn btn-ghost">See how it works</a>
+            <a href="#product" class="btn btn-quiet btn-lg">See how it works</a>
           </div>
         </div>
 
         <div class="hero-visual">
-          <div class="hero-rings" aria-hidden="true"><span></span><span></span><span></span></div>
-          <span class="orbit orbit-1" aria-hidden="true">🏛️</span>
-          <span class="orbit orbit-2" aria-hidden="true">🎧</span>
-          <span class="orbit orbit-3" aria-hidden="true">☕</span>
-          <span class="orbit orbit-4" aria-hidden="true">🎨</span>
+          <!-- The app's welcome screen: rings turning, places riding them. -->
+          <div class="orbit" aria-hidden="true">
+            <div class="ring ring-3"></div>
+            <div class="ring ring-2">
+              <span class="orbiter wash" style="left:6.7%;top:25%">☕</span>
+              <span class="orbiter wash" style="left:85.4%;top:14.6%">🏰</span>
+              <span class="orbiter" style="left:75%;top:93.3%">🎨</span>
+              <span class="orbiter" style="left:3%;top:67.1%">🗺️</span>
+            </div>
+            <div class="ring ring-1">
+              <span class="orbiter" style="left:25%;top:6.7%">🏛️</span>
+              <span class="orbiter wash" style="left:97%;top:32.9%">🎧</span>
+              <span class="orbiter" style="left:6.7%;top:75%">📍</span>
+            </div>
+          </div>
 
           <img class="phone" src="images/app-tour.png" width="763" height="1600"
                alt="The WalkDots app mid-tour: a five-stop route on the map, a turn arrow, and the narration player" />
@@ -82,59 +88,64 @@
       </div>
     </section>
 
-    <!-- Footpaths in place of weav's wave strip. -->
-    <div class="divider" aria-hidden="true"></div>
-
     <!-- ============ CITIES ============ -->
     <section class="cities" aria-label="Places people have walked">
-      <p>One guide for every street, in every city</p>
+      <p class="eyebrow">One guide for every street, in every city</p>
       <div class="marquee">
         <div class="marquee-track">
-          <span>Rome</span><span>Lisbon</span><span>Kyoto</span><span>Mexico City</span><span>Istanbul</span><span>Edinburgh</span><span>Marrakesh</span><span>Prague</span><span>Buenos Aires</span><span>Seoul</span>
-          <span aria-hidden="true">Rome</span><span aria-hidden="true">Lisbon</span><span aria-hidden="true">Kyoto</span><span aria-hidden="true">Mexico City</span><span aria-hidden="true">Istanbul</span><span aria-hidden="true">Edinburgh</span><span aria-hidden="true">Marrakesh</span><span aria-hidden="true">Prague</span><span aria-hidden="true">Buenos Aires</span><span aria-hidden="true">Seoul</span>
+          <span class="pill">Rome</span><span class="pill">Lisbon</span><span class="pill">Kyoto</span><span class="pill">Mexico City</span><span class="pill">Istanbul</span><span class="pill">Edinburgh</span><span class="pill">Marrakesh</span><span class="pill">Prague</span><span class="pill">Buenos Aires</span><span class="pill">Seoul</span><span class="pill">Bratislava</span><span class="pill">Vienna</span>
+          <span class="pill" aria-hidden="true">Rome</span><span class="pill" aria-hidden="true">Lisbon</span><span class="pill" aria-hidden="true">Kyoto</span><span class="pill" aria-hidden="true">Mexico City</span><span class="pill" aria-hidden="true">Istanbul</span><span class="pill" aria-hidden="true">Edinburgh</span><span class="pill" aria-hidden="true">Marrakesh</span><span class="pill" aria-hidden="true">Prague</span><span class="pill" aria-hidden="true">Buenos Aires</span><span class="pill" aria-hidden="true">Seoul</span><span class="pill" aria-hidden="true">Bratislava</span><span class="pill" aria-hidden="true">Vienna</span>
         </div>
       </div>
     </section>
 
-    <!-- ============ ASK WALK + PRODUCT ============ -->
-    <section class="section section-white" id="product">
+    <!-- ============ ASK WALKDOTS + PRODUCT ============ -->
+    <section class="section" id="product" style="padding-top:24px">
       <div class="container">
-        <div class="ask-intro reveal">
+        <div class="ask-intro card reveal">
           <h2 class="display display-lg">Ask WalkDots.</h2>
           <div>
-            <span class="ask-q">What makes WalkDots different from an audio guide?</span>
+            <div class="ask-q">
+              What makes WalkDots different from an audio guide?
+              <span class="send" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span>
+            </div>
             <p class="ask-a" id="ask-answer" data-text="Nothing is pre-recorded. WalkDots builds the tour around wherever you’re standing, narrates it as you move, and answers whatever you ask: who built it, what happened here, whether it’s worth going inside.">Nothing is pre-recorded. WalkDots builds the tour around wherever you’re standing, narrates it as you move, and answers whatever you ask: who built it, what happened here, whether it’s worth going inside.</p>
           </div>
         </div>
 
+        <div class="section-head reveal">
+          <p class="eyebrow">How a walk works</p>
+          <h2 class="display display-lg">A guide in your ear, built around what you want to see.</h2>
+        </div>
+
         <div class="split">
-          <div class="tour-list reveal" id="tour-list">
+          <div class="tour-list card reveal" id="tour-list">
             <div class="tour-item is-open">
-              <h3 style="margin:0"><button type="button" aria-expanded="true" aria-controls="tour-body-0" id="tour-btn-0">A tour built where you stand <i aria-hidden="true"></i></button></h3>
+              <h3 style="margin:0"><button type="button" aria-expanded="true" aria-controls="tour-body-0" id="tour-btn-0"><b aria-hidden="true">1</b>A tour built where you stand</button></h3>
               <div class="tour-body" id="tour-body-0" role="region" aria-labelledby="tour-btn-0"><div>
                 <p>Type where you are and the tour is built there. Pick what you care about, and WalkDots strings together the stops worth your feet.</p>
               </div></div>
             </div>
             <div class="tour-item">
-              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-1" id="tour-btn-1">Narration that keeps up <i aria-hidden="true"></i></button></h3>
+              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-1" id="tour-btn-1"><b aria-hidden="true">2</b>Narration that keeps up</button></h3>
               <div class="tour-body" id="tour-body-1" role="region" aria-labelledby="tour-btn-1"><div>
                 <p>The guide talks as you walk, so keep the phone in your pocket if you like. Each story starts when you reach the stop.</p>
               </div></div>
             </div>
             <div class="tour-item">
-              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-2" id="tour-btn-2">Ask anything <i aria-hidden="true"></i></button></h3>
+              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-2" id="tour-btn-2"><b aria-hidden="true">3</b>Ask anything</button></h3>
               <div class="tour-body" id="tour-body-2" role="region" aria-labelledby="tour-btn-2"><div>
                 <p>Ask about what you’re looking at — who built it, what happened here, whether it’s worth going inside — and get an answer before the next corner.</p>
               </div></div>
             </div>
             <div class="tour-item">
-              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-3" id="tour-btn-3">Directions between stops <i aria-hidden="true"></i></button></h3>
+              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-3" id="tour-btn-3"><b aria-hidden="true">4</b>Directions between stops</button></h3>
               <div class="tour-body" id="tour-body-3" role="region" aria-labelledby="tour-btn-3"><div>
                 <p>Spoken, turn-by-turn directions to the next stop. Missed it? Say “repeat directions” and it tells you again.</p>
               </div></div>
             </div>
             <div class="tour-item">
-              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-4" id="tour-btn-4">Quick summary <i aria-hidden="true"></i></button></h3>
+              <h3 style="margin:0"><button type="button" aria-expanded="false" aria-controls="tour-body-4" id="tour-btn-4"><b aria-hidden="true">5</b>Quick summary</button></h3>
               <div class="tour-body" id="tour-body-4" role="region" aria-labelledby="tour-btn-4"><div>
                 <p>Short on time? Get the three things worth knowing about a stop in under a minute, then keep moving.</p>
               </div></div>
@@ -142,40 +153,50 @@
           </div>
 
           <div class="tour-stage reveal" aria-hidden="true">
+            <!-- 1 · the app's "Build my tour" sheet -->
             <div class="scene is-on">
-              <div class="scene-card">
-                <h4>Where are you?</h4>
-                <span class="meta">Type a neighbourhood, street or landmark</span>
-                <div class="field">
-                  <svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-                  Trastevere, Rome
+              <div class="scene-card sheet">
+                <h4>Build my tour</h4>
+                <p class="eyebrow" style="margin:6px 0 14px">Step 1 of 2</p>
+                <div class="plan-sum">
+                  <div><strong>5</strong><span>stops on your walk</span><small>≈ 1.5 km · 45 min</small></div>
+                  <svg viewBox="0 0 96 56" fill="none">
+                    <path d="M48 6c18 0 40 6 42 20s-14 24-40 24S4 46 6 30 26 6 48 6Z" stroke="#5eda9b" stroke-width="2" stroke-dasharray="4 4"/>
+                    <circle cx="48" cy="6" r="5" fill="#111827"/><circle cx="88" cy="22" r="3.5" fill="#5eda9b"/><circle cx="70" cy="46" r="3.5" fill="#5eda9b"/><circle cx="20" cy="47" r="3.5" fill="#5eda9b"/><circle cx="8" cy="24" r="3.5" fill="#5eda9b"/>
+                  </svg>
                 </div>
-                <div class="chips">
-                  <span class="on">🏛️ History</span><span class="on">🎨 Art</span><span>☕ Food</span><span>🎵 Music</span><span class="on">🏰 Hidden spots</span>
+                <p class="eyebrow" style="margin-bottom:8px">How long</p>
+                <div class="pill-row"><span class="pill">30 min</span><span class="pill on">45 min</span><span class="pill">1 h</span><span class="pill">2 h</span><span class="pill">3 h</span></div>
+                <p class="eyebrow" style="margin-bottom:8px">What interests you?</p>
+                <div class="tile-grid">
+                  <span class="tile on" style="--tint:#f6efe4"><i>🏛️</i>History</span>
+                  <span class="tile" style="--tint:#edf1f7"><i>🏗️</i>Architecture</span>
+                  <span class="tile" style="--tint:#fdeee6"><i>🍽️</i>Food &amp; everyday life</span>
+                  <span class="tile" style="--tint:#f8ecf5"><i>🎨</i>Art</span>
                 </div>
-                <ul class="stop-list">
-                  <li class="now"><b>1</b>Piazza di Santa Maria<em>4 min</em></li>
-                  <li><b>2</b>Villa Farnesina<em>9 min</em></li>
-                  <li><b>3</b>Gianicolo Terrace<em>14 min</em></li>
-                </ul>
               </div>
             </div>
 
+            <!-- 2 · narration -->
             <div class="scene">
               <img class="scene-photo" src="images/trevi-fountain.jpeg" alt="" />
-              <div class="scene-card">
-                <small style="font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--mint-ink)">You’ve arrived</small>
-                <h4 style="margin-top:4px">Trevi Fountain</h4>
+              <div class="scene-card sheet">
+                <p class="eyebrow mint">You’ve arrived</p>
+                <h4>Trevi Fountain</h4>
                 <span class="meta">Stop 4 of 7 · 2:47</span>
-                <div class="wave" style="margin-top:14px">
-                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                <div class="player">
+                  <span class="play"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></span>
+                  <div class="wave">
+                    <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
                 </div>
               </div>
             </div>
 
+            <!-- 3 · ask -->
             <div class="scene">
-              <div class="scene-card">
+              <div class="scene-card sheet">
                 <h4>Colosseum</h4>
                 <span class="meta">Listening…</span>
                 <div class="bubble bubble-you">Wait — why is half of it missing?</div>
@@ -183,26 +204,29 @@
               </div>
             </div>
 
+            <!-- 4 · directions -->
             <div class="scene">
-              <div class="scene-card">
+              <div class="scene-card sheet">
                 <h4>Next: Piazza Venezia</h4>
                 <span class="meta">6 min walk · 450 m</span>
                 <div class="dir">
                   <svg viewBox="0 0 24 24"><path d="M9 20V10a4 4 0 0 1 4-4h6M15 2l4 4-4 4"/></svg>
                   <div><strong>Turn right on Via del Corso</strong><span>then straight for 300 m</span></div>
                 </div>
-                <ul class="stop-list">
-                  <li class="done"><b>✓</b>Trevi Fountain</li>
-                  <li class="now"><b>5</b>Piazza Venezia<em>6 min</em></li>
-                </ul>
+                <ol class="spine">
+                  <li class="done"><b>✓</b><strong>Trevi Fountain</strong><em>Heard · 4 min</em></li>
+                  <li class="now"><b>5</b><strong>Piazza Venezia</strong><em>6 min away</em></li>
+                  <li><b>6</b><strong>Capitoline Hill</strong><em>then 5 min</em></li>
+                </ol>
               </div>
             </div>
 
+            <!-- 5 · summary -->
             <div class="scene">
               <img class="scene-photo" src="images/roman-forum.jpeg" alt="" />
-              <div class="scene-card">
-                <small style="font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--mint-ink)">Quick summary</small>
-                <h4 style="margin-top:4px">Roman Forum</h4>
+              <div class="scene-card sheet">
+                <p class="eyebrow mint">Quick summary</p>
+                <h4>Roman Forum</h4>
                 <div class="summary-lines">
                   <div>The civic heart of Rome for a thousand years.</div>
                   <div>Caesar was cremated where the small temple stands.</div>
@@ -219,9 +243,9 @@
     <section class="section section-wash">
       <div class="container split">
         <div class="reveal">
-          <span class="badge">Context-aware</span>
+          <span class="tag">Context-aware</span>
           <h2 class="display display-lg">Hear the story, not the signpost.</h2>
-          <p class="lead" style="color:var(--ink-soft)">
+          <p class="lead">
             WalkDots knows where you’re standing, what you’ve already heard and what
             you came for — so every answer picks up the thread instead of
             starting from scratch.
@@ -233,11 +257,11 @@
           </ul>
         </div>
 
-        <div class="flow-card reveal" aria-hidden="true">
+        <div class="flow-card card reveal" aria-hidden="true">
           <div class="bubble bubble-you" style="margin:0 0 0 auto">Is it worth going inside?</div>
           <div class="flow-line"></div>
           <div class="flow-group">
-            <small>What WalkDots considers</small>
+            <p class="eyebrow">What WalkDots considers</p>
             <div class="flow-node"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>Location<em>Santa Maria, Trastevere</em></div>
             <div class="flow-node"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span>Tour so far<em>2 of 7 stops</em></div>
             <div class="flow-node"><span class="ico"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L12 16.6 6.6 19.6l1.2-6.1-4.5-4.2 6.1-.7Z"/></svg></span>Interests<em>Art, hidden spots</em></div>
@@ -248,87 +272,89 @@
       </div>
     </section>
 
-    <!-- ============ MINT BAND + SHEET ============ -->
-    <section class="band-mint" id="pace">
-      <div class="container band-head reveal">
-        <h2 class="display display-sm">Pocket the phone.<br />Walk at your own pace.</h2>
-        <p>Use headphones for the best experience. The guide waits when you stop and gets to the point when you hurry.</p>
+    <!-- ============ PACE ============ -->
+    <section class="section" id="pace">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Your pace</p>
+          <h2 class="display display-lg">Pocket the phone. Walk at your own pace.</h2>
+          <p class="lead">Use headphones for the best experience. The guide waits when you stop and gets to the point when you hurry.</p>
+        </div>
+
+        <div class="sheet pace-sheet split reveal">
+          <div>
+            <h3 class="display display-sm">Linger longer. Or don’t.</h3>
+            <p class="lead">
+              Stop at a doorway and the story goes deeper. Walk fast and it gives
+              you the brief version. Times vary — every tour bends to how you
+              actually move.
+            </p>
+            <div class="btn-row">
+              <a href="https://ai-guide-phi.vercel.app" class="btn btn-primary btn-lg">Try a tour <svg><use href="#arrow"/></svg></a>
+            </div>
+          </div>
+
+          <div class="pace" aria-hidden="true">
+            <div class="pace-row" style="--tint:#f6efe4"><i>🏛️</i><strong>Linger</strong><div class="pace-bar"><span style="width:92%"></span></div><em>Full story</em></div>
+            <div class="pace-row" style="--tint:#e6f5e9"><i>🌳</i><strong>Stroll</strong><div class="pace-bar"><span style="width:60%"></span></div><em>Highlights</em></div>
+            <div class="pace-row" style="--tint:#fdeee6"><i>⚡</i><strong>Hurry</strong><div class="pace-bar"><span style="width:26%"></span></div><em>Brief</em></div>
+            <div class="pace-row" style="--tint:#edf1f7"><i>🧭</i><strong>Lost?</strong><div class="pace-bar"><span style="width:12%"></span></div><em>Repeat directions</em></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="container">
-      <div class="sheet split reveal">
-        <div>
-          <span class="badge">Your pace</span>
-          <h2 class="display display-lg">Linger longer. Or don’t.</h2>
-          <p class="lead" style="color:var(--ink-soft)">
-            Stop at a doorway and the story goes deeper. Walk fast and it gives
-            you the brief version. Times vary — every tour bends to how you
-            actually move.
-          </p>
-          <div class="btn-row">
-            <a href="https://ai-guide-phi.vercel.app" class="btn btn-mint">Try a tour <svg><use href="#arrow"/></svg></a>
+    <!-- ============ DARK PANEL ============ -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="panel-dark split reveal">
+          <div>
+            <span class="ask-chip">
+              <span class="mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+              <b>Ask WalkDots.</b> Does it need an app store?
+            </span>
+            <h2 class="display display-lg">No download. No account. Just go.</h2>
+            <p class="lead">
+              WalkDots runs in your browser. For the whole screen, tap Share → Add to
+              Home Screen and it opens like any other app.
+            </p>
+            <div class="btn-row">
+              <a href="https://ai-guide-phi.vercel.app" class="btn btn-primary btn-lg">Open WalkDots <svg><use href="#arrow"/></svg></a>
+              <a href="#start" class="btn btn-dark-quiet btn-lg">How to start</a>
+            </div>
           </div>
-        </div>
 
-        <div class="pace" aria-hidden="true">
-          <div class="pace-row"><strong>Linger</strong><div class="pace-bar"><span style="width:92%"></span></div><em>Full story</em></div>
-          <div class="pace-row"><strong>Stroll</strong><div class="pace-bar"><span style="width:60%"></span></div><em>Highlights</em></div>
-          <div class="pace-row"><strong>Hurry</strong><div class="pace-bar"><span style="width:26%"></span></div><em>Brief</em></div>
-          <div class="pace-row"><strong>Lost?</strong><div class="pace-bar"><span style="width:12%"></span></div><em>Repeat directions</em></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ DARK BAND ============ -->
-    <section class="band-dark" style="margin-top:120px">
-      <div class="container split">
-        <div class="reveal">
-          <span class="ask-chip">
-            <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
-            <b>Ask WalkDots.</b> Does it need an app store?
-          </span>
-          <h2 class="display display-lg">No download. No account. Just go.</h2>
-          <p class="lead">
-            WalkDots runs in your browser. For the whole screen, tap Share → Add to
-            Home Screen and it opens like any other app.
-          </p>
-          <div class="btn-row">
-            <a href="https://ai-guide-phi.vercel.app" class="btn btn-mint">Open WalkDots <svg><use href="#arrow"/></svg></a>
-            <a href="#start" class="btn btn-dark-ghost">How to start</a>
+          <div class="stat-grid">
+            <div class="stat"><strong>Any</strong><span>street, square or landmark</span></div>
+            <div class="stat"><strong>0</strong><span>apps to install</span></div>
+            <div class="stat"><strong>1</strong><span>tap to start the tour</span></div>
+            <div class="stat"><strong>∞</strong><span>questions along the way</span></div>
           </div>
-        </div>
-
-        <div class="stat-grid reveal">
-          <div class="stat"><strong>Any</strong><span>street, square or landmark</span></div>
-          <div class="stat"><strong>0</strong><span>apps to install</span></div>
-          <div class="stat"><strong>1</strong><span>tap to start the tour</span></div>
-          <div class="stat"><strong>∞</strong><span>questions along the way</span></div>
         </div>
       </div>
     </section>
 
     <!-- ============ STEPS ============ -->
-    <section class="section section-white" id="start">
+    <section class="section" id="start" style="padding-top:0">
       <div class="container">
         <div class="section-head reveal">
-          <span class="badge">Zero-effort setup</span>
+          <p class="eyebrow">Zero-effort setup</p>
           <h2 class="display display-lg">Walking in under a minute.</h2>
           <p class="lead">Three steps between you and the first story.</p>
         </div>
 
         <div class="steps">
-          <article class="step reveal">
+          <article class="step card reveal">
             <span class="step-n">1</span>
             <h3>Say where you are</h3>
             <p>Type a street, neighbourhood or landmark. Try the local spelling if it doesn’t find it.</p>
           </article>
-          <article class="step reveal">
+          <article class="step card reveal">
             <span class="step-n">2</span>
             <h3>Start the tour</h3>
             <p>WalkDots lays out the stops and the route between them. Tap once and you’re off.</p>
           </article>
-          <article class="step reveal">
+          <article class="step card reveal">
             <span class="step-n">3</span>
             <h3>Listen and ask</h3>
             <p>Phone in your pocket, headphones in. Ask whatever you want, whenever you want.</p>
@@ -343,13 +369,27 @@
     </section>
 
     <!-- ============ FINAL CTA ============ -->
-    <section class="final" style="border-top:1px solid var(--line)">
+    <section class="final">
+      <!-- Riders sit on the outer rings only, so they never cross the copy. -->
+      <div class="orbit" aria-hidden="true">
+        <div class="ring ring-3">
+          <span class="orbiter" style="left:3.6%;top:31.3%">🏛️</span>
+          <span class="orbiter wash" style="left:96.4%;top:68.7%">🎧</span>
+        </div>
+        <div class="ring ring-2">
+          <span class="orbiter wash" style="left:0%;top:50%">📍</span>
+          <span class="orbiter" style="left:100%;top:50%">☕</span>
+        </div>
+        <div class="ring ring-1"></div>
+      </div>
       <div class="container reveal">
-        <h2 class="display display-xl">You’ve read about it. Now go walk it.</h2>
+        <img class="logo-mark" src="images/icons/icon-512.png" width="512" height="512" alt="" />
+        <span class="wordmark" aria-hidden="true">walkdots</span>
+        <h2 class="display display-xl">You’ve read about it. <span class="accent">Now go walk it.</span></h2>
         <p class="lead">Open WalkDots, type where you are, and hear the street you’re standing on.</p>
         <div class="btn-row">
-          <a href="https://ai-guide-phi.vercel.app" class="btn btn-ink">Start walking <svg><use href="#arrow"/></svg></a>
-          <a href="#product" class="btn btn-soft">Learn more</a>
+          <a href="https://ai-guide-phi.vercel.app" class="glow-btn">Start walking <svg><use href="#arrow"/></svg></a>
+          <a href="#product" class="btn btn-quiet btn-lg">Learn more</a>
         </div>
       </div>
     </section>
@@ -360,8 +400,8 @@
     <div class="container footer-grid">
       <div>
         <a class="logo" href="#" aria-label="WalkDots home">
-          <span class="logo-mark"><svg><use href="#walk-mark"/></svg></span>
-          <span class="logo-word">WalkDots</span>
+          <img class="logo-mark" src="images/icons/icon-192.png" width="192" height="192" alt="" />
+          <span class="wordmark">walkdots</span>
         </a>
         <p class="footer-note">Audio tours anywhere. An AI guide for people who’d rather walk on their own — and still hear all of it.</p>
       </div>
