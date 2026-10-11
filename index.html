@@ -57,11 +57,11 @@
             no group, nothing to download.
           </p>
           <div class="btn-row">
-            <a href="https://ai-guide-phi.vercel.app" class="glow-btn">
-              Start walking
+            <a href="https://ai-guide-phi.vercel.app" class="btn btn-white btn-lg">
+              Start walking free
               <svg><use href="#arrow"/></svg>
             </a>
-            <a href="#product" class="btn btn-quiet btn-lg">See how it works</a>
+            <a href="#product" class="btn btn-ghost btn-lg">See how it works</a>
           </div>
         </div>
 
@@ -88,6 +88,9 @@
       </div>
     </section>
 
+    <!-- Footpaths in place of weav's wave strip. -->
+    <div class="divider" aria-hidden="true"></div>
+
     <!-- ============ CITIES ============ -->
     <section class="cities" aria-label="Places people have walked">
       <p class="eyebrow">One guide for every street, in every city</p>
@@ -100,9 +103,9 @@
     </section>
 
     <!-- ============ ASK WALKDOTS + PRODUCT ============ -->
-    <section class="section" id="product" style="padding-top:24px">
+    <section class="section section-white" id="product">
       <div class="container">
-        <div class="ask-intro card reveal">
+        <div class="ask-intro reveal">
           <h2 class="display display-lg">Ask WalkDots.</h2>
           <div>
             <div class="ask-q">
@@ -113,13 +116,9 @@
           </div>
         </div>
 
-        <div class="section-head reveal">
-          <p class="eyebrow">How a walk works</p>
-          <h2 class="display display-lg">A guide in your ear, built around what you want to see.</h2>
-        </div>
 
         <div class="split">
-          <div class="tour-list card reveal" id="tour-list">
+          <div class="tour-list reveal" id="tour-list">
             <div class="tour-item is-open">
               <h3 style="margin:0"><button type="button" aria-expanded="true" aria-controls="tour-body-0" id="tour-btn-0"><b aria-hidden="true">1</b>A tour built where you stand</button></h3>
               <div class="tour-body" id="tour-body-0" role="region" aria-labelledby="tour-btn-0"><div>
@@ -272,70 +271,68 @@
       </div>
     </section>
 
-    <!-- ============ PACE ============ -->
-    <section class="section" id="pace">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Your pace</p>
-          <h2 class="display display-lg">Pocket the phone. Walk at your own pace.</h2>
-          <p class="lead">Use headphones for the best experience. The guide waits when you stop and gets to the point when you hurry.</p>
-        </div>
-
-        <div class="sheet pace-sheet split reveal">
-          <div>
-            <h3 class="display display-sm">Linger longer. Or don’t.</h3>
-            <p class="lead">
-              Stop at a doorway and the story goes deeper. Walk fast and it gives
-              you the brief version. Times vary — every tour bends to how you
-              actually move.
-            </p>
-            <div class="btn-row">
-              <a href="https://ai-guide-phi.vercel.app" class="btn btn-primary btn-lg">Try a tour <svg><use href="#arrow"/></svg></a>
-            </div>
-          </div>
-
-          <div class="pace" aria-hidden="true">
-            <div class="pace-row" style="--tint:#f6efe4"><i>🏛️</i><strong>Linger</strong><div class="pace-bar"><span style="width:92%"></span></div><em>Full story</em></div>
-            <div class="pace-row" style="--tint:#e6f5e9"><i>🌳</i><strong>Stroll</strong><div class="pace-bar"><span style="width:60%"></span></div><em>Highlights</em></div>
-            <div class="pace-row" style="--tint:#fdeee6"><i>⚡</i><strong>Hurry</strong><div class="pace-bar"><span style="width:26%"></span></div><em>Brief</em></div>
-            <div class="pace-row" style="--tint:#edf1f7"><i>🧭</i><strong>Lost?</strong><div class="pace-bar"><span style="width:12%"></span></div><em>Repeat directions</em></div>
-          </div>
-        </div>
+    <!-- ============ MINT BAND + RIDING SHEET ============ -->
+    <section class="band-mint" id="pace">
+      <div class="container band-head reveal">
+        <h2 class="display display-sm">Pocket the phone.<br />Walk at your own pace.</h2>
+        <p>Use headphones for the best experience. The guide waits when you stop and gets to the point when you hurry.</p>
       </div>
     </section>
 
-    <!-- ============ DARK PANEL ============ -->
-    <section class="section" style="padding-top:0">
-      <div class="container">
-        <div class="panel-dark split reveal">
-          <div>
-            <span class="ask-chip">
-              <span class="mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
-              <b>Ask WalkDots.</b> Does it need an app store?
-            </span>
-            <h2 class="display display-lg">No download. No account. Just go.</h2>
-            <p class="lead">
-              WalkDots runs in your browser. For the whole screen, tap Share → Add to
-              Home Screen and it opens like any other app.
-            </p>
-            <div class="btn-row">
-              <a href="https://ai-guide-phi.vercel.app" class="btn btn-primary btn-lg">Open WalkDots <svg><use href="#arrow"/></svg></a>
-              <a href="#start" class="btn btn-dark-quiet btn-lg">How to start</a>
-            </div>
+    <div class="container">
+      <div class="sheet pace-sheet split reveal">
+        <div>
+          <span class="tag">Your pace</span>
+          <h3 class="display display-lg">Linger longer. Or don’t.</h3>
+          <p class="lead">
+            Stop at a doorway and the story goes deeper. Walk fast and it gives
+            you the brief version. Times vary — every tour bends to how you
+            actually move.
+          </p>
+          <div class="btn-row">
+            <a href="https://ai-guide-phi.vercel.app" class="btn btn-primary btn-lg">Try a tour <svg><use href="#arrow"/></svg></a>
           </div>
+        </div>
 
-          <div class="stat-grid">
-            <div class="stat"><strong>Any</strong><span>street, square or landmark</span></div>
-            <div class="stat"><strong>0</strong><span>apps to install</span></div>
-            <div class="stat"><strong>1</strong><span>tap to start the tour</span></div>
-            <div class="stat"><strong>∞</strong><span>questions along the way</span></div>
+        <div class="pace" aria-hidden="true">
+          <div class="pace-row" style="--tint:#f6efe4"><i>🏛️</i><strong>Linger</strong><div class="pace-bar"><span style="width:92%"></span></div><em>Full story</em></div>
+          <div class="pace-row" style="--tint:#e6f5e9"><i>🌳</i><strong>Stroll</strong><div class="pace-bar"><span style="width:60%"></span></div><em>Highlights</em></div>
+          <div class="pace-row" style="--tint:#fdeee6"><i>⚡</i><strong>Hurry</strong><div class="pace-bar"><span style="width:26%"></span></div><em>Brief</em></div>
+          <div class="pace-row" style="--tint:#edf1f7"><i>🧭</i><strong>Lost?</strong><div class="pace-bar"><span style="width:12%"></span></div><em>Repeat directions</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ DARK BAND ============ -->
+    <section class="band-dark">
+      <div class="container split">
+        <div class="reveal">
+          <span class="ask-chip">
+            <span class="mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+            <b>Ask WalkDots.</b> Does it need an app store?
+          </span>
+          <h2 class="display display-lg">No download. No account. Just go.</h2>
+          <p class="lead">
+            WalkDots runs in your browser. For the whole screen, tap Share → Add to
+            Home Screen and it opens like any other app.
+          </p>
+          <div class="btn-row">
+            <a href="https://ai-guide-phi.vercel.app" class="btn btn-primary btn-lg">Open WalkDots <svg><use href="#arrow"/></svg></a>
+            <a href="#start" class="btn btn-dark-quiet btn-lg">How to start</a>
           </div>
+        </div>
+
+        <div class="stat-grid reveal">
+          <div class="stat"><strong>Any</strong><span>street, square or landmark</span></div>
+          <div class="stat"><strong>0</strong><span>apps to install</span></div>
+          <div class="stat"><strong>1</strong><span>tap to start the tour</span></div>
+          <div class="stat"><strong>∞</strong><span>questions along the way</span></div>
         </div>
       </div>
     </section>
 
     <!-- ============ STEPS ============ -->
-    <section class="section" id="start" style="padding-top:0">
+    <section class="section section-white" id="start">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">Zero-effort setup</p>
@@ -370,26 +367,12 @@
 
     <!-- ============ FINAL CTA ============ -->
     <section class="final">
-      <!-- Riders sit on the outer rings only, so they never cross the copy. -->
-      <div class="orbit" aria-hidden="true">
-        <div class="ring ring-3">
-          <span class="orbiter" style="left:3.6%;top:31.3%">🏛️</span>
-          <span class="orbiter wash" style="left:96.4%;top:68.7%">🎧</span>
-        </div>
-        <div class="ring ring-2">
-          <span class="orbiter wash" style="left:0%;top:50%">📍</span>
-          <span class="orbiter" style="left:100%;top:50%">☕</span>
-        </div>
-        <div class="ring ring-1"></div>
-      </div>
       <div class="container reveal">
-        <img class="logo-mark" src="images/icons/icon-512.png" width="512" height="512" alt="" />
-        <span class="wordmark" aria-hidden="true">walkdots</span>
         <h2 class="display display-xl">You’ve read about it. <span class="accent">Now go walk it.</span></h2>
         <p class="lead">Open WalkDots, type where you are, and hear the street you’re standing on.</p>
         <div class="btn-row">
           <a href="https://ai-guide-phi.vercel.app" class="glow-btn">Start walking <svg><use href="#arrow"/></svg></a>
-          <a href="#product" class="btn btn-quiet btn-lg">Learn more</a>
+          <a href="#product" class="btn btn-soft btn-lg">Learn more</a>
         </div>
       </div>
     </section>

@@ -1,9 +1,12 @@
 /* ============================================================
    WALKDOTS — landing page
-   Built from the app's own design system (ai-guide-phi.vercel.app):
-   the light canvas, white cards on hairlines, pill buttons, the
-   glowing primary button, the welcome screen's orbit rings, sheets
-   with a grab handle, the tour "spine" nodes and the interest tiles.
+   Layout from weav.com: full-bleed mint blocks, a wave strip,
+   big display type, a line-divided accordion, a white sheet that
+   rides up over a colour band, a dark band, a big closing CTA.
+   Everything inside it is the app's own design system
+   (ai-guide-phi.vercel.app): its icon and wordmark, pill and glow
+   buttons, sheets with a grab handle, spine nodes, pills, tiles
+   and the welcome screen's orbit rings.
    ============================================================ */
 
 /* ============ TOKENS (copied from the app) ============ */
@@ -73,8 +76,8 @@ svg { display: block; }
   margin: 0;
   text-wrap: balance;
 }
-.display-xl { font-size: clamp(2.5rem, 5.4vw, 4.4rem); }
-.display-lg { font-size: clamp(2rem, 3.8vw, 3.05rem); }
+.display-xl { font-size: clamp(2.75rem, 6.2vw, 5.4rem); letter-spacing: -0.04em; line-height: 1.02; }
+.display-lg { font-size: clamp(2.3rem, 4.6vw, 4rem); letter-spacing: -0.035em; line-height: 1.05; }
 .display-sm { font-size: clamp(1.5rem, 2.4vw, 1.953rem); }
 .display .accent { color: var(--mint-ink); }
 
@@ -143,6 +146,12 @@ svg { display: block; }
 .btn-dark:hover { background: var(--ink-soft); }
 .btn-quiet { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
 .btn-quiet:hover { border-color: var(--ink-mute); }
+.btn-white { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-card); }
+.btn-white:hover { box-shadow: var(--shadow-lift); }
+.btn-ghost { background: rgba(17, 24, 39, .08); color: var(--ink); }
+.btn-ghost:hover { background: rgba(17, 24, 39, .14); }
+.btn-soft { background: var(--mint-wash); color: var(--mint-ink); }
+.btn-soft:hover { background: #d9f5e7; }
 .btn-dark-quiet { background: transparent; color: var(--on-dark); border-color: #ffffff33; }
 .btn-dark-quiet:hover { border-color: var(--on-dark-mute); }
 
@@ -196,7 +205,7 @@ svg { display: block; }
 .btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 32px; }
 
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
-.panel-dark :focus-visible, .footer :focus-visible { outline-color: var(--mint); }
+.band-dark :focus-visible, .footer :focus-visible { outline-color: var(--mint); }
 
 /* ============ PILLS & TILES (the app's chips) ============ */
 .pill {
@@ -276,11 +285,6 @@ svg { display: block; }
   border-radius: 999px;
   background: var(--line-strong);
 }
-.panel-dark {
-  background: var(--dark);
-  color: var(--on-dark);
-  border-radius: var(--radius-panel);
-}
 
 /* ============ LOGO ============ */
 .logo {
@@ -318,25 +322,25 @@ svg { display: block; }
 /* The icon is the footer's own colour, so give it a hairline edge. */
 .footer .logo-mark { box-shadow: 0 0 0 1px #ffffff1f; }
 
-/* ============ NAV (glass, like the app's floating controls) ============ */
+/* ============ NAV (weav's colour bar, joined to the hero) ============ */
 .nav-wrap {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #f9fafbd6;
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  backdrop-filter: blur(18px) saturate(180%);
-  border-bottom: 1px solid transparent;
-  transition: border-color .25s ease;
+  background: var(--mint);
+  transition: box-shadow .25s ease;
 }
-.nav-wrap.is-stuck { border-bottom-color: var(--line); }
+.nav-wrap.is-stuck { box-shadow: 0 1px 0 rgba(17, 24, 39, .1); }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 80px;
 }
+/* On mint the grey wordmark and mint dot would vanish, so go ink. */
+.nav .wordmark { color: var(--ink); }
+.nav .wordmark::after { background: var(--ink); }
 .nav-links {
   display: flex;
   gap: 4px;
@@ -347,38 +351,40 @@ svg { display: block; }
   font-size: 15px;
   font-weight: 500;
 }
-/* Hover state borrows the app's tab bar: a mint-wash pill. */
+/* Hover borrows the app's tab bar: a soft pill behind the label. */
 .nav-links a {
   display: block;
   padding: 8px 14px;
   border-radius: var(--radius-pill);
-  color: var(--ink-soft);
-  transition: background-color .15s, color .15s;
+  color: var(--ink);
+  transition: background-color .15s;
 }
-.nav-links a:hover { background: var(--mint-wash); color: var(--mint-ink); }
+.nav-links a:hover { background: rgba(255, 255, 255, .45); }
 .nav-actions { display: flex; align-items: center; gap: 8px; }
 
-/* ============ HERO ============ */
+/* ============ HERO (weav's mint block) ============ */
 .hero {
   position: relative;
   overflow: hidden;
+  background: var(--mint);
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  min-height: min(760px, calc(100svh - 72px));
-  padding: 32px 0 56px;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 48px;
+  align-items: end;
+  padding-top: 56px;
 }
 /* Copy sits above the rings so a ring never cuts through a button. */
-.hero-copy { position: relative; z-index: 2; }
+.hero-copy { position: relative; z-index: 2; padding-bottom: 150px; }
+.hero .eyebrow { color: var(--ink-soft); }
+.hero .lead { color: var(--ink-soft); }
 
 .hero-visual {
   position: relative;
-  height: 640px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-self: end;
 }
 
 /* ---- the welcome screen's orbit ----
@@ -393,7 +399,7 @@ svg { display: block; }
 }
 .ring {
   position: absolute;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(17, 24, 39, .1);
   border-radius: 50%;
   animation: turn 90s linear infinite;
 }
@@ -426,13 +432,26 @@ svg { display: block; }
   width: 300px;
   height: auto;
   /* Trims the faint shadow baked into the screenshot's corners. */
+  margin-bottom: 28px;
   border-radius: 12.5% / 5.96%;
-  filter: drop-shadow(0 30px 40px rgba(17, 24, 39, .22));
+  filter: drop-shadow(0 40px 50px rgba(17, 24, 39, .35));
+}
+
+/* ---- weav's wave strip, drawn as footpaths ---- */
+.divider {
+  position: relative;
+  z-index: 2;
+  height: 64px;
+  margin-top: -1px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64'%3E%3Cpath d='M0 64V38C0 22 12 14 24 14s24 8 24 24 12 24 24 24 24-8 24-24v26z' fill='%23fff'/%3E%3C/svg%3E") 0 0 / 96px 64px repeat-x,
+    var(--mint);
 }
 
 /* ============ CITY PILLS ============ */
 .cities {
-  padding: 8px 0 72px;
+  background: var(--surface);
+  padding: 48px 0 24px;
   text-align: center;
 }
 .cities .eyebrow { margin-bottom: 20px; }
@@ -451,7 +470,8 @@ svg { display: block; }
 @keyframes marquee { to { transform: translateX(calc(-50% - 5px)); } }
 
 /* ============ SECTION SHELL ============ */
-.section { padding: 104px 0; }
+.section { padding: 120px 0; }
+.section-white { background: var(--surface); }
 .section-wash { background: var(--mint-wash); }
 
 .split {
@@ -468,8 +488,9 @@ svg { display: block; }
   grid-template-columns: auto 1fr;
   gap: 56px;
   align-items: start;
-  padding: 40px;
-  margin-bottom: 104px;
+  padding-bottom: 96px;
+  margin-bottom: 96px;
+  border-bottom: 1px solid var(--line);
 }
 .ask-intro .display { white-space: nowrap; }
 /* The question sits in a copy of the app's prompt bar. */
@@ -518,21 +539,22 @@ svg { display: block; }
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* ---- product accordion, as a card of rows ---- */
-.tour-list { padding: 6px 0; }
-.tour-item + .tour-item { border-top: 1px solid var(--line); }
+/* ---- product accordion: weav's hairline rows ---- */
+.tour-list { border-top: 1px solid var(--line); }
+.tour-item { border-bottom: 1px solid var(--line); }
 .tour-item button {
   all: unset;
   box-sizing: border-box;
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 22px;
+  gap: 16px;
+  padding: 24px 0;
   cursor: pointer;
   font-family: var(--display);
-  font-size: var(--text-lead);
+  font-size: 24px;
   font-weight: 600;
+  letter-spacing: -0.03em;
   line-height: 1.2;
   color: var(--ink-mute);
   transition: color .2s ease;
@@ -564,7 +586,7 @@ svg { display: block; }
 }
 .tour-item.is-open .tour-body { grid-template-rows: 1fr; }
 .tour-body > div { overflow: hidden; }
-.tour-body p { margin: 0 22px 20px calc(22px + 2.111rem + 14px); max-width: 30rem; color: var(--ink-soft); }
+.tour-body p { margin: 0 0 26px calc(2.111rem + 16px); max-width: 30rem; color: var(--ink-soft); }
 
 .tour-stage {
   position: relative;
@@ -772,8 +794,19 @@ svg { display: block; }
   background: var(--mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111827' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center / 14px no-repeat;
 }
 
-/* ============ PACE ============ */
-.pace-sheet { padding: 64px; }
+/* ============ MINT BAND + RIDING SHEET (weav) ============ */
+.band-mint {
+  background: var(--mint);
+  padding: 96px 0 180px;
+}
+.band-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 32px;
+}
+.band-head p { margin: 0; max-width: 26rem; font-size: 18px; color: var(--ink-soft); }
+.pace-sheet { margin-top: -120px; padding: 72px; }
 .pace { display: grid; gap: 10px; }
 .pace-row {
   display: grid;
@@ -791,10 +824,15 @@ svg { display: block; }
 .pace-bar span { display: block; height: 100%; border-radius: inherit; background: var(--mint); }
 .pace-row em { font-style: normal; color: var(--ink-soft); font-size: 13px; }
 
-/* ============ DARK PANEL ============ */
-.panel-dark.split { padding: 72px; gap: 56px; }
-.panel-dark .display { color: var(--on-dark); }
-.panel-dark .lead { color: var(--on-dark-mute); }
+/* ============ DARK BAND (weav, in the app's splash colour) ============ */
+.band-dark {
+  background: var(--dark);
+  color: var(--on-dark);
+  padding: 120px 0;
+  margin-top: 120px;
+}
+.band-dark .display { color: var(--on-dark); }
+.band-dark .lead { color: var(--on-dark-mute); }
 .ask-chip {
   display: inline-flex;
   align-items: center;
@@ -863,25 +901,13 @@ svg { display: block; }
 }
 .steps-note svg { width: 18px; height: 18px; stroke: var(--mint-ink); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* ============ FINAL CTA (the welcome screen, again) ============ */
+/* ============ FINAL CTA (weav's big close) ============ */
 .final {
-  position: relative;
-  overflow: hidden;
-  padding: 150px 0;
-  text-align: center;
+  background: var(--surface);
+  padding: 140px 0;
   border-top: 1px solid var(--line);
 }
-.final .orbit { top: 50%; }
-.final .ring-1 { width: 520px; height: 520px; margin: -260px 0 0 -260px; }
-.final .ring-2 { width: 760px; height: 760px; margin: -380px 0 0 -380px; }
-.final .ring-3 { width: 1020px; height: 1020px; margin: -510px 0 0 -510px; animation: turn 120s linear infinite; }
-.final .container { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
-.final .logo-mark { width: 64px; height: 64px; margin-bottom: 18px; box-shadow: var(--shadow-lift); }
-.final .wordmark { font-size: 1.875rem; margin-bottom: 20px; }
-.final .wordmark::after { width: 8px; height: 8px; margin: 6px 0 0 2px; }
-.final .display { max-width: 16ch; }
-.final .lead { margin-inline: auto; }
-.final .btn-row { justify-content: center; }
+.final .display { max-width: 14ch; }
 
 /* ============ FOOTER (the app's splash colour) ============ */
 .footer {
@@ -926,12 +952,12 @@ svg { display: block; }
 /* ============ RESPONSIVE ============ */
 @media (max-width: 1000px) {
   .nav-links { display: none; }
-  .hero-grid { grid-template-columns: 1fr; gap: 8px; min-height: 0; padding-top: 40px; }
-  .hero-visual { height: 600px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 24px; padding-top: 40px; }
+  .hero-copy { padding-bottom: 0; }
+  .band-head { flex-direction: column; align-items: start; }
   .split { grid-template-columns: 1fr; gap: 44px; }
   .ask-intro { grid-template-columns: 1fr; gap: 20px; }
   .pace-sheet { padding: 48px 32px 32px; }
-  .panel-dark.split { padding: 48px 32px; }
   .steps { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid > :first-child { grid-column: 1 / -1; }
@@ -943,25 +969,25 @@ svg { display: block; }
   .nav-login { display: none; }
   .wordmark { font-size: 1.35rem; }
   .logo-mark { width: 32px; height: 32px; }
-  .hero-visual { height: 540px; }
   .ring-1 { width: 340px; height: 340px; margin: -170px 0 0 -170px; }
   .ring-2 { width: 480px; height: 480px; margin: -240px 0 0 -240px; }
   .ring-3 { width: 640px; height: 640px; margin: -320px 0 0 -320px; }
   .orbiter { width: 46px; height: 46px; margin: -23px 0 0 -23px; font-size: 20px; }
   .phone { width: 240px; }
-  .section { padding: 72px 0; }
-  .ask-intro { padding: 28px 20px; margin-bottom: 64px; }
+  .section, .band-dark { padding: 80px 0; }
+  .band-mint { padding: 72px 0 160px; }
+  .ask-intro { padding-bottom: 64px; margin-bottom: 64px; }
   .ask-intro .display { white-space: normal; }
-  .tour-item button { padding: 16px; font-size: 1.1rem; }
-  .tour-body p { margin: 0 16px 18px; }
+  .tour-item button { padding: 20px 0; font-size: 20px; }
+  .tour-body p { margin-left: 0; }
   .tour-stage { aspect-ratio: auto; height: 600px; }
   .tour-stage .scene { padding: 14px; }
   .pace-sheet { padding: 40px 18px 18px; }
   .pace-row { grid-template-columns: 30px 1fr auto; }
   .pace-bar { grid-column: 2 / -1; grid-row: 2; }
-  .panel-dark.split { padding: 40px 20px 20px; }
+  .band-dark { margin-top: 80px; }
   .stat { padding: 20px; }
-  .final { padding: 110px 0; }
+  .final { padding: 96px 0; }
   .btn-row > * { flex: 1 1 auto; }
 }
 
