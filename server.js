@@ -45,7 +45,7 @@ app.use(express.json({ limit: "16kb" }));
 // are front-end assets by definition — server code can never match.
 const SERVABLE = new Set([
   ".html", ".css", ".svg", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".avif",
-  ".ico", ".woff", ".woff2", ".ttf", ".map", ".txt", ".webmanifest",
+  ".ico", ".woff", ".woff2", ".ttf", ".map", ".txt", ".xml", ".webmanifest",
 ]);
 
 // Browser JavaScript is the one exception, and only from /assets/. Allowing

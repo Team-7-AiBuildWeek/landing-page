@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>City - WalkDots</title>
+<meta name="description" content="Self-guided audio walking tours for this city, narrated as you go by WalkDots." />
+<link rel="canonical" id="canonical" href="https://www.walkdots.com/cities.html" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" href="/images/icons/icon-192.png" type="image/png" />
 <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" />
@@ -11,7 +13,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="WalkDots" />
 <meta property="og:title" content="City - WalkDots" />
-<meta property="og:description" content="WalkDots builds an audio tour wherever you're standing, narrates it as you go, and answers anything you ask along the way." />
+<meta property="og:description" content="Self-guided audio walking tours for this city, narrated as you go by WalkDots." />
 <meta property="og:url" content="https://www.walkdots.com/city.html" />
 <meta property="og:image" content="https://www.walkdots.com/images/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -96,6 +98,11 @@
       }
 
       document.title = city.name + ' - WalkDots';
+
+      // Each city is its own page to search engines: its own address and summary.
+      document.getElementById('canonical').href = 'https://www.walkdots.com/city.html?city=' + encodeURIComponent(city.slug);
+      document.querySelector('meta[name="description"]').content =
+        'Self-guided audio walking tours of ' + city.name + ', narrated as you go by WalkDots.';
 
       function routeRow(r) {
         return '' +
