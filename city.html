@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>City - Narro</title>
+<title>City - WalkDots</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,7 +16,7 @@
     <nav class="nav container">
       <a class="logo" href="index.html">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
-        <span>Narro</span>
+        <span>WalkDots</span>
       </a>
       <ul class="nav-links">
         <li><a href="cities.html">Cities</a></li>
@@ -39,9 +39,9 @@
       <div>
         <a class="logo" href="index.html">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
-          <span>Narro</span>
+          <span>WalkDots</span>
         </a>
-        <p class="footer-note"><em>Narro</em> — Latin for “I tell the story.” An AI guide for people who'd rather walk alone, and still hear all of it.</p>
+        <p class="footer-note"><em>WalkDots</em> — audio tours anywhere. An AI guide for people who'd rather walk alone, and still hear all of it.</p>
       </div>
       <div class="footer-col">
         <h4>App</h4>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="container footer-base">
-      <span>© 2026 Narro. All rights reserved.</span>
+      <span>© 2026 WalkDots. All rights reserved.</span>
       <span>Made for people who walk slowly.</span>
     </div>
   </footer>
@@ -70,7 +70,7 @@
       var city = window.NARRO_FIND_CITY(slug);
 
       if (!city) {
-        document.title = 'City not found - Narro';
+        document.title = 'City not found - WalkDots';
         main.innerHTML =
           '<div class="not-found">' +
             '<h1 class="page-title">We haven\'t walked there <em>yet</em></h1>' +
@@ -80,7 +80,7 @@
         return;
       }
 
-      document.title = city.name + ' - Narro';
+      document.title = city.name + ' - WalkDots';
 
       function routeRow(r) {
         return '' +
@@ -113,7 +113,7 @@
         '<section class="tailor-cta">' +
           '<div class="tailor-copy">' +
             '<h2>Make ' + city.name + ' fit your days</h2>' +
-            '<p>Dates, budget, pace, live weather — answer five quick questions and Narro drafts a personal day-by-day itinerary.</p>' +
+            '<p>Dates, budget, pace, live weather — answer five quick questions and WalkDots drafts a personal day-by-day itinerary.</p>' +
           '</div>' +
           '<a class="btn btn-primary tailor-btn" href="plan.html?city=' + city.slug + '">Build my ' + city.name + ' itinerary</a>' +
         '</section>' +

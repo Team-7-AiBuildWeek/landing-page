@@ -1,4 +1,4 @@
-// Shared city & route catalogue for the Narro web app pages.
+// Shared city & route catalogue for the WalkDots web app pages.
 // Static by design — the pages read it directly so they work on any
 // static host as well as behind server.js.
 window.NARRO_CITIES = [

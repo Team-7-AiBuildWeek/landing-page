@@ -388,7 +388,7 @@ const RUN_DIRECTLY = !process.env.VERCEL;
 
 if (RUN_DIRECTLY) {
   const server = app.listen(PORT, () => {
-    console.log(`Narro running at http://localhost:${PORT}`);
+    console.log(`WalkDots running at http://localhost:${PORT}`);
     console.log(`Database: ${dbPath}`);
     if (!PRODUCTION) console.log(`Sign in: http://localhost:${PORT}/login.html`);
   });
