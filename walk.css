@@ -996,3 +996,23 @@ svg { display: block; }
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ============ ABOUT / PRIVACY ============ */
+.page-hero { padding: 140px 0 72px; }
+.page-hero .display { max-width: 18ch; margin-top: 12px; }
+.page-hero .lead { max-width: 40rem; margin-top: 20px; }
+.page-body { padding: 72px 0 96px; }
+.prose { max-width: 44rem; }
+.prose section + section { margin-top: 48px; }
+.prose h2 { font-family: "Space Grotesk", sans-serif; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 14px; }
+.prose p, .prose li { font-size: 1.0625rem; line-height: 1.7; color: var(--ink-soft); }
+.prose p + p { margin-top: 14px; }
+.prose ul { margin: 0; padding-left: 1.25rem; display: grid; gap: 14px; }
+.prose li::marker { color: var(--mint); }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose a { color: var(--mint-ink); font-weight: 500; text-decoration: underline; text-underline-offset: 4px; }
+.prose .prose-date { font-size: var(--text-caption); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 20px; }
+@media (max-width: 720px) {
+  .page-hero { padding: 112px 0 48px; }
+  .page-body { padding: 48px 0 72px; }
+}

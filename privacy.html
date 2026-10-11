@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Privacy - WalkDots</title>
+<title>Privacy — WalkDots</title>
 <link rel="canonical" href="https://www.walkdots.com/privacy.html" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" href="/images/icons/icon-192.png" type="image/png" />
 <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-<meta name="description" content="What WalkDots does with your location and your words, who it shares them with, and your rights." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="WalkDots" />
-<meta property="og:title" content="Privacy - WalkDots" />
-<meta property="og:description" content="What WalkDots does with your location and your words, who it shares them with, and your rights." />
+<meta property="og:title" content="Privacy — WalkDots" />
+<meta property="og:description" content="WalkDots builds an audio tour wherever you're standing, narrates it as you go, and answers anything you ask along the way." />
 <meta property="og:url" content="https://www.walkdots.com/privacy.html" />
 <meta property="og:image" content="https://www.walkdots.com/images/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -21,44 +20,56 @@
 <meta property="og:image:alt" content="WalkDots — audio tours anywhere" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://www.walkdots.com/images/og-image.png" />
+<meta name="description" content="What WalkDots does with your location and your words, who it shares them with, and your rights." />
+<meta name="theme-color" content="#f9fafb" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=12" />
-<link rel="stylesheet" href="pages.css?v=6" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="walk.css" />
 </head>
 <body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </svg>
+
   <header class="nav-wrap">
-    <nav class="nav container">
-      <a class="logo" href="index.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
-        <span>WalkDots</span>
+    <nav class="nav container" aria-label="Main">
+      <a class="logo" href="index.html" aria-label="WalkDots home">
+        <img class="logo-mark" src="images/icons/icon-192.png" width="192" height="192" alt="" />
+        <span class="wordmark">walkdots</span>
       </a>
+
       <ul class="nav-links">
+        <li><a href="index.html#product">Product</a></li>
+        <li><a href="index.html#pace">Your pace</a></li>
+        <li><a href="index.html#start">How to start</a></li>
         <li><a href="cities.html">Cities</a></li>
         <li><a href="plan.html">Plan a trip</a></li>
-        <li><a href="index.html#how">How it works</a></li>
-        <li><a href="index.html#voice">The voice</a></li>
-        <li><a href="index.html#stories">Reviews</a></li>
       </ul>
+
       <div class="nav-actions">
-        <a href="login.html" class="nav-login">Log in</a>
-        <a href="https://app.walkdots.com/" class="btn btn-dark">Open the app</a>
+        <a href="login.html" class="btn btn-quiet nav-login">Sign in</a>
+        <a href="https://app.walkdots.com" class="btn btn-dark">Start walking</a>
       </div>
     </nav>
   </header>
 
-  <section class="page-head container">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="index.html">Home</a><span>/</span><strong>Privacy</strong>
-    </nav>
-    <h1 class="page-title">Privacy</h1>
-    <p class="page-sub">No tracking, no advertising, and an account is optional. Here is exactly what happens to your information.</p>
-  </section>
+  <main>
+    <section class="section section-wash page-hero">
+      <div class="container">
+        <p class="eyebrow">Privacy policy</p>
+        <h1 class="display display-lg">Your walk, <span class="accent">your data.</span></h1>
+        <p class="lead">No tracking, no advertising, and an account is optional. Here is exactly what happens to your information.</p>
+      </div>
+    </section>
 
-  <article class="container legal">
+    <section class="section section-white page-body">
+      <div class="container">
+        <article class="prose">
+
       <div>
-        <p class="legal-date">Last updated 11 October 2026</p>
+        <p class="prose-date">Last updated 11 October 2026</p>
         <p>
           WalkDots builds audio walking tours on the website and in the iPhone app. This page says what
           it does with your information. The short version: no tracking and no advertising, and an
@@ -230,28 +241,42 @@
         </p>
       </section>
 
-  </article>
+
+        </article>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="container">
+        <h2 class="display display-xl">Ready when you are. <span class="accent">Go walk it.</span></h2>
+        <p class="lead">Open WalkDots, say where you are, and hear the street you’re standing on.</p>
+        <div class="btn-row">
+          <a href="https://app.walkdots.com" class="glow-btn">Start walking <svg><use href="#arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <a class="logo" href="index.html">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v4a4 4 0 0 0 4 4h1v-7H7v-1a5 5 0 0 1 10 0v1h-3v7h2a1 1 0 0 1 0 2h-3v2h3a3 3 0 0 0 3-3v-9a7 7 0 0 0-7-7Z"/></svg>
-          <span>WalkDots</span>
+        <a class="logo" href="index.html" aria-label="WalkDots home">
+          <img class="logo-mark" src="images/icons/icon-192.png" width="192" height="192" alt="" />
+          <span class="wordmark">walkdots</span>
         </a>
-        <p class="footer-note"><em>WalkDots</em> — audio tours anywhere. An AI guide for people who'd rather walk alone, and still hear all of it.</p>
+        <p class="footer-note">Audio tours anywhere. An AI guide for people who’d rather walk on their own — and still hear all of it.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="index.html#product">Features</a><a href="index.html#pace">Your pace</a><a href="index.html#start">How to start</a><a href="cities.html">Cities</a><a href="plan.html">Plan a trip</a>
       </div>
       <div class="footer-col">
         <h4>App</h4>
-        <a href="https://app.walkdots.com/">Open the app</a><a href="cities.html">Cities</a><a href="plan.html">Plan a trip</a><a href="index.html#how">How it works</a>
+        <a href="https://app.walkdots.com">Open WalkDots</a><a href="login.html">Sign in</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="about.html">About</a><a href="#">Careers</a><a href="#">Press kit</a>
-      </div>
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="#">Help centre</a><a href="#">Offline guide</a><a href="privacy.html">Privacy</a>
+        <a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="mailto:jurajkolesar1976@gmail.com">Contact</a>
       </div>
     </div>
     <div class="container footer-base">
