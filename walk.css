@@ -367,6 +367,13 @@ svg { display: block; }
   position: relative;
   overflow: hidden;
   background: var(--mint);
+  /* Fill the first screen under the nav, so the wave starts just
+     below the fold; the content is centred in it. */
+  min-height: calc(100vh - 80px);
+  min-height: calc(100svh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .hero-grid {
   display: grid;
@@ -966,6 +973,7 @@ svg { display: block; }
 @media (max-width: 620px) {
   .container { width: calc(100% - 32px); }
   .nav { height: 64px; }
+  .hero { min-height: calc(100vh - 64px); min-height: calc(100svh - 64px); }
   .nav-login { display: none; }
   .wordmark { font-size: 1.35rem; }
   .logo-mark { width: 32px; height: 32px; }
