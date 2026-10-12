@@ -1,0 +1,65 @@
+/* ============================================================
+   HOVER BUTTONS — the "interactive hover button" effect
+
+   A dot sits before the label; on hover it grows to fill the pill
+   while the label slides out to the right and a copy with an arrow
+   slides in. The layers are added by assets/hover-buttons.js.
+   Self-contained so it works on every page, whichever stylesheet
+   the page uses.
+   ============================================================ */
+.ih {
+  position: relative;
+  isolation: isolate;
+  --ih-fill: #111827;
+  --ih-ink: #f9fafb;
+  --ih-ease: cubic-bezier(.22, 1, .36, 1);
+}
+.btn.ih { overflow: hidden; }
+/* Dark buttons fill mint instead, so the change still shows. */
+.btn-dark.ih, .btn-dark-quiet.ih { --ih-fill: #5eda9b; --ih-ink: #111827; }
+
+.ih-dot {
+  position: absolute;
+  z-index: 0;
+  /* --ih-x is the button's own left padding, set by the script. */
+  left: var(--ih-x, 1.125rem);
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 999px;
+  background: var(--ih-fill);
+  transition: left .3s var(--ih-ease), top .3s var(--ih-ease), width .3s var(--ih-ease), height .3s var(--ih-ease), margin .3s var(--ih-ease);
+}
+.ih-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding-left: 16px;
+  transition: transform .3s var(--ih-ease), opacity .3s ease;
+}
+.ih-hover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  color: var(--ih-ink);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(3rem);
+  transition: transform .3s var(--ih-ease), opacity .3s ease;
+}
+.ih-hover svg { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.ih:not(:disabled):hover .ih-label, .ih:focus-visible .ih-label { transform: translateX(3rem); opacity: 0; }
+.ih:not(:disabled):hover .ih-hover, .ih:focus-visible .ih-hover { transform: none; opacity: 1; }
+.ih:not(:disabled):hover .ih-dot, .ih:focus-visible .ih-dot { left: 0; top: 0; width: 100%; height: 100%; margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ih-dot, .ih-label, .ih-hover { transition: none; }
+}
